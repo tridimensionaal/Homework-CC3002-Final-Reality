@@ -1,4 +1,4 @@
-package com.github.cc3002.finalreality.model.weapon;
+package com.github.tridimensionaal.finalreality.model.weapon;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

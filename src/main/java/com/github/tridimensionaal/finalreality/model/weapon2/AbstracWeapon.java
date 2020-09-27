@@ -1,4 +1,4 @@
-package com.github.cc3002.finalreality.model.weapon;
+package com.github.tridimensionaal.finalreality.model.weapon2;
 
 import java.util.Objects;
 
@@ -6,41 +6,35 @@ import java.util.Objects;
  * A class that holds all the information of a weapon.
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Matías Salim Seda Auil
  */
-public class Weapon {
+public abstract class AbstractWeapon {
 
-  private final String name;
-  private final int damage;
-  private final int weight;
-  private final WeaponType type;
+  protected final String name;
+  protected final int damage;
+  protected final int weight;
+  protected final String type;
 
-  /**
-   * Creates a weapon with a name, a base damage, speed and it's type.
-   *
-   * @see WeaponType
-   */
-  public Weapon(final String name, final int damage, final int weight,
-      final WeaponType type) {
+  public abstractWeapon(final String name, final int damage, final int weight,final String type) {
     this.name = name;
     this.damage = damage;
     this.weight = weight;
     this.type = type;
   }
 
-  private String getName() {
+  protected String getName() {
     return name;
   }
 
-  private int getDamage() {
+  protected int getDamage() {
     return damage;
   }
 
-  public int getWeight() {
+  protected int getWeight() {
     return weight;
   }
 
-  private WeaponType getType() {
+  protected String getType() {
     return type;
   }
 
