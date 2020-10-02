@@ -1,4 +1,4 @@
-package com.github.tridimensionaal.finalreality.model.weapon2;
+package com.github.tridimensionaal.finalreality.model.weapon;
 
 /**
  * This represents a character from the game.

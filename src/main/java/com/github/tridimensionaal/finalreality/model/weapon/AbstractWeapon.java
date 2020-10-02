@@ -1,4 +1,4 @@
-package com.github.tridimensionaal.finalreality.model.weapon2;
+package com.github.tridimensionaal.finalreality.model.weapon;
 
 import java.util.Objects;
 

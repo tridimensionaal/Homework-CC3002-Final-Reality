@@ -1,4 +1,4 @@
-package com.github.tridimensionaal.finalreality.model.weapon2;
+package com.github.tridimensionaal.finalreality.model.weapon;
 
 public class Sword extends AbstractWeapon{
 

@@ -1,14 +1,12 @@
 package com.github.tridimensionaal.finalreality.model.character;
 
-import com.github.tridimensionaal.finalreality.model.character.player.CharacterClass;
-import com.github.tridimensionaal.finalreality.model.weapon.Weapon;
 
 /**
  * This represents a character from the game.
  * A character can be controlled by the player or by the CPU (an enemy).
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Matías Salim Seda Auil 
  */
 public interface ICharacter {
 
@@ -19,22 +17,22 @@ public interface ICharacter {
   void waitTurn();
 
   /**
+   * Adds this character to the turns queue.
+   */
+  void addToQueue();
+
+  /**
    * Returns this character's name.
    */
   String getName();
 
   /**
-   * Equips a weapon to the character.
+   * Returns this character's health points.
    */
-  void equip(Weapon weapon);
+  int getHealth();
 
   /**
-   * Return this character's equipped weapon.
+   * Returns this character's defense points.
    */
-  Weapon getEquippedWeapon();
-
-  /**
-   * Returns this character's class.
-   */
-  CharacterClass getCharacterClass();
+  int getDefense();
 }
