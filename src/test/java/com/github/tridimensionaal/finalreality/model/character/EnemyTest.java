@@ -1,25 +1,31 @@
 package com.github.tridimensionaal.finalreality.model.character;
 
-import com.github.tridimensionaal.finalreality.model.character.player.CharacterClass;
-import com.github.tridimensionaal.finalreality.model.character.player.PlayerCharacter;
+import com.github.tridimensionaal.finalreality.model.character.player.*;
+import com.github.tridimensionaal.finalreality.model.character.enemy.*;
+import com.github.tridimensionaal.finalreality.model.character.player.normal.Thief;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 
 class EnemyTest extends AbstractCharacterTest {
 
   private static final String ENEMY_NAME = "Goblin";
+  private static final int ENEMY_HEALTH = 10;
+  private static final int ENEMY_DEFENSE = 10;
+  private static final int ENEMY_WEIGHT = 10;
+  private static final int ENEMY_DAMAGE = 10;
 
   @BeforeEach
   void setUp() {
     basicSetUp();
-    testCharacters.add(new Enemy(ENEMY_NAME, 10, turns));
+    testCharacters.add(new Enemy(turns, ENEMY_NAME, ENEMY_HEALTH,ENEMY_DEFENSE, ENEMY_WEIGHT, ENEMY_DAMAGE));
   }
 
   @Test
   void constructorTest() {
-    checkConstruction(new Enemy(ENEMY_NAME, 10, turns),
+    checkConstruction(new Enemy(turns, ENEMY_NAME, ENEMY_HEALTH,ENEMY_DEFENSE, ENEMY_WEIGHT, ENEMY_DAMAGE),
         testCharacters.get(0),
-        new Enemy(ENEMY_NAME, 11, turns),
-        new PlayerCharacter(ENEMY_NAME, turns, CharacterClass.THIEF));
+        new Enemy(turns, ENEMY_NAME, 11,11,11,11),
+        new Thief(turns, ENEMY_NAME, 10, 10));
   }
 }

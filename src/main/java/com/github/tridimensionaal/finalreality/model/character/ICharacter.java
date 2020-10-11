@@ -35,4 +35,5 @@ public interface ICharacter {
    * Returns this character's defense points.
    */
   int getDefense();
+  
 }

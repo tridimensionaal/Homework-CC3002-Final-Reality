@@ -30,7 +30,7 @@ public class PlayerCharacter extends AbstractCharacter {
    * @param equippedWeapon
    *     the character's equipped weapon
    */
-  protected final String characterClass;
+  private final String characterClass;
   private IWeapon equippedWeapon = null;
 
   protected PlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final String characterClass) {
@@ -41,17 +41,13 @@ public class PlayerCharacter extends AbstractCharacter {
   public IWeapon getEquippedWeapon(){
       return equippedWeapon;
   }
-  public void equipWeapon(IWeapon weapon){
-      equippedWeapon = weapon;
+
+  public void equipWeapon(IWeapon weapon) {
+      this.equippedWeapon = weapon;
   }
 
   public String getCharacterClass(){
       return characterClass;
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(getCharacterClass());
   }
 
   @Override
@@ -63,7 +59,14 @@ public class PlayerCharacter extends AbstractCharacter {
       return false;
     }
     final PlayerCharacter that = (PlayerCharacter) o;
-    return getCharacterClass() == that.getCharacterClass()
-        && getName().equals(that.getName());
+    return super.equals(o) && getCharacterClass().equals(that.getCharacterClass());
   }
+  @Override 
+  public int hashCode(){
+      return Objects.hash(getName(),getHealth(), getDefense());
+  }
+
+
 }
+
+

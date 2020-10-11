@@ -54,11 +54,11 @@ public class Enemy extends AbstractCharacter {
       return false;
     }
     final Enemy enemy = (Enemy) o;
-    return getWeight() == enemy.getWeight() && getDamage() == enemy.getDamage();
+    return super.equals(o) && getWeight() == enemy.getWeight() && getDamage() == enemy.getDamage();
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getWeight(),getDamage());
+    return Objects.hash(getName(), getHealth(), getDefense(), getWeight(),getDamage());
   }
 }

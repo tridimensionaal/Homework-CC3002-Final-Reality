@@ -11,15 +11,13 @@ import java.util.Objects;
 public abstract class AbstractWeapon implements IWeapon {
 
   private final String name;
-  protected final int damage;
-  protected final int weight;
-  protected final String type;
+  private final int damage;
+  private final int weight;
 
-  protected AbstractWeapon(final String name, final int damage, final int weight,final String type) {
+  protected AbstractWeapon(final String name, final int damage, final int weight) {
     this.name = name;
     this.damage = damage;
     this.weight = weight;
-    this.type = type;
   }
 
   @Override
@@ -38,11 +36,6 @@ public abstract class AbstractWeapon implements IWeapon {
   }
 
   @Override
-  public String getType() {
-    return type;
-  }
-
-  @Override
   public boolean equals(final Object o) {
     if (this == o) {
       return true;
@@ -53,12 +46,11 @@ public abstract class AbstractWeapon implements IWeapon {
     final IWeapon weapon = (IWeapon) o;
     return getDamage() == weapon.getDamage() &&
         getWeight() == weapon.getWeight() &&
-        getName().equals(weapon.getName()) &&
-        getType() .equals(weapon.getName());
+        getName().equals(weapon.getName()); 
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getDamage(), getWeight(), getType());
+    return Objects.hash(getName(), getDamage(), getWeight());
   }
 }

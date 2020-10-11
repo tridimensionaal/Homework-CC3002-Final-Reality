@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import com.github.tridimensionaal.finalreality.model.character.player.CharacterClass;
 import com.github.tridimensionaal.finalreality.model.character.player.PlayerCharacter;
 import java.util.EnumMap;
 import java.util.Map;
