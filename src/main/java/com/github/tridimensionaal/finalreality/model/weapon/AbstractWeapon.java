@@ -1,4 +1,4 @@
-package com.github.cc3002.finalreality.model.weapon;
+package com.github.tridimensionaal.finalreality.model.weapon;
 
 import java.util.Objects;
 
@@ -6,41 +6,39 @@ import java.util.Objects;
  * A class that holds all the information of a weapon.
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Matías Salim Seda Auil
  */
-public class Weapon {
+public abstract class AbstractWeapon implements IWeapon {
 
   private final String name;
-  private final int damage;
-  private final int weight;
-  private final WeaponType type;
+  protected final int damage;
+  protected final int weight;
+  protected final String type;
 
-  /**
-   * Creates a weapon with a name, a base damage, speed and it's type.
-   *
-   * @see WeaponType
-   */
-  public Weapon(final String name, final int damage, final int weight,
-      final WeaponType type) {
+  protected AbstractWeapon(final String name, final int damage, final int weight,final String type) {
     this.name = name;
     this.damage = damage;
     this.weight = weight;
     this.type = type;
   }
 
-  private String getName() {
+  @Override
+  public String getName() {
     return name;
   }
 
-  private int getDamage() {
+  @Override
+  public int getDamage() {
     return damage;
   }
 
+  @Override
   public int getWeight() {
     return weight;
   }
 
-  private WeaponType getType() {
+  @Override
+  public String getType() {
     return type;
   }
 
@@ -49,14 +47,14 @@ public class Weapon {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof Weapon)) {
+    if (!(o instanceof IWeapon)) {
       return false;
     }
-    final Weapon weapon = (Weapon) o;
+    final IWeapon weapon = (IWeapon) o;
     return getDamage() == weapon.getDamage() &&
         getWeight() == weapon.getWeight() &&
         getName().equals(weapon.getName()) &&
-        getType() == weapon.getType();
+        getType() .equals(weapon.getName());
   }
 
   @Override
