@@ -22,7 +22,7 @@ public class MagicPlayerCharacter extends PlayerCharacter{
 
   protected int mana;
 
-  protected MagicPlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final String characterClass, int mana) {
+  public MagicPlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final String characterClass, int mana) {
       super(turnsQueue, name, health, defense, characterClass);
       this.mana = mana;
   }
@@ -43,7 +43,7 @@ public class MagicPlayerCharacter extends PlayerCharacter{
   }
   @Override 
   public int hashCode(){
-      return Objects.hash(getName(),getHealth(), getDefense(), getMana());
+      return Objects.hash(getName(),getHealth(), getDefense(), getCharacterClass(), getMana());
   }
 
 }

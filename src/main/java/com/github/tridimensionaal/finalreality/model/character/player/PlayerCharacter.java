@@ -33,7 +33,7 @@ public class PlayerCharacter extends AbstractCharacter {
   private final String characterClass;
   private IWeapon equippedWeapon = null;
 
-  protected PlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final String characterClass) {
+  public PlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final String characterClass) {
       super(turnsQueue, name, health, defense);
       this.characterClass = characterClass;
   }
@@ -63,7 +63,7 @@ public class PlayerCharacter extends AbstractCharacter {
   }
   @Override 
   public int hashCode(){
-      return Objects.hash(getName(),getHealth(), getDefense());
+      return Objects.hash(getName(),getHealth(), getDefense(), getCharacterClass());
   }
 
 

@@ -13,7 +13,7 @@ public class MagicWeapon extends AbstractWeapon{
   private final int magicDamage;
 
   protected MagicWeapon(final String name, final int damage, final int weight, final int magicDamage) {
-    super(name,damage,weight,type);
+    super(name,damage,weight);
     this.magicDamage= magicDamage;
   }
 

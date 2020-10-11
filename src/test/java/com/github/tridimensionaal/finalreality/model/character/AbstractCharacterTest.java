@@ -32,7 +32,11 @@ public abstract class AbstractCharacterTest {
   @Test
   void waitTurnTest() {
     Assertions.assertTrue(turns.isEmpty());
-    //tryToEquip(testCharacters.get(0));
+    if(testCharacters.get(0) instanceof PlayerCharacter) {
+        PlayerCharacter character = (PlayerCharacter) testCharacters.get(0);
+        tryToEquip(character);
+        testCharacters.add(0,character);
+    }
     testCharacters.get(0).waitTurn();
     try {
       // Thread.sleep is not accurate so this values may be changed to adjust the
@@ -47,10 +51,9 @@ public abstract class AbstractCharacterTest {
       e.printStackTrace();
     }
   }
-
-  //private void tryToEquip(PlayerCharacter character) {
-   // character.equipWeapon(testWeapon);
-  //}
+  private void tryToEquip(PlayerCharacter character) {
+      character.equipWeapon(testWeapon);
+  }
 
   protected void checkConstruction(final ICharacter expectedCharacter,
       final ICharacter testEqualCharacter,

@@ -1,6 +1,5 @@
 package com.github.tridimensionaal.finalreality.model.character;
 
-import com.github.tridimensionaal.finalreality.model.character.player.*;
 import com.github.tridimensionaal.finalreality.model.character.enemy.*;
 import com.github.tridimensionaal.finalreality.model.character.player.normal.Thief;
 import org.junit.jupiter.api.BeforeEach;

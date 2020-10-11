@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import com.github.tridimensionaal.finalreality.model.character.player.*;
+import com.github.tridimensionaal.finalreality.model.character.player.MagicPlayerCharacter;
+import com.github.tridimensionaal.finalreality.model.character.player.PlayerCharacter;
 import com.github.tridimensionaal.finalreality.model.character.enemy.Enemy;
 import com.github.tridimensionaal.finalreality.model.character.player.magic.*;
 import com.github.tridimensionaal.finalreality.model.character.player.normal.*;
@@ -16,13 +17,12 @@ import org.junit.jupiter.api.Test;
  *
  * @author Ignacio Slater Muñoz.
  * @author <Your name>
- * @see PlayerCharacter
+ * @see MagicPlayerCharacter
  */
-class PlayerCharacterTest extends AbstractCharacterTest {
+class MagicPlayerCharacterTest extends PlayerCharacterTest{
 
-  private static final String ENGINEER_NAME = "Cid";
-  private static final String THIEF_NAME = "Zidane";
-private static final String KNIGHT_NAME = "Railoo";
+  private static final String BLACK_MAGE_NAME = "Vivi";
+  private static final String WHITE_MAGE_NAME = "Eiko";
 
   /**
    * Setup method.
@@ -32,39 +32,44 @@ private static final String KNIGHT_NAME = "Railoo";
   void setUp() {
     super.basicSetUp();
 
-    ICharacter Knight = new Knight(turns, KNIGHT_NAME, 10,10);
-    testCharacters.add(Knight);
+    ICharacter BlackMage = new BlackMage(turns, BLACK_MAGE_NAME, 10,10,10);
+    testCharacters.add(BlackMage);
 
-    ICharacter Engineer = new Engineer(turns, ENGINEER_NAME , 10,10);
-    testCharacters.add(Engineer);
+    ICharacter WhiteMage = new WhiteMage(turns, WHITE_MAGE_NAME, 10,10,10);
+    testCharacters.add(WhiteMage);
 
-    ICharacter Thief = new Thief(turns, THIEF_NAME, 10,10);
-    testCharacters.add(Thief);
   }
 
   /**
    * Checks that the class' constructor and equals method works properly.
    */
   @Test
+
   void constructorTest() {
     var enemy = new Enemy(turns, "Enemy", 10, 10, 10, 10);
 
     for (var character :
         testCharacters) {
-      PlayerCharacter character1 = (PlayerCharacter) character;
+
+      MagicPlayerCharacter character1 = (MagicPlayerCharacter) character;
       var characterName = character1.getName();
       var characterHealth = character1.getHealth();
       var characterDefense = character1.getDefense();
       var characterClass = character1.getCharacterClass();
+      var characterMana = character1.getMana();
 
-      ICharacter character2 = new PlayerCharacter(turns, characterName, characterHealth, characterDefense, characterClass);
-      ICharacter character3 = new PlayerCharacter(turns, "as", 12, 12, characterClass);
-      ICharacter character4 = new PlayerCharacter(turns, characterName, characterHealth, characterDefense, "jas");
-      ICharacter magicPlayerCharacter = new MagicPlayerCharacter(turns, characterName, characterHealth, characterDefense, characterClass, 10);
+
+
+      ICharacter character2 = new MagicPlayerCharacter(turns, characterName, characterHealth, characterDefense, characterClass, characterMana);
+      ICharacter character3 = new MagicPlayerCharacter(turns, "as", 12, 12, characterClass,13);
+      ICharacter character4 = new MagicPlayerCharacter(turns, characterName, characterHealth, characterDefense, "jas",characterMana);
+
+      ICharacter playerCharacter = new PlayerCharacter(turns, characterName, characterHealth, characterDefense, characterClass);
+
 
       checkConstruction(character, character2,character3,character4);
       assertNotEquals(character, enemy);
-      assertNotEquals(magicPlayerCharacter, character);
+      assertNotEquals(character, playerCharacter);
     }
 
   }
@@ -73,7 +78,7 @@ private static final String KNIGHT_NAME = "Railoo";
   void equipWeaponTest() {
     for (var character :
         testCharacters) {
-      PlayerCharacter character1 = (PlayerCharacter) character;
+      MagicPlayerCharacter character1 = (MagicPlayerCharacter) character;
       character1.equipWeapon(testWeapon);
       assertEquals(testWeapon, character1.getEquippedWeapon());
     }
