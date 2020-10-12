@@ -3,7 +3,7 @@ package com.github.tridimensionaal.finalreality.model.weapon;
 import java.util.Objects;
 
 /**
- * A class that holds all the information of a weapon.
+ * An abstract class that holds the common behaviour of all the  weapons in the game.
  *
  * @author Ignacio Slater Muñoz.
  * @author Matías Salim Seda Auil
@@ -13,6 +13,17 @@ public abstract class AbstractWeapon implements IWeapon {
   private final String name;
   private final int damage;
   private final int weight;
+
+  /**
+   * Creates a new abstract weapon.
+   *
+   * @param name
+   *     the weapon's name
+   * @param damage
+   *     the weapon's damage
+   * @param weight 
+   *     the weapon's weight
+   */
 
   protected AbstractWeapon(final String name, final int damage, final int weight) {
     this.name = name;

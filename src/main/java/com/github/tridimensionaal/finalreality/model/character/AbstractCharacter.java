@@ -22,6 +22,19 @@ public abstract class AbstractCharacter implements ICharacter {
   private final int defense;
   private ScheduledExecutorService scheduledExecutor;
 
+  /**
+   * Creates a new abstract character.
+   *
+   * @param turnsQueue
+   *     the queue with the characters waiting for their turn
+   * @param name
+   *     the character's name
+   * @param health 
+   *     the character's health 
+   * @param defense
+   *     the character's health 
+   */
+
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense) {
     this.turnsQueue = turnsQueue;
     this.name = name;
@@ -67,12 +80,13 @@ public abstract class AbstractCharacter implements ICharacter {
 
   @Override
   public boolean equals(final Object o) {
-    if (this == o) {
+    /*if (this == o) {
       return true;
     }
     if (!(o instanceof ICharacter)) {
       return false;
     }
+    */
     final ICharacter that = (ICharacter) o;
     return getName().equals(that.getName()) && getHealth() == that.getHealth() && getDefense() == that.getDefense(); 
   }

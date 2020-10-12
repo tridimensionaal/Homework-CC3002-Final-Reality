@@ -6,17 +6,20 @@ import com.github.tridimensionaal.finalreality.model.character.player.MagicPlaye
 import com.github.tridimensionaal.finalreality.model.character.ICharacter;
 
 /**
- * A class that holds all the information of a single player's black mage.
+ * A class that holds all the information of a black mage.
  *
  * @author Matías Salim Seda Auil
  */
  
 public class BlackMage extends MagicPlayerCharacter{
-    /**
-     *  Creates a new black mage.
-     */
 
-    public BlackMage(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final int mana) {
-    super(turnsQueue, name, health, defense, "BlackMage", mana);
+  /**
+   * Creates a new black mage.
+   *
+   * {@inheritDoc}
+   */
+ 
+  public BlackMage(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final int mana) {
+      super(turnsQueue, name, health, defense, "BlackMage", mana);
     }
 }

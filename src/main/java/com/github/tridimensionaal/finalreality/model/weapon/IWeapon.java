@@ -1,36 +1,39 @@
 package com.github.tridimensionaal.finalreality.model.weapon;
 
 /**
- * This represents a character from the game.
- * A character can be controlled by the player or by the CPU (an enemy).
+ * This represents a weapon from the game.
+ * A weapon can be used only by player's character.
  *
  * @author Ignacio Slater Muñoz.
  * @author Matías Salim Seda Auil
  */
 public interface IWeapon{
-
+  
   /**
-   * Returns this weapon's name.
+   * @return This weapon's name.
+   * 
    */
   String getName();
 
   /**
-   * Returns this weapon's damage.
+   * @return This weapon's damage.
    */
   int getDamage();
 
   /**
-   * Returns this weapon's weight.
+   * @return This weapon's weight.
    */
   int getWeight();
 
   /**
-   * 
+   * @param o An object
+   * @return True if this weapon is the same that object o or False if this weapon is not the same that object o.
    */
+
   boolean equals(Object o);
 
   /**
-   * 
+   * @return This weapon's hash code. 
    */
   int hashCode();
 }

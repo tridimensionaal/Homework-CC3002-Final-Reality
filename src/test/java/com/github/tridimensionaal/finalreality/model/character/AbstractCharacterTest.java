@@ -55,14 +55,56 @@ public abstract class AbstractCharacterTest {
       character.equipWeapon(testWeapon);
   }
 
-  protected void checkConstruction(final ICharacter expectedCharacter,
-      final ICharacter testEqualCharacter,
-      final ICharacter sameClassDifferentCharacter,
-      final ICharacter differentClassCharacter) {
-    assertEquals(expectedCharacter, testEqualCharacter);
-    assertNotEquals(sameClassDifferentCharacter, testEqualCharacter);
-    assertNotEquals(testEqualCharacter, differentClassCharacter);
-    assertEquals(expectedCharacter.hashCode(), testEqualCharacter.hashCode());
+  protected void checkConstruction(
+      //Original character
+      final ICharacter character,
+      //Same character
+      final ICharacter character1,
+      //Different name
+      final ICharacter character2,
+      //Different health
+      final ICharacter character3,
+      //Different defense 
+      final ICharacter character4,
+      //Different name and health
+      final ICharacter character5,
+      //Different name and defendse
+      final ICharacter character6,
+      //Different health and defense 
+      final ICharacter character7,
+      //All diferent
+      final ICharacter character8) {
+
+    assertEquals(character, character);
+    assertEquals(character.hashCode(), character.hashCode());
+
+    assertEquals(character, character1);
+    assertEquals(character.hashCode(), character1.hashCode());
+
+    assertNotEquals(character, character2);
+    assertNotEquals(character.hashCode(), character2.hashCode());
+
+    assertNotEquals(character, character3);
+    assertNotEquals(character.hashCode(), character3.hashCode());
+
+    assertNotEquals(character, character4);
+    assertNotEquals(character.hashCode(), character4.hashCode());
+
+    assertNotEquals(character, character5);
+    assertNotEquals(character.hashCode(), character5.hashCode());
+
+    assertNotEquals(character, character6);
+    assertNotEquals(character.hashCode(), character6.hashCode());
+
+    assertNotEquals(character, character7);
+    assertNotEquals(character.hashCode(), character7.hashCode());
+
+    assertNotEquals(character, character8);
+    assertNotEquals(character.hashCode(), character8.hashCode());
+
+    assertNotEquals(character, character8);
+    assertNotEquals(character.hashCode(), character8.hashCode());
+    
   }
 
   protected void basicSetUp() {

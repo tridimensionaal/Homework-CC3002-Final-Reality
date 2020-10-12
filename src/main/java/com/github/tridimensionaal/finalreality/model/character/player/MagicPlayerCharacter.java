@@ -7,25 +7,32 @@ import java.util.Objects;
 
 
 /**
- * A class that holds all the information of a single character of the game.
+ * A class that holds all the information of a single magic character of the game.
  *
  * @author Ignacio Slater Muñoz.
  * @author Matías Salim Seda Auil
  */
 public class MagicPlayerCharacter extends PlayerCharacter{
+  private int mana;
+
   /**
-   * Creates a new magic character.
+   * Creates a new magic player character.
+   * 
+   *
+   * {@inheritDoc} 
    *
    * @param mana
    *     the character's mana 
    */
 
-  protected int mana;
-
   public MagicPlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final String characterClass, int mana) {
       super(turnsQueue, name, health, defense, characterClass);
       this.mana = mana;
   }
+
+  /**
+   * @return the character's mana
+   */
   public int getMana(){
       return mana;
   }
@@ -41,6 +48,7 @@ public class MagicPlayerCharacter extends PlayerCharacter{
     final MagicPlayerCharacter that = (MagicPlayerCharacter) o;
     return super.equals(o) && getMana() == that.getMana();
   }
+
   @Override 
   public int hashCode(){
       return Objects.hash(getName(),getHealth(), getDefense(), getCharacterClass(), getMana());

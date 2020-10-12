@@ -58,16 +58,26 @@ class MagicPlayerCharacterTest extends PlayerCharacterTest{
       var characterClass = character1.getCharacterClass();
       var characterMana = character1.getMana();
 
-
-
-      ICharacter character2 = new MagicPlayerCharacter(turns, characterName, characterHealth, characterDefense, characterClass, characterMana);
-      ICharacter character3 = new MagicPlayerCharacter(turns, "as", 12, 12, characterClass,13);
-      ICharacter character4 = new MagicPlayerCharacter(turns, characterName, characterHealth, characterDefense, "jas",characterMana);
+      //Same character
+      ICharacter character2 = new MagicPlayerCharacter(turns, characterName, characterHealth, characterDefense, characterClass,characterMana);
+      //Diferent name
+      ICharacter character3 = new MagicPlayerCharacter(turns, "as", characterHealth, characterDefense, characterClass, characterMana);
+      //Different health
+      ICharacter character4 = new MagicPlayerCharacter(turns, characterName, 12, characterDefense, characterClass, characterMana);
+      //Diferent defense
+      ICharacter character5 = new MagicPlayerCharacter(turns, characterName, characterHealth, 12, characterClass, characterMana);
+      //Diferent name and health
+      ICharacter character6 = new MagicPlayerCharacter(turns, "asda" , 13, characterDefense, characterClass, characterMana);
+      //Diferent name and defense
+      ICharacter character7 = new MagicPlayerCharacter(turns, "asdas" , characterHealth, 15, characterClass, characterMana);
+      //Diferent health and defense
+      ICharacter character8 = new MagicPlayerCharacter(turns, characterName, 13, 131, characterClass, characterMana);
+      //Different name, health and defense 
+      ICharacter character9 = new MagicPlayerCharacter(turns, "jjka", 16, 1, characterClass, characterMana);
 
       ICharacter playerCharacter = new PlayerCharacter(turns, characterName, characterHealth, characterDefense, characterClass);
 
-
-      checkConstruction(character, character2,character3,character4);
+      checkConstruction(character, character2, character3, character4, character5, character6, character7, character8, character9);
       assertNotEquals(character, enemy);
       assertNotEquals(character, playerCharacter);
     }

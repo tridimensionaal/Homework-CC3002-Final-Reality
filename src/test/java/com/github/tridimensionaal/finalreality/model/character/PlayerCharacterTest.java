@@ -57,12 +57,26 @@ private static final String KNIGHT_NAME = "Railoo";
       var characterDefense = character1.getDefense();
       var characterClass = character1.getCharacterClass();
 
+      //Same character
       ICharacter character2 = new PlayerCharacter(turns, characterName, characterHealth, characterDefense, characterClass);
-      ICharacter character3 = new PlayerCharacter(turns, "as", 12, 12, characterClass);
-      ICharacter character4 = new PlayerCharacter(turns, characterName, characterHealth, characterDefense, "jas");
+      //Diferent name
+      ICharacter character3 = new PlayerCharacter(turns, "as", characterHealth, characterDefense, characterClass);
+      //Different health
+      ICharacter character4 = new PlayerCharacter(turns, characterName, 12, characterDefense, characterClass);
+      //Diferent defense
+      ICharacter character5 = new PlayerCharacter(turns, characterName, characterHealth, 12, characterClass);
+      //Diferent name and health
+      ICharacter character6 = new PlayerCharacter(turns, "asda" , 13, characterDefense, characterClass);
+      //Diferent name and defense
+      ICharacter character7 = new PlayerCharacter(turns, "asdas" , characterHealth, 15, characterClass);
+      //Diferent health and defense
+      ICharacter character8 = new PlayerCharacter(turns, characterName, 13, 131, characterClass);
+      //Different name, health and defense 
+      ICharacter character9 = new PlayerCharacter(turns, "jjka", 16, 1, characterClass);
+
       ICharacter magicPlayerCharacter = new MagicPlayerCharacter(turns, characterName, characterHealth, characterDefense, characterClass, 10);
 
-      checkConstruction(character, character2,character3,character4);
+
       assertNotEquals(character, enemy);
       assertNotEquals(magicPlayerCharacter, character);
     }

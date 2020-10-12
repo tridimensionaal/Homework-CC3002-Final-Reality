@@ -22,18 +22,28 @@ public interface ICharacter {
   void addToQueue();
 
   /**
-   * Returns this character's name.
+   * @return this character's name.
    */
   String getName();
 
   /**
-   * Returns this character's health points.
+   * @return this character's health points.
    */
   int getHealth();
 
   /**
-   * Returns this character's defense points.
+   * @return this character's defense points.
    */
   int getDefense();
-  
+
+   /**
+   * @param o An object
+   * @return True if this character is the same that object o or False if this character is not the same that object o.
+   */
+  boolean equals(Object o);
+
+  /**
+   * @return This character's hash code. 
+   */
+  int hashCode();
 }
