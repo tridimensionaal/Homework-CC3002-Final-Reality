@@ -16,11 +16,24 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class AbstractCharacter implements ICharacter {
 
-  protected final BlockingQueue<ICharacter> turnsQueue;
-  protected final String name;
-  protected final int health;
-  protected final int defense;
+  private final BlockingQueue<ICharacter> turnsQueue;
+  private final String name;
+  private final int health;
+  private final int defense;
   private ScheduledExecutorService scheduledExecutor;
+
+  /**
+   * Creates a new abstract character.
+   *
+   * @param turnsQueue
+   *     the queue with the characters waiting for their turn
+   * @param name
+   *     the character's name
+   * @param health 
+   *     the character's health 
+   * @param defense
+   *     the character's health 
+   */
 
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense) {
     this.turnsQueue = turnsQueue;
@@ -63,6 +76,19 @@ public abstract class AbstractCharacter implements ICharacter {
   @Override
   public int getDefense() {
     return defense;
+  }
+
+  @Override
+  public boolean equals(final Object o) {
+    /*if (this == o) {
+      return true;
+    }
+    if (!(o instanceof ICharacter)) {
+      return false;
+    }
+    */
+    final ICharacter that = (ICharacter) o;
+    return getName().equals(that.getName()) && getHealth() == that.getHealth() && getDefense() == that.getDefense(); 
   }
 }
 

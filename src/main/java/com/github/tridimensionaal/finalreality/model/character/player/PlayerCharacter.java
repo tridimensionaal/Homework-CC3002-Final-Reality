@@ -8,50 +8,52 @@ import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A class that holds all the information of a single character of the game.
+ * A class that holds all the information of a single player character of the game.
  *
  * @author Ignacio Slater Muñoz.
  * @author Matías Salim Seda Auil
  */
 public class PlayerCharacter extends AbstractCharacter {
-  /**
-   * Creates a new character.
-   *
-   * @param turnsQueue
-   *     the queue with the characters waiting for their turn
-   * @param name
-   *     the character's name
-   * @param health 
-   *     the character's health 
-   * @param defense
-   *     the character's health 
-   * @param characterClass 
-   *     the character's class
-   * @param equippedWeapon
-   *     the character's equipped weapon
-   */
-  protected final String characterClass;
+
+  private final String characterClass;
   private IWeapon equippedWeapon = null;
 
-  protected PlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final String characterClass) {
+  /**
+   * Creates a new player character.
+   *
+   * {@inheritDoc}
+   *
+   * @param characterClass 
+   *     the character's class
+   */
+
+  public PlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final String characterClass) {
       super(turnsQueue, name, health, defense);
       this.characterClass = characterClass;
   }
 
+  /**
+   * @return the actual equipped weapon.
+   */
   public IWeapon getEquippedWeapon(){
       return equippedWeapon;
   }
-  public void equipWeapon(IWeapon weapon){
-      equippedWeapon = weapon;
+
+  /**
+   * Equip a new weapon.
+   * @Param weapon.
+   */
+ 
+  public void equipWeapon(IWeapon weapon) {
+      this.equippedWeapon = weapon;
   }
 
+  /**
+   * @return the player character's class.
+   */
+ 
   public String getCharacterClass(){
       return characterClass;
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(getCharacterClass());
   }
 
   @Override
@@ -59,11 +61,22 @@ public class PlayerCharacter extends AbstractCharacter {
     if (this == o) {
       return true;
     }
+
     if (!(o instanceof PlayerCharacter)) {
       return false;
     }
+
     final PlayerCharacter that = (PlayerCharacter) o;
-    return getCharacterClass() == that.getCharacterClass()
-        && getName().equals(that.getName());
+
+    return super.equals(o) && getCharacterClass().equals(that.getCharacterClass());
   }
+
+  @Override 
+  public int hashCode(){
+      return Objects.hash(getName(),getHealth(), getDefense(), getCharacterClass());
+  }
+
+
 }
+
+

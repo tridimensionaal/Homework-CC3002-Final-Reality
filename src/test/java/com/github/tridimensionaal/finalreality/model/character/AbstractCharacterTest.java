@@ -3,8 +3,9 @@ package com.github.tridimensionaal.finalreality.model.character;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import com.github.tridimensionaal.finalreality.model.weapon.Weapon;
-import com.github.tridimensionaal.finalreality.model.weapon.WeaponType;
+import com.github.tridimensionaal.finalreality.model.character.player.PlayerCharacter;
+import com.github.tridimensionaal.finalreality.model.weapon.*;
+import com.github.tridimensionaal.finalreality.model.weapon.normal.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -23,7 +24,7 @@ public abstract class AbstractCharacterTest {
 
   protected BlockingQueue<ICharacter> turns;
   protected List<ICharacter> testCharacters;
-  protected Weapon testWeapon;
+  protected IWeapon testWeapon;
 
   /**
    * Checks that the character waits the appropriate amount of time for it's turn.
@@ -31,7 +32,11 @@ public abstract class AbstractCharacterTest {
   @Test
   void waitTurnTest() {
     Assertions.assertTrue(turns.isEmpty());
-    tryToEquip(testCharacters.get(0));
+    if(testCharacters.get(0) instanceof PlayerCharacter) {
+        PlayerCharacter character = (PlayerCharacter) testCharacters.get(0);
+        tryToEquip(character);
+        testCharacters.add(0,character);
+    }
     testCharacters.get(0).waitTurn();
     try {
       // Thread.sleep is not accurate so this values may be changed to adjust the
@@ -46,24 +51,65 @@ public abstract class AbstractCharacterTest {
       e.printStackTrace();
     }
   }
-
-  private void tryToEquip(ICharacter character) {
-    character.equip(testWeapon);
+  private void tryToEquip(PlayerCharacter character) {
+      character.equipWeapon(testWeapon);
   }
 
-  protected void checkConstruction(final ICharacter expectedCharacter,
-      final ICharacter testEqualCharacter,
-      final ICharacter sameClassDifferentCharacter,
-      final ICharacter differentClassCharacter) {
-    assertEquals(expectedCharacter, testEqualCharacter);
-    assertNotEquals(sameClassDifferentCharacter, testEqualCharacter);
-    assertNotEquals(testEqualCharacter, differentClassCharacter);
-    assertEquals(expectedCharacter.hashCode(), testEqualCharacter.hashCode());
+  protected void checkConstruction(
+      //Original character
+      final ICharacter character,
+      //Same character
+      final ICharacter character1,
+      //Different name
+      final ICharacter character2,
+      //Different health
+      final ICharacter character3,
+      //Different defense 
+      final ICharacter character4,
+      //Different name and health
+      final ICharacter character5,
+      //Different name and defendse
+      final ICharacter character6,
+      //Different health and defense 
+      final ICharacter character7,
+      //All diferent
+      final ICharacter character8) {
+
+    assertEquals(character, character);
+    assertEquals(character.hashCode(), character.hashCode());
+
+    assertEquals(character, character1);
+    assertEquals(character.hashCode(), character1.hashCode());
+
+    assertNotEquals(character, character2);
+    assertNotEquals(character.hashCode(), character2.hashCode());
+
+    assertNotEquals(character, character3);
+    assertNotEquals(character.hashCode(), character3.hashCode());
+
+    assertNotEquals(character, character4);
+    assertNotEquals(character.hashCode(), character4.hashCode());
+
+    assertNotEquals(character, character5);
+    assertNotEquals(character.hashCode(), character5.hashCode());
+
+    assertNotEquals(character, character6);
+    assertNotEquals(character.hashCode(), character6.hashCode());
+
+    assertNotEquals(character, character7);
+    assertNotEquals(character.hashCode(), character7.hashCode());
+
+    assertNotEquals(character, character8);
+    assertNotEquals(character.hashCode(), character8.hashCode());
+
+    assertNotEquals(character, character8);
+    assertNotEquals(character.hashCode(), character8.hashCode());
+    
   }
 
   protected void basicSetUp() {
     turns = new LinkedBlockingQueue<>();
-    testWeapon = new Weapon("Test", 15, 10, WeaponType.AXE);
+    testWeapon = new Axe(15, 10);
     testCharacters = new ArrayList<>();
   }
 }

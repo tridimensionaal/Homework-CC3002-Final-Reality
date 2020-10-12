@@ -3,7 +3,7 @@ package com.github.tridimensionaal.finalreality.model.weapon;
 import java.util.Objects;
 
 /**
- * A class that holds all the information of a weapon.
+ * An abstract class that holds the common behaviour of all the  weapons in the game.
  *
  * @author Ignacio Slater Muñoz.
  * @author Matías Salim Seda Auil
@@ -11,15 +11,24 @@ import java.util.Objects;
 public abstract class AbstractWeapon implements IWeapon {
 
   private final String name;
-  protected final int damage;
-  protected final int weight;
-  protected final String type;
+  private final int damage;
+  private final int weight;
 
-  protected AbstractWeapon(final String name, final int damage, final int weight,final String type) {
+  /**
+   * Creates a new abstract weapon.
+   *
+   * @param name
+   *     the weapon's name
+   * @param damage
+   *     the weapon's damage
+   * @param weight 
+   *     the weapon's weight
+   */
+
+  protected AbstractWeapon(final String name, final int damage, final int weight) {
     this.name = name;
     this.damage = damage;
     this.weight = weight;
-    this.type = type;
   }
 
   @Override
@@ -38,11 +47,6 @@ public abstract class AbstractWeapon implements IWeapon {
   }
 
   @Override
-  public String getType() {
-    return type;
-  }
-
-  @Override
   public boolean equals(final Object o) {
     if (this == o) {
       return true;
@@ -53,12 +57,11 @@ public abstract class AbstractWeapon implements IWeapon {
     final IWeapon weapon = (IWeapon) o;
     return getDamage() == weapon.getDamage() &&
         getWeight() == weapon.getWeight() &&
-        getName().equals(weapon.getName()) &&
-        getType() .equals(weapon.getName());
+        getName().equals(weapon.getName()); 
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getDamage(), getWeight(), getType());
+    return Objects.hash(getName(), getDamage(), getWeight());
   }
 }
