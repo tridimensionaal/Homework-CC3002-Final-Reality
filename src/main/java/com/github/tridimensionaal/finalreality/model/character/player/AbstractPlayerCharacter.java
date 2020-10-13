@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Ignacio Slater Muñoz.
  * @author Matías Salim Seda Auil
  */
-public class PlayerCharacter extends AbstractCharacter {
+public abstract class AbstractPlayerCharacter extends AbstractCharacter implements IPlayerCharacter{
 
   private final String characterClass;
   private IWeapon equippedWeapon = null;
@@ -27,7 +27,7 @@ public class PlayerCharacter extends AbstractCharacter {
    *     the character's class
    */
 
-  public PlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final String characterClass) {
+  public AbstractPlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final String characterClass) {
       super(turnsQueue, name, health, defense);
       this.characterClass = characterClass;
   }
@@ -41,7 +41,8 @@ public class PlayerCharacter extends AbstractCharacter {
 
   /**
    * Equip a new weapon.
-   * @Param weapon.
+   * @param weapon
+   *    a weapon
    */
  
   public void equipWeapon(IWeapon weapon) {
@@ -62,12 +63,11 @@ public class PlayerCharacter extends AbstractCharacter {
       return true;
     }
 
-    if (!(o instanceof PlayerCharacter)) {
+    if (!(o instanceof IPlayerCharacter)) {
       return false;
     }
 
-    final PlayerCharacter that = (PlayerCharacter) o;
-
+    final IPlayerCharacter that = (IPlayerCharacter) o;
     return super.equals(o) && getCharacterClass().equals(that.getCharacterClass());
   }
 
@@ -75,7 +75,6 @@ public class PlayerCharacter extends AbstractCharacter {
   public int hashCode(){
       return Objects.hash(getName(),getHealth(), getDefense(), getCharacterClass());
   }
-
 
 }
 

@@ -2,7 +2,7 @@ package com.github.tridimensionaal.finalreality.model.character.player.magic;
 
 import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.BlockingQueue;
-import com.github.tridimensionaal.finalreality.model.character.player.MagicPlayerCharacter;
+import com.github.tridimensionaal.finalreality.model.character.player.AbstractMagicPlayerCharacter;
 import com.github.tridimensionaal.finalreality.model.character.ICharacter;
 
 
@@ -12,7 +12,7 @@ import com.github.tridimensionaal.finalreality.model.character.ICharacter;
  * @author Matías Salim Seda Auil
  */
  
-public class WhiteMage extends MagicPlayerCharacter{
+public class WhiteMage extends AbstractMagicPlayerCharacter{
 
   /**
    * Creates a new white mage.

@@ -12,7 +12,7 @@ import com.github.tridimensionaal.finalreality.model.weapon.AbstractWeapon;
 public class Axe extends AbstractWeapon{
 
   /**
-   * Creates a new staff.
+   * Creates a new Axe.
    *
    * {@inheritDoc}
    */

@@ -3,12 +3,12 @@ package com.github.tridimensionaal.finalreality.model.weapon;
 import java.util.Objects;
 
 /**
- * A class that holds all the information of a magic weapon.
+ * An abstract class that holds all the information of a magic weapon.
  *
  * @author Ignacio Slater Muñoz.
  * @author Matías Salim Seda Auil
  */
-public class MagicWeapon extends AbstractWeapon{
+public abstract class AbstractMagicWeapon extends AbstractWeapon implements IMagicWeapon{
   
   private final int magicDamage;
 
@@ -22,7 +22,7 @@ public class MagicWeapon extends AbstractWeapon{
    *     the weapon's magic damage 
    */
 
-  protected MagicWeapon(final String name, final int damage, final int weight, final int magicDamage) {
+  public AbstractMagicWeapon(final String name, final int damage, final int weight, final int magicDamage) {
     super(name,damage,weight);
     this.magicDamage= magicDamage;
   }
@@ -39,11 +39,12 @@ public class MagicWeapon extends AbstractWeapon{
     if (this == o) {
       return true;
     }
-    if (!(o instanceof MagicWeapon)) {
+    if (!(o instanceof IMagicWeapon)) {
       return false;
     }
-    final MagicWeapon weapon = (MagicWeapon) o;
-    return super.equals(o) && getMagicDamage() == weapon.getMagicDamage();
+    final IMagicWeapon weapon = (IMagicWeapon) o;
+    final IWeapon weaponn = (IWeapon) o;
+    return super.equals(weaponn) && getMagicDamage() == weapon.getMagicDamage();
   }
 
   @Override

@@ -1,8 +1,8 @@
 package com.github.tridimensionaal.finalreality.model.character.player.normal;
 
+import com.github.tridimensionaal.finalreality.model.character.player.AbstractPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.BlockingQueue;
-import com.github.tridimensionaal.finalreality.model.character.player.PlayerCharacter;
 import com.github.tridimensionaal.finalreality.model.character.ICharacter;
 
 
@@ -12,7 +12,7 @@ import com.github.tridimensionaal.finalreality.model.character.ICharacter;
  * @author Matías Salim Seda Auil
  */
  
-public class Engineer extends PlayerCharacter{
+public class Engineer extends AbstractPlayerCharacter {
 
   /**
    * Creates a new engineer.
