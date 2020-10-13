@@ -12,8 +12,8 @@ import java.util.Objects;
  * @author Ignacio Slater Muñoz.
  * @author Matías Salim Seda Auil
  */
-public class MagicPlayerCharacter extends PlayerCharacter{
-  private int mana;
+public abstract class AbstractMagicPlayerCharacter extends AbstractPlayerCharacter implements IMagicPlayerCharacter{
+  private final int mana;
 
   /**
    * Creates a new magic player character.
@@ -25,7 +25,7 @@ public class MagicPlayerCharacter extends PlayerCharacter{
    *     the character's mana 
    */
 
-  public MagicPlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final String characterClass, int mana) {
+  public AbstractMagicPlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final String characterClass, int mana) {
       super(turnsQueue, name, health, defense, characterClass);
       this.mana = mana;
   }
@@ -42,11 +42,12 @@ public class MagicPlayerCharacter extends PlayerCharacter{
     if (this == o) {
       return true;
     }
-    if (!(o instanceof MagicPlayerCharacter)) {
+    if (!(o instanceof IMagicPlayerCharacter)) {
       return false;
     }
-    final MagicPlayerCharacter that = (MagicPlayerCharacter) o;
+    final IMagicPlayerCharacter that = (IMagicPlayerCharacter) o;
     return super.equals(o) && getMana() == that.getMana();
+
   }
 
   @Override 

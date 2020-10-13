@@ -1,6 +1,6 @@
 package com.github.tridimensionaal.finalreality.model.character;
 
-import com.github.tridimensionaal.finalreality.model.character.player.PlayerCharacter;
+import com.github.tridimensionaal.finalreality.model.character.player.IPlayerCharacter;
 import com.github.tridimensionaal.finalreality.model.character.enemy.Enemy;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
@@ -45,8 +45,8 @@ public abstract class AbstractCharacter implements ICharacter {
   @Override
   public void waitTurn() {
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
-    if (this instanceof PlayerCharacter) {
-      var player = (PlayerCharacter) this;
+    if (this instanceof IPlayerCharacter) {
+      var player = (IPlayerCharacter) this;
       scheduledExecutor
               .schedule(this::addToQueue, player.getEquippedWeapon().getWeight()/ 10, TimeUnit.SECONDS);
 

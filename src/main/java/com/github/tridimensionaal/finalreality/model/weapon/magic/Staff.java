@@ -1,6 +1,6 @@
 package com.github.tridimensionaal.finalreality.model.weapon.magic;
 
-import com.github.tridimensionaal.finalreality.model.weapon.MagicWeapon;
+import com.github.tridimensionaal.finalreality.model.weapon.AbstractMagicWeapon;
 
 /**
  * A class that holds all the information of a single staff.
@@ -8,7 +8,7 @@ import com.github.tridimensionaal.finalreality.model.weapon.MagicWeapon;
  * @author Matías Salim Seda Auil
  */
  
-public class Staff extends MagicWeapon{
+public class Staff extends AbstractMagicWeapon{
 
   /**
    * Creates a new staff.

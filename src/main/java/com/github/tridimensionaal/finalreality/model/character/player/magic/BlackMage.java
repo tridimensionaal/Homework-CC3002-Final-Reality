@@ -1,8 +1,8 @@
 package com.github.tridimensionaal.finalreality.model.character.player.magic;
 
+import com.github.tridimensionaal.finalreality.model.character.player.AbstractMagicPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.BlockingQueue;
-import com.github.tridimensionaal.finalreality.model.character.player.MagicPlayerCharacter;
 import com.github.tridimensionaal.finalreality.model.character.ICharacter;
 
 /**
@@ -11,7 +11,7 @@ import com.github.tridimensionaal.finalreality.model.character.ICharacter;
  * @author Matías Salim Seda Auil
  */
  
-public class BlackMage extends MagicPlayerCharacter{
+public class BlackMage extends AbstractMagicPlayerCharacter {
 
   /**
    * Creates a new black mage.
