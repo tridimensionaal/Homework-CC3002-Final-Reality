@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Ignacio Slater Muñoz.
  * @author Matías Salim Seda Auil
- * @see IMagicPlayerCharacter
+ * @see IPlayerCharacter
  */
 
 public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest {
@@ -36,7 +36,6 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
     Assertions.assertTrue(turns.isEmpty());
     IPlayerCharacter character = (IPlayerCharacter) testCharacters.get(0);
     character.equipWeapon(testWeapon);
-    testCharacters.add(0,character);
     testCharacters.get(0).waitTurn();
     try {
       // Thread.sleep is not accurate so this values may be changed to adjust the
@@ -106,6 +105,6 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
     assertNotEquals(character.hashCode(), character8.hashCode());
 
   }
- 
+
 }
 

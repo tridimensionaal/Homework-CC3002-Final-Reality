@@ -23,11 +23,11 @@ public class Knife extends AbstractWeapon{
         super("Knife", damage, weight);
   }
   public boolean equippedByEngineer(){
-      return true;
+      return false;
   }
 
   public boolean equippedByKnight(){
-      return false;
+      return true;
   }
 
   public boolean equippedByThief(){

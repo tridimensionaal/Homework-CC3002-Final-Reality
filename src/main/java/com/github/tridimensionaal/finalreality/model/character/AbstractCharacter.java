@@ -25,14 +25,10 @@ public abstract class AbstractCharacter implements ICharacter {
   /**
    * Creates a new abstract character.
    *
-   * @param turnsQueue
-   *     the queue with the characters waiting for their turn
-   * @param name
-   *     the character's name
-   * @param health 
-   *     the character's health 
-   * @param defense
-   *     the character's health 
+   * @param turnsQueue the queue with the characters waiting for their turn
+   * @param name       the character's name
+   * @param health     the character's health
+   * @param defense    the character's health
    */
 
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, int health, final int defense) {
@@ -48,12 +44,12 @@ public abstract class AbstractCharacter implements ICharacter {
     if (this instanceof IPlayerCharacter) {
       var player = (IPlayerCharacter) this;
       scheduledExecutor
-              .schedule(this::addToQueue, player.getEquippedWeapon().getWeight()/ 10, TimeUnit.SECONDS);
+              .schedule(this::addToQueue, player.getEquippedWeapon().getWeight() / 10, TimeUnit.SECONDS);
 
     } else {
       var enemy = (Enemy) this;
       scheduledExecutor
-          .schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
+              .schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
     }
   }
 
@@ -78,14 +74,14 @@ public abstract class AbstractCharacter implements ICharacter {
     return defense;
   }
 
-  public void receiveDamage(int damage){
-      if(health == 0){
-          return;
-      }
-      health -= (damage - this.defense);
-      if (health < 1){
-          health = 0;
-      }
+  public void receiveDamage(int damage) {
+    if (health == 0) {
+      return;
+    }
+    health -= (damage - this.defense);
+    if (health < 1) {
+      health = 0;
+    }
   }
 
   @Override
@@ -98,7 +94,7 @@ public abstract class AbstractCharacter implements ICharacter {
     }
     */
     final ICharacter that = (ICharacter) o;
-    return getName().equals(that.getName()) && getHealth() == that.getHealth() && getDefense() == that.getDefense(); 
+    return getName().equals(that.getName()) && getHealth() == that.getHealth() && getDefense() == that.getDefense();
   }
 }
 

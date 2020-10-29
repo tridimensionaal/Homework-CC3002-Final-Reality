@@ -1,5 +1,6 @@
 package com.github.tridimensionaal.finalreality.model.character.enemy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import com.github.tridimensionaal.finalreality.model.character.*;
 import com.github.tridimensionaal.finalreality.model.character.player.normal.Thief;
@@ -40,13 +41,24 @@ class EnemyTest extends AbstractCharacterTest {
       // acceptable error margin.
       // We're testing that the character waits approximately 1 second.
       Thread.sleep(900);
-      Assertions.assertEquals(0, turns.size());
+      assertEquals(0, turns.size());
       Thread.sleep(200);
-      Assertions.assertEquals(1, turns.size());
-      Assertions.assertEquals(testCharacters.get(0), turns.peek());
+      assertEquals(1, turns.size());
+      assertEquals(testCharacters.get(0), turns.peek());
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+  }
+  @Test
+  void attackTest() {
+    ICharacter enemy1 = new Enemy(turns, "hola", 20,10, 10, 15);
+    //weapon Damage = 15
+    ICharacter thief = new Thief(turns,"hola",15,5);
+    enemy1.attack(thief);
+    assertEquals(thief.getHealth(),5);
+    enemy1.attack(thief);
+    assertEquals(thief.getHealth(),0);
+    thief.attack(enemy1);
   }
 
   /**

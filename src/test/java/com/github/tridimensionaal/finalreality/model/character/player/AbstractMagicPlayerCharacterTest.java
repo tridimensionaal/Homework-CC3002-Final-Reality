@@ -3,7 +3,6 @@ package com.github.tridimensionaal.finalreality.model.character.player;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import com.github.tridimensionaal.finalreality.model.character.player.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

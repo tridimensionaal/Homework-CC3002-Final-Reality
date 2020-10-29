@@ -7,11 +7,10 @@ package com.github.tridimensionaal.finalreality.model.weapon;
  * @author Ignacio Slater Muñoz.
  * @author Matías Salim Seda Auil
  */
-public interface IWeapon{
-  
+public interface IWeapon {
+
   /**
    * @return This weapon's name.
-   * 
    */
   String getName();
 
@@ -33,7 +32,7 @@ public interface IWeapon{
   boolean equals(Object o);
 
   /**
-   * @return This weapon's hash code. 
+   * @return This weapon's hash code.
    */
   int hashCode();
 

@@ -63,9 +63,10 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
       if(this.equippedWeapon== null){
           return;
       }
-      else{
-          character.receiveDamage(this.getEquippedWeapon().getDamage());
+      if (this.getHealth() == 0){
+          return;
       }
+      character.receiveDamage(this.getEquippedWeapon().getDamage());
 
   }
 

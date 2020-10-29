@@ -1,9 +1,14 @@
 package com.github.tridimensionaal.finalreality.model.character.player.magic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
+import com.github.tridimensionaal.finalreality.model.character.ICharacter;
+import com.github.tridimensionaal.finalreality.model.character.enemy.Enemy;
 import com.github.tridimensionaal.finalreality.model.character.player.*;
-import com.github.tridimensionaal.finalreality.model.weapon.magic.Staff;
+import com.github.tridimensionaal.finalreality.model.weapon.IWeapon;
+import com.github.tridimensionaal.finalreality.model.weapon.normal.*;
+import com.github.tridimensionaal.finalreality.model.weapon.magic.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -77,11 +82,54 @@ class BlackMageTest extends AbstractMagicPlayerCharacterTest{
    * Checks that the equipWeapon method works properly.
    */
   @Test
-  void equipWeaponTest() {
-    blackMage.equipWeapon(testWeapon);
-    assertEquals(blackMage.getEquippedWeapon(),testWeapon);
-  }
+    void equipWeaponTest() {
+        IPlayerCharacter blackMage1 = new BlackMage(turns, "hola",10,10,10);
+
+        IWeapon axeTest = new Axe(10,10);
+        IWeapon bowTest = new Bow(10,10);
+        IWeapon knifeTest = new Knife(10,10);
+        IWeapon swordTest = new Sword(10,10);
+        IWeapon staffTest = new Staff(10,10,10);
 
 
+        assertNull(blackMage1.getEquippedWeapon());
 
+        blackMage1.equipWeapon(axeTest);
+        assertNull(blackMage1.getEquippedWeapon());
+
+        blackMage1.equipWeapon(swordTest);
+        assertNull(blackMage1.getEquippedWeapon());
+
+        blackMage1.equipWeapon(bowTest);
+      assertNull(blackMage1.getEquippedWeapon());
+
+      blackMage1.equipWeapon(knifeTest);
+        assertEquals(blackMage1.getEquippedWeapon(), knifeTest);
+
+        blackMage1.equipWeapon(staffTest);
+        assertEquals(blackMage1.getEquippedWeapon(), staffTest);
+
+        IPlayerCharacter blackMage2 = new BlackMage(turns, "hola",0,0,0);
+        blackMage2.equipWeapon(staffTest);
+        assertNull(blackMage2.getEquippedWeapon());
+
+    }
+
+ 
+ 
+    @Test
+    void attackTest(){
+        IMagicPlayerCharacter blackMage1 = new BlackMage(turns, "hola", 20,10,10);
+        //weapon Damage = 15
+        blackMage1.equipWeapon(testWeapon);
+        ICharacter enemy = new Enemy(turns,"hola",15,5,10,10);
+        blackMage1.attack(enemy);
+        assertEquals(enemy.getHealth(),5);
+        blackMage1.attack(enemy);
+        assertEquals(enemy.getHealth(),0);
+        enemy.attack(blackMage1);
+
+    }
 }
+
+

@@ -8,35 +8,36 @@ import com.github.tridimensionaal.finalreality.model.weapon.AbstractWeapon;
  * @author Matías Salim Seda Auil
  */
  
-public class Axe extends AbstractWeapon{
+public class Axe extends AbstractWeapon {
 
-  /**
-   * Creates a new Axe.
-   *
-   * {@inheritDoc}
-   */
+    /**
+     * Creates a new Axe.
+     * <p>
+     * {@inheritDoc}
+     */
 
-    public Axe( final int damage, final int weight) {
+    public Axe(final int damage, final int weight) {
         super("Axe", damage, weight);
-  }
+    }
 
-  public boolean equippedByEngineer(){
-      return true;
-  }
+    public boolean equippedByEngineer() {
+        return true;
+    }
 
-  public boolean equippedByKnight(){
-      return true;
-  }
+    public boolean equippedByKnight() {
+        return true;
+    }
 
-  public boolean equippedByThief(){
-      return false;
-  }
+    public boolean equippedByThief() {
+        return false;
+    }
 
-  public boolean equippedByBlackMage(){
-      return false;
-  }
-  public boolean equippedByWhiteMage(){
-      return false;
-  }
+    public boolean equippedByBlackMage() {
+        return false;
+    }
+
+    public boolean equippedByWhiteMage() {
+        return false;
+    }
 }
 
