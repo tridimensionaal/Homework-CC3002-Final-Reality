@@ -45,6 +45,10 @@ public class Enemy extends AbstractCharacter {
     return damage;
   }
 
+  public void attack(ICharacter character){
+      character.receiveDamage(this.getDamage());
+  }
+
   @Override
   public boolean equals(final Object o) {
     if (this == o) {

@@ -22,4 +22,24 @@ public class Bow extends AbstractWeapon{
         super("Bow", damage, weight );
   }
 
+  public public boolean equippedByEngineer(){
+      return true;
+  }
+
+  public boolean equippedByKnight(){
+      return false;
+  }
+
+  public boolean equippedByThief(){
+      return true;
+  }
+
+  public boolean equippedByBlackMage(){
+      return false;
+  }
+  public boolean equippedByWhiteMage(){
+      return false;
+  }
+}
+
 }

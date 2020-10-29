@@ -1,6 +1,5 @@
 package com.github.tridimensionaal.finalreality.model.weapon.normal;
 
-
 import com.github.tridimensionaal.finalreality.model.weapon.AbstractWeapon;
 
 /**
@@ -21,4 +20,23 @@ public class Axe extends AbstractWeapon{
         super("Axe", damage, weight);
   }
 
+  public boolean equippedByEngineer(){
+      return true;
+  }
+
+  public boolean equippedByKnight(){
+      return true;
+  }
+
+  public boolean equippedByThief(){
+      return false;
+  }
+
+  public boolean equippedByBlackMage(){
+      return false;
+  }
+  public boolean equippedByWhiteMage(){
+      return false;
+  }
 }
+

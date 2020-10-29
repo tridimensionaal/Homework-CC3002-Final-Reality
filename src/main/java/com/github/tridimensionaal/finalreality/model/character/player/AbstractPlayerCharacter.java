@@ -46,15 +46,27 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
    */
  
   public void equipWeapon(IWeapon weapon) {
+      if(this.getHealth() == 0) {
+          return;
+      }
       this.equippedWeapon = weapon;
   }
 
   /**
    * @return the player character's class.
    */
- 
   public String getCharacterClass(){
       return characterClass;
+  }
+
+  public void attack(ICharacter character){
+      if(this.equippedWeapon== null){
+          return;
+      }
+      else{
+          character.receiveDamage(this.getEquippedWeapon().getDamage());
+      }
+
   }
 
   @Override

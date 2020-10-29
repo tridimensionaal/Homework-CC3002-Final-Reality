@@ -4,6 +4,7 @@ import com.github.tridimensionaal.finalreality.model.character.player.AbstractPl
 import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.BlockingQueue;
 import com.github.tridimensionaal.finalreality.model.character.ICharacter;
+import com.github.tridimensionaal.finalreality.model.weapon.IWeapon;
 
 
 /**
@@ -22,6 +23,12 @@ public class Engineer extends AbstractPlayerCharacter {
  
     public Engineer(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense) {
     super(turnsQueue, name, health, defense, "Engineer");
+    }
+
+    public void equipWeapon(IWeapon weapon){
+        if (weapon.equippedByEngineer()){
+            super.equipWeapon(weapon);
+        }
     }
 }
 

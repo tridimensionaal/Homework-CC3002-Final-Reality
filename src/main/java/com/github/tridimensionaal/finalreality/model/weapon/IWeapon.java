@@ -36,4 +36,14 @@ public interface IWeapon{
    * @return This weapon's hash code. 
    */
   int hashCode();
+
+  boolean equippedByEngineer();
+
+  boolean equippedByKnight();
+
+  boolean equippedByThief();
+
+  boolean equippedByBlackMage();
+
+  boolean equippedByWhiteMage();
 }

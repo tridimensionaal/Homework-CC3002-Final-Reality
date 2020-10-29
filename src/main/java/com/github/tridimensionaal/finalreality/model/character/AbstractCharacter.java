@@ -18,7 +18,7 @@ public abstract class AbstractCharacter implements ICharacter {
 
   private final BlockingQueue<ICharacter> turnsQueue;
   private final String name;
-  private final int health;
+  private int health;
   private final int defense;
   private ScheduledExecutorService scheduledExecutor;
 
@@ -35,7 +35,7 @@ public abstract class AbstractCharacter implements ICharacter {
    *     the character's health 
    */
 
-  protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense) {
+  protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, int health, final int defense) {
     this.turnsQueue = turnsQueue;
     this.name = name;
     this.health = health;
@@ -76,6 +76,16 @@ public abstract class AbstractCharacter implements ICharacter {
   @Override
   public int getDefense() {
     return defense;
+  }
+
+  public void receiveDamage(int damage){
+      if(health == 0){
+          return;
+      }
+      health -= (damage - this.defense);
+      if (health < 1){
+          health = 0;
+      }
   }
 
   @Override

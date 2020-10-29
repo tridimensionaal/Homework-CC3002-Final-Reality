@@ -19,5 +19,22 @@ public class Staff extends AbstractMagicWeapon{
     public Staff(final int damage, final int weight, final int magicDamage) {
         super("Staff", damage, weight, magicDamage);
   }
+  public boolean equippedByEngineer(){
+      return false;
+  }
 
+  public boolean equippedByKnight(){
+      return false;
+  }
+
+  public boolean equippedByThief(){
+      return true;
+  }
+
+  public boolean equippedByBlackMage(){
+      return true;
+  }
+  public boolean equippedByWhiteMage(){
+      return true;
+  }
 }
