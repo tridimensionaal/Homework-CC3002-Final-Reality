@@ -27,11 +27,11 @@ public abstract class AbstractCharacterTest {
   protected IWeapon testWeapon;
 
   protected final String NAME = "Hola";
-  protected final int HEALTH = 12;
+  protected int HEALTH = 12;
   protected final int DEFENSE = 12;
 
   protected final String NAME2 = "Hola1";
-  protected final int HEALTH2 = 13;
+  protected int HEALTH2 = 13;
   protected final int DEFENSE2 = 13;
 
 

@@ -22,7 +22,7 @@ public class Bow extends AbstractWeapon{
         super("Bow", damage, weight );
   }
 
-  public public boolean equippedByEngineer(){
+  public boolean equippedByEngineer(){
       return true;
   }
 
@@ -42,4 +42,3 @@ public class Bow extends AbstractWeapon{
   }
 }
 
-}

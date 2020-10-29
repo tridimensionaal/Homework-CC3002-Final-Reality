@@ -34,6 +34,7 @@ public class Staff extends AbstractMagicWeapon{
   public boolean equippedByBlackMage(){
       return true;
   }
+
   public boolean equippedByWhiteMage(){
       return true;
   }

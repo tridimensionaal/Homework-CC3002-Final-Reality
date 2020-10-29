@@ -22,7 +22,7 @@ public class Knife extends AbstractWeapon{
     public Knife( final int damage, final int weight) {
         super("Knife", damage, weight);
   }
-  public public boolean equippedByEngineer(){
+  public boolean equippedByEngineer(){
       return true;
   }
 
@@ -42,4 +42,3 @@ public class Knife extends AbstractWeapon{
   }
 }
 
-}

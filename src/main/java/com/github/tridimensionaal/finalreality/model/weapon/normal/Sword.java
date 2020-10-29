@@ -35,6 +35,7 @@ public class Sword extends AbstractWeapon{
   public boolean equippedByBlackMage(){
       return false;
   }
+
   public boolean equippedByWhiteMage(){
       return false;
   }
