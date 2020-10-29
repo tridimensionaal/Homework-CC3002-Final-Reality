@@ -3,6 +3,7 @@ package com.github.tridimensionaal.finalreality.model.character.player.magic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.github.tridimensionaal.finalreality.model.character.player.*;
+import com.github.tridimensionaal.finalreality.model.weapon.magic.Staff;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +26,7 @@ class WhiteMageTest extends AbstractMagicPlayerCharacterTest{
   @BeforeEach
   void setUp() {
     super.basicSetUp();
-    whiteMage.equipWeapon(testWeapon);
+    testWeapon = new Staff(15,10,10);
     testCharacters.add(new WhiteMage(turns, NAME, HEALTH, DEFENSE, MANA));
   }
 

@@ -3,6 +3,7 @@ package com.github.tridimensionaal.finalreality.model.character.player.normal;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.github.tridimensionaal.finalreality.model.character.player.*;
+import com.github.tridimensionaal.finalreality.model.weapon.normal.Axe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +25,7 @@ class EngineerTest extends AbstractPlayerCharacterTest{
   @BeforeEach
   void setUp() {
     super.basicSetUp();
+    testWeapon = new Axe(15,10);
     testCharacters.add(new Engineer(turns, NAME, HEALTH, DEFENSE));
 
  }

@@ -24,7 +24,6 @@ public abstract class AbstractCharacterTest {
 
   protected BlockingQueue<ICharacter> turns;
   protected List<ICharacter> testCharacters;
-  protected IWeapon testWeapon;
 
   protected final String NAME = "Hola";
   protected int HEALTH = 12;
@@ -34,42 +33,6 @@ public abstract class AbstractCharacterTest {
   protected int HEALTH2 = 13;
   protected final int DEFENSE2 = 13;
 
-
-  /**
-   * Checks that the character waits the appropriate amount of time for it's turn.
-   */
-
-  @Test
-  void waitTurnTest() {
-    Assertions.assertTrue(turns.isEmpty());
-    if((testCharacters.get(0) instanceof IPlayerCharacter)) {
-        IPlayerCharacter character = (IPlayerCharacter) testCharacters.get(0);
-        tryToEquip(character);
-        testCharacters.add(0,character);
-    }
-    if((testCharacters.get(0) instanceof IMagicPlayerCharacter)) {
-      IPlayerCharacter  character = (IPlayerCharacter) testCharacters.get(0);
-      tryToEquip(character);
-      testCharacters.add(0, character);
-    }
-    testCharacters.get(0).waitTurn();
-    try {
-      // Thread.sleep is not accurate so this values may be changed to adjust the
-      // acceptable error margin.
-      // We're testing that the character waits approximately 1 second.
-      Thread.sleep(900);
-      Assertions.assertEquals(0, turns.size());
-      Thread.sleep(200);
-      Assertions.assertEquals(1, turns.size());
-      Assertions.assertEquals(testCharacters.get(0), turns.peek());
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-  }
-
-  private void tryToEquip(IPlayerCharacter character) {
-      character.equipWeapon(testWeapon);
-  }
 
   protected void checkConstruction(
       //Original character
@@ -129,7 +92,6 @@ public abstract class AbstractCharacterTest {
 
   protected void basicSetUp() {
     turns = new LinkedBlockingQueue<>();
-    testWeapon = new Staff(15, 10,10);
     testCharacters = new ArrayList<>();
   }
 }
