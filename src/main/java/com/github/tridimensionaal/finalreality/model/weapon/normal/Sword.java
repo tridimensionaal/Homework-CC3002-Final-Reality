@@ -20,5 +20,23 @@ public class Sword extends AbstractWeapon{
     public Sword( final int damage, final int weight) {
         super("Sword", damage, weight);
   }
+  public boolean equippedByEngineer(){
+      return false;
+  }
 
+  public boolean equippedByKnight(){
+      return true;
+  }
+
+  public boolean equippedByThief(){
+      return true;
+  }
+
+  public boolean equippedByBlackMage(){
+      return false;
+  }
+
+  public boolean equippedByWhiteMage(){
+      return false;
+  }
 }

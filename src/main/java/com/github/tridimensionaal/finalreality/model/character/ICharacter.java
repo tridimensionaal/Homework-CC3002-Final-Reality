@@ -46,4 +46,15 @@ public interface ICharacter {
    * @return This character's hash code. 
    */
   int hashCode();
+
+  /**
+   * @param character 
+   */
+  void attack(ICharacter character);
+
+  /**
+   * @param damage
+   */
+  void receiveDamage(int damage);
 }
+

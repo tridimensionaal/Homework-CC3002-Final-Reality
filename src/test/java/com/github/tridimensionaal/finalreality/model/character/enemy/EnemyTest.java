@@ -1,8 +1,10 @@
 package com.github.tridimensionaal.finalreality.model.character.enemy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import com.github.tridimensionaal.finalreality.model.character.*;
 import com.github.tridimensionaal.finalreality.model.character.player.normal.Thief;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +32,34 @@ class EnemyTest extends AbstractCharacterTest {
       testCharacters.add(new Enemy(turns, NAME, HEALTH,DEFENSE, WEIGHT, DAMAGE));
   }
 
+  @Test
+  void waitTurnTest() {
+    Assertions.assertTrue(turns.isEmpty());
+    testCharacters.get(0).waitTurn();
+    try {
+      // Thread.sleep is not accurate so this values may be changed to adjust the
+      // acceptable error margin.
+      // We're testing that the character waits approximately 1 second.
+      Thread.sleep(900);
+      assertEquals(0, turns.size());
+      Thread.sleep(200);
+      assertEquals(1, turns.size());
+      assertEquals(testCharacters.get(0), turns.peek());
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+  @Test
+  void attackTest() {
+    ICharacter enemy1 = new Enemy(turns, "hola", 20,10, 10, 15);
+    //weapon Damage = 15
+    ICharacter thief = new Thief(turns,"hola",15,5);
+    enemy1.attack(thief);
+    assertEquals(thief.getHealth(),5);
+    enemy1.attack(thief);
+    assertEquals(thief.getHealth(),0);
+    thief.attack(enemy1);
+  }
 
   /**
    * Checks that the enemy's constructor and equals methods works properly.

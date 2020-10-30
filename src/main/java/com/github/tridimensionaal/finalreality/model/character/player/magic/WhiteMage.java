@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.BlockingQueue;
 import com.github.tridimensionaal.finalreality.model.character.player.AbstractMagicPlayerCharacter;
 import com.github.tridimensionaal.finalreality.model.character.ICharacter;
+import com.github.tridimensionaal.finalreality.model.weapon.IWeapon;
 
 
 /**
@@ -12,16 +13,22 @@ import com.github.tridimensionaal.finalreality.model.character.ICharacter;
  * @author Matías Salim Seda Auil
  */
  
-public class WhiteMage extends AbstractMagicPlayerCharacter{
+public class WhiteMage extends AbstractMagicPlayerCharacter {
 
-  /**
-   * Creates a new white mage.
-   *
-   * {@inheritDoc}
-   */
-    
+    /**
+     * Creates a new white mage.
+     * <p>
+     * {@inheritDoc}
+     */
+
     public WhiteMage(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final int mana) {
-    super(turnsQueue, name, health, defense, "WhiteMage",mana);
+        super(turnsQueue, name, health, defense, "WhiteMage", mana);
+    }
+
+    public void equipWeapon(IWeapon weapon) {
+        if (weapon.equippedByWhiteMage()) {
+            super.equipWeapon(weapon);
+        }
     }
 }
 

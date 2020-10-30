@@ -4,6 +4,7 @@ import com.github.tridimensionaal.finalreality.model.character.player.AbstractPl
 import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.BlockingQueue;
 import com.github.tridimensionaal.finalreality.model.character.ICharacter;
+import com.github.tridimensionaal.finalreality.model.weapon.IWeapon;
 
 /**
  * A class that holds all the information of a single thief.
@@ -20,6 +21,11 @@ public class Thief extends AbstractPlayerCharacter {
  
     public Thief(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense) {
         super(turnsQueue, name, health, defense, "Thief");
+    }
+    public void equipWeapon(IWeapon weapon){
+        if (weapon.equippedByThief()){
+            super.equipWeapon(weapon);
+        }
     }
 }
 

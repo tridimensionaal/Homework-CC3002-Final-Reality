@@ -20,9 +20,8 @@ public interface IPlayerCharacter extends ICharacter{
 
   /**
    * Equip a new weapon.
-   * @Param weapon.
+   * @param weapon
    */
- 
   void equipWeapon(IWeapon weapon);
 
   /**

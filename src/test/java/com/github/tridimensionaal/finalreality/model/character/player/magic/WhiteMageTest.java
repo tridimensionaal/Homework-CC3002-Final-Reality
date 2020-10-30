@@ -1,8 +1,14 @@
 package com.github.tridimensionaal.finalreality.model.character.player.magic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
+import com.github.tridimensionaal.finalreality.model.character.ICharacter;
+import com.github.tridimensionaal.finalreality.model.character.enemy.Enemy;
 import com.github.tridimensionaal.finalreality.model.character.player.*;
+import com.github.tridimensionaal.finalreality.model.weapon.IWeapon;
+import com.github.tridimensionaal.finalreality.model.weapon.normal.*;
+import com.github.tridimensionaal.finalreality.model.weapon.magic.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +31,7 @@ class WhiteMageTest extends AbstractMagicPlayerCharacterTest{
   @BeforeEach
   void setUp() {
     super.basicSetUp();
-    whiteMage.equipWeapon(testWeapon);
+    testWeapon = new Staff(15,10,10);
     testCharacters.add(new WhiteMage(turns, NAME, HEALTH, DEFENSE, MANA));
   }
 
@@ -75,8 +81,50 @@ class WhiteMageTest extends AbstractMagicPlayerCharacterTest{
    * Checks that the equipWeapon method works properly.
    */
   @Test
-  void equipWeaponTest() {
-    whiteMage.equipWeapon(testWeapon);
-    assertEquals(whiteMage.getEquippedWeapon(),testWeapon);
-  }
+    void equipWeaponTest() {
+        IPlayerCharacter whiteMage1 = new WhiteMage(turns, "hola",10,10,10);
+
+        IWeapon axeTest = new Axe(10,10);
+        IWeapon bowTest = new Bow(10,10);
+        IWeapon knifeTest = new Knife(10,10);
+        IWeapon swordTest = new Sword(10,10);
+        IWeapon staffTest = new Staff(10,10,10);
+
+
+        assertNull(whiteMage1.getEquippedWeapon());
+
+        whiteMage1.equipWeapon(axeTest);
+        assertNull(whiteMage1.getEquippedWeapon());
+
+        whiteMage1.equipWeapon(swordTest);
+        assertNull(whiteMage1.getEquippedWeapon());
+
+        whiteMage1.equipWeapon(bowTest);
+        assertNull(whiteMage1.getEquippedWeapon());
+
+        whiteMage1.equipWeapon(knifeTest);
+        assertNull(whiteMage1.getEquippedWeapon());
+
+        whiteMage1.equipWeapon(staffTest);
+        assertEquals(whiteMage1.getEquippedWeapon(), staffTest);
+
+        IPlayerCharacter whiteMage2 = new WhiteMage(turns, "hola",0,0,0);
+        whiteMage2.equipWeapon(staffTest);
+        assertNull(whiteMage2.getEquippedWeapon());
+
+    }
+
+    @Test
+    void attackTest(){
+        IMagicPlayerCharacter whiteMage1 = new WhiteMage(turns, "hola", 20,10,10);
+        //weapon Damage = 15
+        whiteMage1.equipWeapon(testWeapon);
+        ICharacter enemy = new Enemy(turns,"hola",15,5,10,10);
+        whiteMage1.attack(enemy);
+        assertEquals(enemy.getHealth(),5);
+        whiteMage1.attack(enemy);
+        assertEquals(enemy.getHealth(),0);
+        enemy.attack(whiteMage1);
+
+    }
 }

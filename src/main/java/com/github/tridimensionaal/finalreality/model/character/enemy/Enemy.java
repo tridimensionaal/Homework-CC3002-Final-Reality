@@ -18,16 +18,15 @@ public class Enemy extends AbstractCharacter {
    * Creates a new enemy with a name, a health, a defense, a health, a weight, a damage and the queue with the characters ready to play.
    *
    * @param weight
-   *     the enemy's weight
+   * the enemy's weight
    * @param damage
-   *     the enemy's damage
-   * 
+   * the enemy's damage
    */
   private final int weight;
   private final int damage;
 
   public Enemy(@NotNull final BlockingQueue<ICharacter> turnsQueue, @NotNull String name, int health, int defense, int weight, int damage) {
-    super(turnsQueue, name, health,defense );
+    super(turnsQueue, name, health, defense);
     this.weight = weight;
     this.damage = damage;
   }
@@ -38,11 +37,19 @@ public class Enemy extends AbstractCharacter {
   public int getWeight() {
     return weight;
   }
+
   /**
    * Returns the damage of this enemy.
    */
   public int getDamage() {
     return damage;
+  }
+
+  public void attack(ICharacter character) {
+      if(this.getHealth() == 0){
+          return;
+      }
+    character.receiveDamage(this.getDamage());
   }
 
   @Override
@@ -59,6 +66,6 @@ public class Enemy extends AbstractCharacter {
 
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getHealth(), getDefense(), getWeight(),getDamage());
+    return Objects.hash(getName(), getHealth(), getDefense(), getWeight(), getDamage());
   }
 }
