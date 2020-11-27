@@ -19,10 +19,11 @@ public class Knight extends AbstractPlayerCharacter{
    * {@inheritDoc}
    */
  
-
     public Knight(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense) {
     super(turnsQueue, name, health, defense, "Knight");
     }
+
+    @Override
     public void equipWeapon(IWeapon weapon){
         if (weapon.equippedByKnight()){
             super.equipWeapon(weapon);

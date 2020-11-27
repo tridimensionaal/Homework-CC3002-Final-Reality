@@ -74,14 +74,22 @@ public abstract class AbstractCharacter implements ICharacter {
     return defense;
   }
 
+  @Override
   public void receiveDamage(int damage) {
-    if (health == 0) {
+
+    if (this.isDead()) {
       return;
     }
-    health -= (damage - this.defense);
-    if (health < 1) {
-      health = 0;
+
+    this.health -= (damage - this.defense);
+    if (this.health < 1) {
+      this.health = 0;
     }
+  }
+
+  @Override
+  public boolean isDead() {
+    return this.health == 0;
   }
 
   @Override

@@ -36,13 +36,28 @@ public interface IWeapon {
    */
   int hashCode();
 
+  /**
+   * @return True if this weapon can be equipped by a engineer or false otherwise
+   */
   boolean equippedByEngineer();
 
+  /**
+   * @return True if this weapon can be equipped by a knight or false otherwise
+   */
   boolean equippedByKnight();
 
+  /**
+   * @return True if this weapon can be equipped by a thief or false otherwise
+   */
   boolean equippedByThief();
 
+  /**
+   * @return True if this weapon can be equipped by a black mage or false otherwise
+   */
   boolean equippedByBlackMage();
-
+ 
+  /**
+   * @return True if this weapon can be equipped by a white mage or false otherwise
+   */
   boolean equippedByWhiteMage();
 }

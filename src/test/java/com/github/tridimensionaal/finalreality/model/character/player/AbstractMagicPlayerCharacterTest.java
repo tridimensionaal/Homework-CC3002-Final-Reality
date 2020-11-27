@@ -17,15 +17,34 @@ import org.junit.jupiter.api.Test;
 public abstract class AbstractMagicPlayerCharacterTest extends AbstractPlayerCharacterTest{
 
   protected final int MANA = 12;
+  protected final int MANA2 = 13;
 
-  protected final int MANA2 = 12;
+  //Original magicPlayerCharacter
+  protected IMagicPlayerCharacter magicPlayerCharacter;
+  //Same magicPlayerCharacter
+  protected IMagicPlayerCharacter magicPlayerCharacter1;
+  //Different name
+  protected IMagicPlayerCharacter magicPlayerCharacter2;
+  //Different health
+  protected IMagicPlayerCharacter magicPlayerCharacter3;
+  //Different defense
+  protected IMagicPlayerCharacter magicPlayerCharacter4;
+  //Different name and health
+  protected IMagicPlayerCharacter magicPlayerCharacter5;
+  //Different name and defense
+  protected IMagicPlayerCharacter magicPlayerCharacter6;
+  //Different health and defense
+  protected IMagicPlayerCharacter magicPlayerCharacter7;
+  //All different
+  protected IMagicPlayerCharacter magicPlayerCharacter8;
+
 
   /**
    * Setup method.
    */
   @BeforeEach
-  void setUp() {
-    super.setUp();
+  protected void basicSetUp() {
+    super.basicSetUp();
   }
 
   @Test
@@ -52,58 +71,37 @@ public abstract class AbstractMagicPlayerCharacterTest extends AbstractPlayerCha
   /**
    * Checks that the class' constructor and equals method works properly.
    */
-  protected void checkConstruction(
-      //Original character
-      IMagicPlayerCharacter character,
-      //Same character
-      IMagicPlayerCharacter character1,
-      //Different name
-      IMagicPlayerCharacter character2,
-      //Different health
-      IMagicPlayerCharacter character3,
-      //Different defense 
-      IMagicPlayerCharacter character4,
-      //Different name and health
-      IMagicPlayerCharacter character5,
-      //Different name and defense
-      IMagicPlayerCharacter character6,
-      //Different health and defense 
-      IMagicPlayerCharacter character7,
-      //All different
-      IMagicPlayerCharacter character8) {
+  protected void checkConstruction(){
+    assertNotEquals(magicPlayerCharacter, "Hola");
+    assertNotEquals(magicPlayerCharacter.hashCode(), "Hola".hashCode());
 
-    assertNotEquals(character, "Hola");
-    assertNotEquals(character.hashCode(), "Hola".hashCode());
+    assertEquals(magicPlayerCharacter, magicPlayerCharacter);
+    assertEquals(magicPlayerCharacter.hashCode(), magicPlayerCharacter.hashCode());
 
-    assertEquals(character, character);
-    assertEquals(character.hashCode(), character.hashCode());
+    assertEquals(magicPlayerCharacter, magicPlayerCharacter1);
+    assertEquals(magicPlayerCharacter.hashCode(), magicPlayerCharacter1.hashCode());
 
-    assertEquals(character, character1);
-    assertEquals(character.hashCode(), character1.hashCode());
+    assertNotEquals(magicPlayerCharacter, magicPlayerCharacter2);
+    assertNotEquals(magicPlayerCharacter.hashCode(), magicPlayerCharacter2.hashCode());
 
-    assertNotEquals(character, character2);
-    assertNotEquals(character.hashCode(), character2.hashCode());
+    assertNotEquals(magicPlayerCharacter, magicPlayerCharacter3);
+    assertNotEquals(magicPlayerCharacter.hashCode(), magicPlayerCharacter3.hashCode());
 
-    assertNotEquals(character, character3);
-    assertNotEquals(character.hashCode(), character3.hashCode());
+    assertNotEquals(magicPlayerCharacter, magicPlayerCharacter4);
+    assertNotEquals(magicPlayerCharacter.hashCode(), magicPlayerCharacter4.hashCode());
 
-    assertNotEquals(character, character4);
-    assertNotEquals(character.hashCode(), character4.hashCode());
+    assertNotEquals(magicPlayerCharacter, magicPlayerCharacter5);
+    assertNotEquals(magicPlayerCharacter.hashCode(), magicPlayerCharacter5.hashCode());
 
-    assertNotEquals(character, character5);
-    assertNotEquals(character.hashCode(), character5.hashCode());
+    assertNotEquals(magicPlayerCharacter, magicPlayerCharacter6);
+    assertNotEquals(magicPlayerCharacter.hashCode(), magicPlayerCharacter6.hashCode());
 
-    assertNotEquals(character, character6);
-    assertNotEquals(character.hashCode(), character6.hashCode());
+    assertNotEquals(magicPlayerCharacter, magicPlayerCharacter7);
+    assertNotEquals(magicPlayerCharacter.hashCode(), magicPlayerCharacter7.hashCode());
 
-    assertNotEquals(character, character7);
-    assertNotEquals(character.hashCode(), character7.hashCode());
+    assertNotEquals(magicPlayerCharacter, magicPlayerCharacter8);
+    assertNotEquals(magicPlayerCharacter.hashCode(), magicPlayerCharacter8.hashCode());
 
-    assertNotEquals(character, character8);
-    assertNotEquals(character.hashCode(), character8.hashCode());
-
-    assertNotEquals(character, character8);
-    assertNotEquals(character.hashCode(), character8.hashCode());
+    super.checkConstruction();
   }
-
 }

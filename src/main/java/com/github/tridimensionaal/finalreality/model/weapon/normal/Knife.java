@@ -16,27 +16,31 @@ public class Knife extends AbstractWeapon{
    *
    * {@inheritDoc}
    */
-
-
-
     public Knife( final int damage, final int weight) {
         super("Knife", damage, weight);
   }
+
+  @Override
   public boolean equippedByEngineer(){
       return false;
   }
 
+  @Override
   public boolean equippedByKnight(){
       return true;
   }
 
+  @Override
   public boolean equippedByThief(){
       return false;
   }
 
+  @Override
   public boolean equippedByBlackMage(){
       return true;
   }
+
+  @Override
   public boolean equippedByWhiteMage(){
       return false;
   }

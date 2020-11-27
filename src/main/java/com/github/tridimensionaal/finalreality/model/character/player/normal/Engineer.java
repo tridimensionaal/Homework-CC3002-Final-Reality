@@ -25,6 +25,7 @@ public class Engineer extends AbstractPlayerCharacter {
     super(turnsQueue, name, health, defense, "Engineer");
     }
 
+    @Override
     public void equipWeapon(IWeapon weapon){
         if (weapon.equippedByEngineer()){
             super.equipWeapon(weapon);

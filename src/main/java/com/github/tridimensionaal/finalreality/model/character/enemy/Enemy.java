@@ -45,11 +45,12 @@ public class Enemy extends AbstractCharacter {
     return damage;
   }
 
+  @Override
   public void attack(ICharacter character) {
-      if(this.getHealth() == 0){
+      if(this.isDead()){
           return;
       }
-    character.receiveDamage(this.getDamage());
+      character.receiveDamage(this.getDamage());
   }
 
   @Override

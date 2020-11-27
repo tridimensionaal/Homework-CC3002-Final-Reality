@@ -16,62 +16,62 @@ public abstract class AbstractMagicWeaponTest extends AbstractWeaponTest{
   protected final int MAGICDAMAGE = 15;
   protected static final int MAGICDAMAGE2 = 10;
 
+  //Original magicWeaponTest 
+  protected IMagicWeapon magicWeaponTest;
+  //Same magicWeaponTest
+  protected IMagicWeapon magicWeaponTest1;
+  //Different damage
+  protected IMagicWeapon magicWeaponTest2;
+  //Different weight 
+  protected IMagicWeapon magicWeaponTest3;
+  //Different magic damage
+  protected IMagicWeapon magicWeaponTest4;
+  //Different damage and weight
+  protected IMagicWeapon magicWeaponTest5;
+  //Different damage and magic damage
+  protected IMagicWeapon magicWeaponTest6;
+  //Different weight and magic damage
+  protected IMagicWeapon magicWeaponTest7;
+  //All Different
+  protected IMagicWeapon magicWeaponTest8;
 
-  protected void checkConstruction(
-      //Original weapon 
-      final IMagicWeapon weapon,
-      //Same weapon
-      final IMagicWeapon weapon1,
-      //Different damage
-      final IMagicWeapon weapon2,
-      //Different weight 
-      final IMagicWeapon weapon3,
-      //Different magic damage
-      final IMagicWeapon weapon4,
-      //Different damage and weight
-      final IMagicWeapon weapon5,
-      //Different damage and magic damage
-      final IMagicWeapon weapon6,
-      //Different weight and magic damage
-      final IMagicWeapon weapon7,
-      //All Different
-      final IMagicWeapon weapon8) {
+  protected void checkConstruction(){
+    assertEquals(magicWeaponTest, magicWeaponTest);
+    assertEquals(magicWeaponTest.hashCode(), magicWeaponTest.hashCode());
 
-    assertEquals(weapon, weapon);
-    assertEquals(weapon.hashCode(), weapon.hashCode());
+    assertEquals(magicWeaponTest, magicWeaponTest1);
+    assertEquals(magicWeaponTest.hashCode(), magicWeaponTest1.hashCode());
 
-    assertEquals(weapon, weapon1);
-    assertEquals(weapon.hashCode(), weapon1.hashCode());
+    assertNotEquals(magicWeaponTest, magicWeaponTest2);
+    assertNotEquals(magicWeaponTest.hashCode(), magicWeaponTest2.hashCode());
 
-    assertNotEquals(weapon, weapon2);
-    assertNotEquals(weapon.hashCode(), weapon2.hashCode());
+    assertNotEquals(magicWeaponTest, magicWeaponTest3);
+    assertNotEquals(magicWeaponTest.hashCode(), magicWeaponTest3.hashCode());
 
-    assertNotEquals(weapon, weapon3);
-    assertNotEquals(weapon.hashCode(), weapon3.hashCode());
+    assertNotEquals(magicWeaponTest, magicWeaponTest4);
+    assertNotEquals(magicWeaponTest.hashCode(), magicWeaponTest4.hashCode());
 
-    assertNotEquals(weapon, weapon4);
-    assertNotEquals(weapon.hashCode(), weapon4.hashCode());
+    assertNotEquals(magicWeaponTest, magicWeaponTest5);
+    assertNotEquals(magicWeaponTest.hashCode(), magicWeaponTest5.hashCode());
 
-    assertNotEquals(weapon, weapon5);
-    assertNotEquals(weapon.hashCode(), weapon5.hashCode());
+    assertNotEquals(magicWeaponTest, magicWeaponTest6);
+    assertNotEquals(magicWeaponTest.hashCode(), magicWeaponTest6.hashCode());
 
-    assertNotEquals(weapon, weapon6);
-    assertNotEquals(weapon.hashCode(), weapon6.hashCode());
+    assertNotEquals(magicWeaponTest, magicWeaponTest7);
+    assertNotEquals(magicWeaponTest.hashCode(), magicWeaponTest7.hashCode());
 
-    assertNotEquals(weapon, weapon7);
-    assertNotEquals(weapon.hashCode(), weapon7.hashCode());
+    assertNotEquals(magicWeaponTest, magicWeaponTest8);
+    assertNotEquals(magicWeaponTest.hashCode(), magicWeaponTest8.hashCode());
 
-    assertNotEquals(weapon, weapon8);
-    assertNotEquals(weapon.hashCode(), weapon8.hashCode());
+    assertNotEquals(magicWeaponTest, magicWeaponTest8);
+    assertNotEquals(magicWeaponTest.hashCode(), magicWeaponTest8.hashCode());
 
-    assertNotEquals(weapon, weapon8);
-    assertNotEquals(weapon.hashCode(), weapon8.hashCode());
+    assertNotEquals(magicWeaponTest, STR);
+    assertNotEquals(magicWeaponTest.hashCode(), STR.hashCode());
 
-    assertNotEquals(weapon, STR);
-    assertNotEquals(weapon.hashCode(), STR.hashCode());
+    assertNotEquals(STR, magicWeaponTest);
+    assertNotEquals(STR.hashCode(), magicWeaponTest.hashCode());
 
-    assertNotEquals(STR, weapon);
-    assertNotEquals(STR.hashCode(), weapon.hashCode());
- 
-      }
+    super.checkConstruction();
+  }
 }

@@ -1,13 +1,15 @@
 package com.github.tridimensionaal.finalreality.model.character.player;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
 import com.github.tridimensionaal.finalreality.model.character.*;
+import com.github.tridimensionaal.finalreality.model.character.enemy.Enemy;
 import com.github.tridimensionaal.finalreality.model.weapon.IWeapon;
+import com.github.tridimensionaal.finalreality.model.weapon.normal.*;
+import com.github.tridimensionaal.finalreality.model.weapon.magic.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Abstract class containing the common tests for all the types of player magic characters.
@@ -18,14 +20,53 @@ import org.junit.jupiter.api.Test;
  */
 
 public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest {
+  //Original playerCharacter
+  protected IPlayerCharacter playerCharacter;
+  //Same playerCharacter
+  protected IPlayerCharacter playerCharacter1;
+  //Different name
+  protected IPlayerCharacter playerCharacter2;
+  //Different health
+  protected IPlayerCharacter playerCharacter3;
+  //Different defense
+  protected IPlayerCharacter playerCharacter4;
+  //Different name and health
+  protected IPlayerCharacter playerCharacter5;
+  //Different name and defense
+  protected IPlayerCharacter playerCharacter6;
+  //Different health and defense
+  protected IPlayerCharacter playerCharacter7;
+  //All different
+  protected IPlayerCharacter playerCharacter8;
+
+
+  protected IWeapon axeTest;
+  protected IWeapon bowTest;
+  protected IWeapon knifeTest;
+  protected IWeapon swordTest;
+  protected IWeapon staffTest;
+
   protected IWeapon testWeapon;
+
+  protected IPlayerCharacter characterAttackTest;
+  protected ICharacter enemyAttackTest;
+
+  protected IPlayerCharacter characterEquipWeaponTest;
+  protected IPlayerCharacter characterEquipWeaponTest0;
 
   /**
    * Setup method.
    */
   @BeforeEach
-  void setUp() {
+  protected void basicSetUp() {
     super.basicSetUp();
+    axeTest = new Axe(15,10);
+    bowTest = new Bow(15,10);
+    knifeTest = new Knife(15,10);
+    swordTest = new Sword(15,10);
+    staffTest = new Staff(15,10,10);
+    enemyAttackTest = new Enemy(turns, "hi",10,10,10,10);
+
   }
 
   /**
@@ -33,7 +74,7 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
    */
   @Test
   void waitTurnTest() {
-    Assertions.assertTrue(turns.isEmpty());
+    assertTrue(turns.isEmpty());
     IPlayerCharacter character = (IPlayerCharacter) testCharacters.get(0);
     character.equipWeapon(testWeapon);
     testCharacters.get(0).waitTurn();
@@ -51,59 +92,60 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
     }
   }
 
-  protected void checkConstruction(
-          //Original character
-          IPlayerCharacter character,
-          //Same character
-          IPlayerCharacter character1,
-          //Different name
-          IPlayerCharacter character2,
-          //Different health
-          IPlayerCharacter character3,
-          //Different defense
-          IPlayerCharacter character4,
-          //Different name and health
-          IPlayerCharacter character5,
-          //Different name and defense
-          IPlayerCharacter character6,
-          //Different health and defense
-          IPlayerCharacter character7,
-          //All different
-          IPlayerCharacter character8) {
+  protected void checkConstruction(){
+    playerCharacter = (IPlayerCharacter) character;
+    playerCharacter1 = (IPlayerCharacter) character1;
+    playerCharacter2 = (IPlayerCharacter) character2;
+    playerCharacter3 = (IPlayerCharacter) character3;
+    playerCharacter4 = (IPlayerCharacter) character4;
+    playerCharacter5 = (IPlayerCharacter) character5;
+    playerCharacter6 = (IPlayerCharacter) character6;
+    playerCharacter7 = (IPlayerCharacter) character7;
+    playerCharacter8 = (IPlayerCharacter) character8;
 
-    assertNotEquals(character, "Hola");
-    assertNotEquals(character.hashCode(), "Hola".hashCode());
+    assertNotEquals(playerCharacter, "Hola");
+    assertNotEquals(playerCharacter.hashCode(), "Hola".hashCode());
 
-    assertEquals(character, character);
-    assertEquals(character.hashCode(), character.hashCode());
+    assertEquals(playerCharacter, playerCharacter);
+    assertEquals(playerCharacter.hashCode(), playerCharacter.hashCode());
 
-    assertEquals(character, character1);
-    assertEquals(character.hashCode(), character1.hashCode());
+    assertEquals(playerCharacter, playerCharacter1);
+    assertEquals(playerCharacter.hashCode(), playerCharacter1.hashCode());
 
-    assertNotEquals(character, character2);
-    assertNotEquals(character.hashCode(), character2.hashCode());
+    assertNotEquals(playerCharacter, playerCharacter2);
+    assertNotEquals(playerCharacter.hashCode(), playerCharacter2.hashCode());
 
-    assertNotEquals(character, character3);
-    assertNotEquals(character.hashCode(), character3.hashCode());
+    assertNotEquals(playerCharacter, playerCharacter3);
+    assertNotEquals(playerCharacter.hashCode(), playerCharacter3.hashCode());
 
-    assertNotEquals(character, character4);
-    assertNotEquals(character.hashCode(), character4.hashCode());
+    assertNotEquals(playerCharacter, playerCharacter4);
+    assertNotEquals(playerCharacter.hashCode(), playerCharacter4.hashCode());
 
-    assertNotEquals(character, character5);
-    assertNotEquals(character.hashCode(), character5.hashCode());
+    assertNotEquals(playerCharacter, playerCharacter5);
+    assertNotEquals(playerCharacter.hashCode(), playerCharacter5.hashCode());
 
-    assertNotEquals(character, character6);
-    assertNotEquals(character.hashCode(), character6.hashCode());
+    assertNotEquals(playerCharacter, playerCharacter6);
+    assertNotEquals(playerCharacter.hashCode(), playerCharacter6.hashCode());
 
-    assertNotEquals(character, character7);
-    assertNotEquals(character.hashCode(), character7.hashCode());
+    assertNotEquals(playerCharacter, playerCharacter7);
+    assertNotEquals(playerCharacter.hashCode(), playerCharacter7.hashCode());
 
-    assertNotEquals(character, character8);
-    assertNotEquals(character.hashCode(), character8.hashCode());
+    assertNotEquals(playerCharacter, playerCharacter8);
+    assertNotEquals(playerCharacter.hashCode(), playerCharacter8.hashCode());
 
-    assertNotEquals(character, character8);
-    assertNotEquals(character.hashCode(), character8.hashCode());
+    super.checkConstruction();
+  }
 
+  @Test
+  void attackTest(){
+    characterAttackTest.equipWeapon(testWeapon);
+    characterAttackTest.attack(enemyAttackTest);
+    assertEquals(enemyAttackTest.getHealth(),5);
+    characterAttackTest.attack(enemyAttackTest);
+    assertEquals(enemyAttackTest.getHealth(),0);
+    assertTrue(enemyAttackTest.isDead());
+    enemyAttackTest.attack(characterAttackTest);
+    assertEquals(characterAttackTest.getHealth(),HEALTH);
   }
 
 }

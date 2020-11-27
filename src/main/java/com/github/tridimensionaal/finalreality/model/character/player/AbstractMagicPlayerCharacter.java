@@ -7,7 +7,7 @@ import java.util.Objects;
 
 
 /**
- * A class that holds all the information of a single magic character of the game.
+ * A class that holds all the information of a single abstract magic character of the game.
  *
  * @author Ignacio Slater Muñoz.
  * @author Matías Salim Seda Auil
@@ -30,9 +30,7 @@ public abstract class AbstractMagicPlayerCharacter extends AbstractPlayerCharact
       this.mana = mana;
   }
 
-  /**
-   * @return the character's mana
-   */
+  @Override
   public int getMana(){
       return mana;
   }

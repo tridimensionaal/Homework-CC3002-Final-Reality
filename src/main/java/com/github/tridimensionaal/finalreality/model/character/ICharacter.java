@@ -48,13 +48,20 @@ public interface ICharacter {
   int hashCode();
 
   /**
+   * Attack the ICharacter character 
    * @param character 
    */
   void attack(ICharacter character);
 
   /**
+   * Recieve damage
    * @param damage
    */
   void receiveDamage(int damage);
+
+  /**
+   * @return True is this character is dead or false otherwise. A character is dead if they health is 0. 
+   */
+  boolean isDead();
 }
 

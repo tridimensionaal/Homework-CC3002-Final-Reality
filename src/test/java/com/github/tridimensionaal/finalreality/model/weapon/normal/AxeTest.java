@@ -13,30 +13,21 @@ import org.junit.jupiter.api.Test;
  * @see Axe
  */
 class AxeTest extends AbstractWeaponTest{
-  private IWeapon testAxe;
-  private IWeapon testAxe1;
-  private IWeapon testAxe2;
-  private IWeapon testAxe3;
-  private IWeapon testAxe4;
-  private IWeapon testAxe5;
-  private IWeapon testAxe6;
-  private IWeapon testAxe7;
-  private IWeapon testAxe8;
 
   /**
    * Setup method.
    */
   @BeforeEach
   void setUp() {
-    testAxe = new Axe(DAMAGE, WEIGHT);
-    testAxe1 = new Axe(DAMAGE, WEIGHT);
-    testAxe2 = new Bow(DAMAGE, WEIGHT);
-    testAxe3= new Axe(DAMAGE2, WEIGHT);
-    testAxe4 = new Axe(DAMAGE, WEIGHT2);
-    testAxe5 = new Bow(DAMAGE2, WEIGHT);
-    testAxe6 = new Bow(DAMAGE, WEIGHT2);
-    testAxe7 = new Axe(DAMAGE2, WEIGHT2);
-    testAxe8 = new Bow(DAMAGE2, WEIGHT2);
+    weaponTest = new Axe(DAMAGE, WEIGHT);
+    weaponTest1 = new Axe(DAMAGE, WEIGHT);
+    weaponTest2 = new Bow(DAMAGE, WEIGHT);
+    weaponTest3= new Axe(DAMAGE2, WEIGHT);
+    weaponTest4 = new Axe(DAMAGE, WEIGHT2);
+    weaponTest5 = new Bow(DAMAGE2, WEIGHT);
+    weaponTest6 = new Bow(DAMAGE, WEIGHT2);
+    weaponTest7 = new Axe(DAMAGE2, WEIGHT2);
+    weaponTest8 = new Bow(DAMAGE2, WEIGHT2);
   }
 
   /**
@@ -44,6 +35,6 @@ class AxeTest extends AbstractWeaponTest{
    */
   @Test
   void constructorTest() {
-    checkConstruction(testAxe,testAxe1,testAxe2,testAxe3,testAxe4,testAxe5,testAxe6,testAxe7,testAxe8);
+    super.checkConstruction();
   }
 }
