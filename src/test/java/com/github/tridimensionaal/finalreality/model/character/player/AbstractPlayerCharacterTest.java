@@ -139,11 +139,18 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
   @Test
   void attackTest(){
     characterAttackTest.equipWeapon(testWeapon);
+
     characterAttackTest.attack(enemyAttackTest);
     assertEquals(enemyAttackTest.getHealth(),5);
+
     characterAttackTest.attack(enemyAttackTest);
     assertEquals(enemyAttackTest.getHealth(),0);
     assertTrue(enemyAttackTest.isDead());
+
+    characterAttackTest.attack(enemyAttackTest);
+    assertEquals(enemyAttackTest.getHealth(),0);
+    assertTrue(enemyAttackTest.isDead());
+
     enemyAttackTest.attack(characterAttackTest);
     assertEquals(characterAttackTest.getHealth(),HEALTH);
   }

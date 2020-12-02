@@ -25,7 +25,6 @@ class WhiteMageTest extends AbstractMagicPlayerCharacterTest{
     super.basicSetUp();
 
     testWeapon = new Staff(15,10,10);
-    testCharacters.add(new WhiteMage(turns, NAME, HEALTH, DEFENSE, MANA));
 
     character = new WhiteMage(turns, NAME, HEALTH, DEFENSE, MANA);
     character1 = new WhiteMage(turns, NAME, HEALTH, DEFENSE, MANA);
@@ -37,6 +36,7 @@ class WhiteMageTest extends AbstractMagicPlayerCharacterTest{
     character7  = new WhiteMage(turns, NAME, HEALTH2, DEFENSE2, MANA);
     character8 = new WhiteMage(turns, NAME2, HEALTH2, DEFENSE2, MANA);
 
+    testCharacters.add(character);
 
     magicPlayerCharacter = new WhiteMage(turns, NAME, HEALTH, DEFENSE, MANA);
     magicPlayerCharacter1 = new WhiteMage(turns, NAME, HEALTH, DEFENSE, MANA);

@@ -25,7 +25,6 @@ class BlackMageTest extends AbstractMagicPlayerCharacterTest{
       super.basicSetUp();
 
       testWeapon = staffTest;
-      testCharacters.add(new BlackMage(turns, NAME, HEALTH, DEFENSE, MANA));
 
       character = new BlackMage(turns, NAME, HEALTH, DEFENSE, MANA);
       character1 = new BlackMage(turns, NAME, HEALTH, DEFENSE, MANA);
@@ -36,6 +35,8 @@ class BlackMageTest extends AbstractMagicPlayerCharacterTest{
       character6 = new BlackMage(turns, NAME2, HEALTH, DEFENSE2, MANA);
       character7  = new BlackMage(turns, NAME, HEALTH2, DEFENSE2, MANA);
       character8 = new BlackMage(turns, NAME2, HEALTH2, DEFENSE2, MANA);
+
+      testCharacters.add(character);
 
       magicPlayerCharacter = new BlackMage(turns, NAME, HEALTH, DEFENSE, MANA);
       magicPlayerCharacter1 = new BlackMage(turns, NAME, HEALTH, DEFENSE, MANA);
@@ -50,7 +51,7 @@ class BlackMageTest extends AbstractMagicPlayerCharacterTest{
       characterEquipWeaponTest = (IPlayerCharacter) character;
       characterEquipWeaponTest0 = new BlackMage(turns, NAME, 0, DEFENSE, MANA);
 
-        characterAttackTest = (IPlayerCharacter) character;
+      characterAttackTest = (IPlayerCharacter) character;
 
   }
 

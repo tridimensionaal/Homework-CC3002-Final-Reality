@@ -26,7 +26,6 @@ public class KnightTest extends AbstractPlayerCharacterTest{
     super.basicSetUp();
 
     testWeapon = swordTest;
-    testCharacters.add(new Knight(turns, NAME, HEALTH, DEFENSE));
 
     character = new Knight(turns, NAME, HEALTH, DEFENSE);
     character1 = new Knight(turns, NAME, HEALTH, DEFENSE);
@@ -37,6 +36,9 @@ public class KnightTest extends AbstractPlayerCharacterTest{
     character6 = new Knight(turns, NAME2, HEALTH, DEFENSE2);
     character7  = new Knight(turns, NAME, HEALTH2, DEFENSE2);
     character8 = new Knight(turns, NAME2, HEALTH2, DEFENSE2);
+
+    testCharacters.add(character);
+
     characterAttackTest = (IPlayerCharacter) character;
     characterEquipWeaponTest0 = new Knight(turns, NAME, 0, DEFENSE);
  }

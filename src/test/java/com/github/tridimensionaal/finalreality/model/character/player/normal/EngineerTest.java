@@ -25,8 +25,6 @@ class EngineerTest extends AbstractPlayerCharacterTest {
         super.basicSetUp();
 
         testWeapon = axeTest;
-        testCharacters.add(new Engineer(turns, NAME, HEALTH, DEFENSE));
-
         character = new Engineer(turns, NAME, HEALTH, DEFENSE);
         character1 = new Engineer(turns, NAME, HEALTH, DEFENSE);
         character2 = new Engineer(turns, NAME2, HEALTH, DEFENSE);
@@ -36,6 +34,8 @@ class EngineerTest extends AbstractPlayerCharacterTest {
         character6 = new Engineer(turns, NAME2, HEALTH, DEFENSE2);
         character7  = new Engineer(turns, NAME, HEALTH2, DEFENSE2);
         character8 = new Engineer(turns, NAME2, HEALTH2, DEFENSE2);
+
+        testCharacters.add(character);
 
         characterEquipWeaponTest = (IPlayerCharacter) character;
         characterEquipWeaponTest0 = new Engineer(turns, NAME, 0, DEFENSE);

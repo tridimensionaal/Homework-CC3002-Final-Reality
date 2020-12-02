@@ -24,7 +24,6 @@ class ThiefTest extends AbstractPlayerCharacterTest{
     super.basicSetUp();
 
     testWeapon = bowTest;
-    testCharacters.add(new Thief(turns, NAME, HEALTH, DEFENSE));
 
     character = new Thief(turns, NAME, HEALTH, DEFENSE);
     character1 = new Thief(turns, NAME, HEALTH, DEFENSE);
@@ -35,6 +34,9 @@ class ThiefTest extends AbstractPlayerCharacterTest{
     character6 = new Thief(turns, NAME2, HEALTH, DEFENSE2);
     character7  = new Thief(turns, NAME, HEALTH2, DEFENSE2);
     character8 = new Thief(turns, NAME2, HEALTH2, DEFENSE2);
+
+    testCharacters.add(character);
+
     characterAttackTest = (IPlayerCharacter) character;
     characterEquipWeaponTest0 = new Thief(turns, NAME, 0, DEFENSE);
 

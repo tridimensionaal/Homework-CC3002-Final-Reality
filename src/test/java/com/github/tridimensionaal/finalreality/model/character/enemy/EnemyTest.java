@@ -2,7 +2,6 @@ package com.github.tridimensionaal.finalreality.model.character.enemy;
 
 import com.github.tridimensionaal.finalreality.model.character.*;
 import com.github.tridimensionaal.finalreality.model.character.player.normal.Thief;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -147,10 +146,18 @@ class EnemyTest extends AbstractCharacterTest {
   void attackTest() {
       enemyAttackTest.attack(characterAttackTest);
       assertEquals(characterAttackTest.getHealth(),10);
+
       enemyAttackTest.attack(characterAttackTest);
       assertEquals(characterAttackTest.getHealth(),5);
+
       enemyAttackTest.attack(characterAttackTest);
+      assertEquals(characterAttackTest.getHealth(),0);
       assertTrue(characterAttackTest.isDead());
+
+      enemyAttackTest.attack(characterAttackTest);
+      assertEquals(characterAttackTest.getHealth(),0);
+      assertTrue(characterAttackTest.isDead());
+
       characterAttackTest.attack(enemyAttackTest);
       assertEquals(enemyAttackTest.getHealth(),HEALTH);
       }
