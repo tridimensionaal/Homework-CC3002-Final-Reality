@@ -1,7 +1,7 @@
-package com.github.tridimensionaal.finalreality.model.controller.handlers;
+package com.github.tridimensionaal.finalreality.controller.handlers;
 
 import com.github.tridimensionaal.finalreality.model.character.ICharacter;
-import com.github.tridimensionaal.finalreality.model.controller.GameController;
+import com.github.tridimensionaal.finalreality.controller.GameController;
 import java.beans.PropertyChangeEvent;
 
 

@@ -1,6 +1,6 @@
 package com.github.tridimensionaal.finalreality.model.character;
 
-import com.github.tridimensionaal.finalreality.model.controller.handlers.IEventHandler;
+import com.github.tridimensionaal.finalreality.controller.handlers.IEventHandler;
 
 
 
@@ -51,13 +51,13 @@ public interface ICharacter {
   int hashCode();
 
   /**
-   * Attack the ICharacter character 
+   * Attacks the ICharacter character 
    * @param character 
    */
   void attack(ICharacter character);
 
   /**
-   * Receive damage
+   * Receives damage
    * @param damage
    */
   void receiveDamage(int damage);

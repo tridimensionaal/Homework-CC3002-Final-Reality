@@ -1,4 +1,4 @@
-package com.github.tridimensionaal.finalreality.model.controller.handlers;
+package com.github.tridimensionaal.finalreality.controller.handlers;
 
 import java.beans.PropertyChangeListener;
 

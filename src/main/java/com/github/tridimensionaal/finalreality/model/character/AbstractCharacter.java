@@ -2,7 +2,7 @@ package com.github.tridimensionaal.finalreality.model.character;
 
 import com.github.tridimensionaal.finalreality.model.character.enemy.Enemy;
 import com.github.tridimensionaal.finalreality.model.character.player.IPlayerCharacter;
-import com.github.tridimensionaal.finalreality.model.controller.handlers.IEventHandler;
+import com.github.tridimensionaal.finalreality.controller.handlers.IEventHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.beans.PropertyChangeSupport;
