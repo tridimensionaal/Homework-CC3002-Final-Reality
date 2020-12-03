@@ -149,10 +149,20 @@ public class GameController {
   /**
    * Adds a new player character to the player's character list
    */
-  public void addPlayer(IPlayerCharacter character){
+  public void addPlayerCharacter(IPlayerCharacter character){
       character.addListener(playerCharacterIsDeadHandler);
       playerCharacter.add(character);
   }
+
+  public void setActualCharacter(ICharacter character){
+      actualCharacter = character;
+  }
+
+  public ICharacter getActualCharacter(){
+      return actualCharacter;
+  }
+
+
 
   /**
    * Equips a new weapon to the actual character. 
@@ -163,13 +173,17 @@ public class GameController {
       IWeapon characterWeapon = character.getEquippedWeapon();
 
       character.equipWeapon(weapon);
-      if (characterWeapon == character.getEquippedWeapon()){
+      if(character.getEquippedWeapon()==null){
           return;
       }
+      if (character.getEquippedWeapon().equals(characterWeapon)){
+          return;
+      }
+
       else{
           playerInventory.remove(weapon);
           if (characterWeapon != null){
-              playerInventory.add(characterWeapon);
+              addWeaponToInventory(characterWeapon);
           }
       }
 
@@ -188,7 +202,7 @@ public class GameController {
       }
 
       while(!queue.isEmpty()){
-          actualCharacter = queue.poll();
+          var character = queue.poll();
       }
   }
 

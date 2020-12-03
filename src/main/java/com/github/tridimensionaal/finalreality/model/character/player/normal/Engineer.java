@@ -31,5 +31,6 @@ public class Engineer extends AbstractPlayerCharacter {
             super.equipWeapon(weapon);
         }
     }
+    
 }
 

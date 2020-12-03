@@ -80,9 +80,7 @@ public abstract class AbstractCharacter implements ICharacter {
   }
 
   @Override
-  public boolean isDead() {
-    return this.health == 0;
-  }
+  public boolean isDead() { return this.health == 0; }
 
   @Override
   public void hasDied() {
