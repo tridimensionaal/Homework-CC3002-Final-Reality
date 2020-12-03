@@ -27,8 +27,6 @@ class EnemyTest extends AbstractCharacterTest {
   protected ICharacter enemyAttackTest;
 
 
-
-
   @BeforeEach
   void setUp() {
     super.basicSetUp();
@@ -67,6 +65,7 @@ class EnemyTest extends AbstractCharacterTest {
       e.printStackTrace();
     }
   }
+
   /**
    * Checks that the enemy's constructor and equals methods works properly.
    */

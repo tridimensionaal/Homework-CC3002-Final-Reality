@@ -63,7 +63,9 @@ class GameControllerTest {
     private IPlayerCharacter blackMageTest;
     private IPlayerCharacter whiteMageTest;
     
-
+    /**
+     * Setup method.
+     */
     @BeforeEach
     void setUp() {
         gameControllerTest = new GameController();
@@ -83,18 +85,24 @@ class GameControllerTest {
         thiefTest = gameControllerTest.createThief(PLAYER_CHARACTER_NAME,PLAYER_CHARACTER_HEALTH,PLAYER_CHARACTER_DEFENSE);
         blackMageTest = gameControllerTest.createBlackMage(PLAYER_CHARACTER_NAME,PLAYER_CHARACTER_HEALTH,PLAYER_CHARACTER_DEFENSE,PLAYER_CHARACTER_MANA);
         whiteMageTest= gameControllerTest.createWhiteMage(PLAYER_CHARACTER_NAME,PLAYER_CHARACTER_HEALTH,PLAYER_CHARACTER_DEFENSE,PLAYER_CHARACTER_MANA);
-
-
-
     }
+  
+    
+    /**
+     * Checks that the game controller's constructor workds properly.
+     */
     @Test
-    void checkConstruction() {
+    void checkConstructor() {
         assertTrue(gameControllerTest.getEnemyCharacter().isEmpty());
         assertTrue(gameControllerTest.getPlayerCharacter().isEmpty());
         assertTrue(gameControllerTest.getPlayerInventory().isEmpty());
     }
+
+    /**
+     * Checks if all the game controller weapon creator methods work properly.
+     */
     @Test
-    void createWeapons() {
+    void createWeapon() {
         assertEquals(axeTest, new Axe(WEAPON_DAMAGE,WEAPON_WEIGHT));
 
         assertEquals(bowTest, new Bow(WEAPON_DAMAGE,WEAPON_WEIGHT));
@@ -106,6 +114,10 @@ class GameControllerTest {
         assertEquals(staffTest, new Staff(WEAPON_DAMAGE,WEAPON_WEIGHT,WEAPON_MAGIC_DAMAGE));
 
     }
+
+    /**
+     * Checks that the game controller's add to inventory method workds properly.
+     */
     @Test
     void addToInventory() {
         assertTrue(gameControllerTest.getPlayerInventory().isEmpty());
@@ -126,6 +138,10 @@ class GameControllerTest {
         assertEquals(gameControllerTest.getPlayerInventory().size(),5);
 
     }
+
+    /**
+     * Checks that the game controller's create enemy method workds properly.
+     */
     @Test
     void createEnemy() {
         assertEquals(enemy1Test, new Enemy(gameControllerTest.getQueue(), ENEMY_NAME+"1", ENEMY_HEALTH, ENEMY_DEFENSE, ENEMY_WEIGHT,ENEMY_DAMAGE));
@@ -135,6 +151,9 @@ class GameControllerTest {
         assertEquals(enemy3Test, new Enemy(gameControllerTest.getQueue(), ENEMY_NAME+"3", ENEMY_HEALTH, ENEMY_DEFENSE, ENEMY_WEIGHT,ENEMY_DAMAGE));
     }
 
+    /**
+     * Checks that the game controller's add enemy method workds properly.
+     */
     @Test
     void addEnemy() {
         assertTrue(gameControllerTest.getEnemyCharacter().isEmpty());
@@ -148,6 +167,10 @@ class GameControllerTest {
         gameControllerTest.addEnemy(enemy3Test);
         assertEquals(gameControllerTest.getEnemyCharacter().size(),3);
     }
+
+    /**
+     * Checks if all the game controller player character creator methods work properly.
+     */
     @Test
     void createPlayerCharacter() {
         assertEquals(engineerTest, new Engineer(gameControllerTest.getQueue(), PLAYER_CHARACTER_NAME, PLAYER_CHARACTER_HEALTH, PLAYER_CHARACTER_DEFENSE));
@@ -161,6 +184,9 @@ class GameControllerTest {
         assertEquals(whiteMageTest, new WhiteMage(gameControllerTest.getQueue(), PLAYER_CHARACTER_NAME, PLAYER_CHARACTER_HEALTH, PLAYER_CHARACTER_DEFENSE, PLAYER_CHARACTER_MANA));
     }
 
+    /**
+     * Checks that the game controller's add enemy method workds properly.
+     */
     @Test
     void addPlayerCharacter() {
         assertTrue(gameControllerTest.getPlayerCharacter().isEmpty());
@@ -182,6 +208,9 @@ class GameControllerTest {
 
     }
 
+    /**
+     * Checks that the game controller's equip weapon method workds properly.
+     */
     @Test
     void equipWeapon() {
         gameControllerTest.setActualCharacter(engineerTest);
@@ -203,39 +232,78 @@ class GameControllerTest {
         gameControllerTest.equipWeapon(axeTest);
         actual = (IPlayerCharacter) gameControllerTest.getActualCharacter();
         assertEquals(actual.getEquippedWeapon(), axeTest);
-
-
     }
+
+    /**
+     * Checks that the game controller's attack method works properly.
+     */
     @Test
     void attack() {
-
         gameControllerTest.addPlayerCharacter(engineerTest);
         gameControllerTest.addEnemy(enemy1Test);
+        gameControllerTest.addEnemy(enemy2Test);
 
-        //Player's character attacks enemy
         ICharacter actual = gameControllerTest.getPlayerCharacter().get(0);
         gameControllerTest.setActualCharacter(actual);
         gameControllerTest.equipWeapon(bowTest);
 
+        //Player's character attacks enemy1
         gameControllerTest.attack(gameControllerTest.getEnemyCharacter().get(0));
         assertEquals(gameControllerTest.getEnemyCharacter().get(0).getHealth(),5);
 
-        //enemy died
+        //enemy1 died
+        gameControllerTest.attack(gameControllerTest.getEnemyCharacter().get(0));
+        assertEquals(gameControllerTest.getEnemyCharacter().size(), 1);
+
+        //Player's character attacks enemy2
+        gameControllerTest.attack(gameControllerTest.getEnemyCharacter().get(0));
+        assertEquals(gameControllerTest.getEnemyCharacter().get(0).getHealth(),5);
+
+        //enemy2 died
         gameControllerTest.attack(gameControllerTest.getEnemyCharacter().get(0));
         assertEquals(gameControllerTest.getEnemyCharacter().size(), 0);
 
-        //Enemy attacks player's character
-        gameControllerTest.addEnemy(enemy2Test);
+        gameControllerTest.addEnemy(enemy3Test);
+        gameControllerTest.addPlayerCharacter(knightTest);
+
         actual = gameControllerTest.getEnemyCharacter().get(0);
         gameControllerTest.setActualCharacter(actual);
 
+
+        //Enemy attacks player's character1
         gameControllerTest.attack(gameControllerTest.getPlayerCharacter().get(0));
         assertEquals(gameControllerTest.getPlayerCharacter().get(0).getHealth(),5);
 
+        //player's character1 died
+        gameControllerTest.attack(gameControllerTest.getPlayerCharacter().get(0));
+        assertEquals(gameControllerTest.getPlayerCharacter().size(), 1);
 
-        //player's character died
+        //Enemy attacks player's character1
+        gameControllerTest.attack(gameControllerTest.getPlayerCharacter().get(0));
+        assertEquals(gameControllerTest.getPlayerCharacter().get(0).getHealth(),5);
+
+        //player's character1 died
         gameControllerTest.attack(gameControllerTest.getPlayerCharacter().get(0));
         assertEquals(gameControllerTest.getPlayerCharacter().size(), 0);
+
+
+
+    }
+    @Test
+    void turns() {
+        gameControllerTest.addEnemy(enemy1Test);
+        gameControllerTest.addEnemy(enemy2Test);
+
+        whiteMageTest.equipWeapon(staffTest);
+        knightTest.equipWeapon(swordTest);
+        thiefTest.equipWeapon(bowTest);
+
+        gameControllerTest.addPlayerCharacter(whiteMageTest);
+        gameControllerTest.addPlayerCharacter(knightTest);
+        gameControllerTest.addPlayerCharacter(thiefTest);
+
+        gameControllerTest.turns();
+
     }
 }
 
