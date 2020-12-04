@@ -8,7 +8,7 @@ import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A class that holds all the information of a single player character of the game.
+ * A class that holds all the information of a single abstract player character of the game.
  *
  * @author Ignacio Slater Muñoz.
  * @author Matías Salim Seda Auil
@@ -32,42 +32,33 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
       this.characterClass = characterClass;
   }
 
-  /**
-   * @return the actual equipped weapon.
-   */
+  @Override
   public IWeapon getEquippedWeapon(){
       return equippedWeapon;
   }
 
-  /**
-   * Equip a new weapon.
-   * @param weapon
-   *    a weapon
-   */
- 
+  @Override
   public void equipWeapon(IWeapon weapon) {
-      if(this.getHealth() == 0) {
+      if(this.isDead()) {
           return;
       }
       this.equippedWeapon = weapon;
   }
 
-  /**
-   * @return the player character's class.
-   */
+  @Override
   public String getCharacterClass(){
       return characterClass;
   }
 
+  @Override
   public void attack(ICharacter character){
       if(this.equippedWeapon== null){
           return;
       }
-      if (this.getHealth() == 0){
+      if (this.isDead()){
           return;
       }
       character.receiveDamage(this.getEquippedWeapon().getDamage());
-
   }
 
   @Override

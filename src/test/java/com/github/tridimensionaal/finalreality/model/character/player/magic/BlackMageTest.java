@@ -3,12 +3,7 @@ package com.github.tridimensionaal.finalreality.model.character.player.magic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import com.github.tridimensionaal.finalreality.model.character.ICharacter;
-import com.github.tridimensionaal.finalreality.model.character.enemy.Enemy;
 import com.github.tridimensionaal.finalreality.model.character.player.*;
-import com.github.tridimensionaal.finalreality.model.weapon.IWeapon;
-import com.github.tridimensionaal.finalreality.model.weapon.normal.*;
-import com.github.tridimensionaal.finalreality.model.weapon.magic.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,16 +17,41 @@ import org.junit.jupiter.api.Test;
  */
 class BlackMageTest extends AbstractMagicPlayerCharacterTest{
 
-  IPlayerCharacter blackMage = new BlackMage(turns, NAME, HEALTH, DEFENSE, MANA);
-
   /**
    * Setup method.
    */
   @BeforeEach
   void setUp() {
-    super.basicSetUp();
-    testWeapon = new Staff(15,10,10);
-    testCharacters.add(new BlackMage(turns, NAME, HEALTH, DEFENSE, MANA));
+      super.basicSetUp();
+
+      testWeapon = staffTest;
+
+      character = new BlackMage(turns, NAME, HEALTH, DEFENSE, MANA);
+      character1 = new BlackMage(turns, NAME, HEALTH, DEFENSE, MANA);
+      character2 = new BlackMage(turns, NAME2, HEALTH, DEFENSE, MANA);
+      character3 = new BlackMage(turns, NAME, HEALTH2, DEFENSE, MANA);
+      character4 = new BlackMage(turns, NAME, HEALTH, DEFENSE2, MANA);
+      character5 = new BlackMage(turns, NAME2, HEALTH2, DEFENSE, MANA);
+      character6 = new BlackMage(turns, NAME2, HEALTH, DEFENSE2, MANA);
+      character7  = new BlackMage(turns, NAME, HEALTH2, DEFENSE2, MANA);
+      character8 = new BlackMage(turns, NAME2, HEALTH2, DEFENSE2, MANA);
+
+      testCharacters.add(character);
+
+      magicPlayerCharacter = new BlackMage(turns, NAME, HEALTH, DEFENSE, MANA);
+      magicPlayerCharacter1 = new BlackMage(turns, NAME, HEALTH, DEFENSE, MANA);
+      magicPlayerCharacter2 = new BlackMage(turns, NAME, HEALTH2, DEFENSE, MANA);
+      magicPlayerCharacter3 = new BlackMage(turns, NAME, HEALTH2, DEFENSE2, MANA);
+      magicPlayerCharacter4 = new BlackMage(turns, NAME, HEALTH, DEFENSE2, MANA2);
+      magicPlayerCharacter5 = new BlackMage(turns, NAME, HEALTH2, DEFENSE2, MANA);
+      magicPlayerCharacter6 = new BlackMage(turns, NAME, HEALTH2, DEFENSE, MANA2);
+      magicPlayerCharacter7  = new BlackMage(turns, NAME, HEALTH, DEFENSE2, MANA2);
+      magicPlayerCharacter8 = new BlackMage(turns, NAME, HEALTH2, DEFENSE2, MANA2);
+
+      characterEquipWeaponTest = (IPlayerCharacter) character;
+      characterEquipWeaponTest0 = new BlackMage(turns, NAME, 0, DEFENSE, MANA);
+
+      characterAttackTest = (IPlayerCharacter) character;
 
   }
 
@@ -40,42 +60,7 @@ class BlackMageTest extends AbstractMagicPlayerCharacterTest{
    */
   @Test
   void constructorTest() {
-    //Same blackMage
-    IMagicPlayerCharacter blackMage1 = new BlackMage(turns, NAME , HEALTH, DEFENSE,MANA);
-    //Different name
-    IMagicPlayerCharacter blackMage2= new BlackMage(turns, NAME2, HEALTH, DEFENSE, MANA);
-    //Different health
-    IMagicPlayerCharacter blackMage3 = new BlackMage(turns, NAME , HEALTH2, DEFENSE, MANA);
-    //Different defense
-    IMagicPlayerCharacter blackMage4 = new BlackMage(turns, NAME , HEALTH, DEFENSE2,MANA);
-    //Different name and health
-    IMagicPlayerCharacter blackMage5 = new BlackMage(turns, NAME2, HEALTH2, DEFENSE,MANA);
-    //Different name and defense
-    IMagicPlayerCharacter blackMage6 = new BlackMage(turns, NAME2, HEALTH, DEFENSE2,MANA);
-    //Different health and defense
-    IMagicPlayerCharacter blackMage7 = new BlackMage(turns, NAME , HEALTH2, DEFENSE2,MANA);
-    //All different 
-    IMagicPlayerCharacter blackMage8 = new BlackMage(turns, NAME2, HEALTH2, DEFENSE2,MANA);
-
-    checkConstruction(blackMage,blackMage1,blackMage2,blackMage3,blackMage4,blackMage5,blackMage6, blackMage7, blackMage8);
-
-    //Different name
-    blackMage2= new BlackMage(turns, NAME2 , HEALTH, DEFENSE, MANA2);
-    //Different health
-    blackMage3 = new BlackMage(turns, NAME , HEALTH2, DEFENSE, MANA2);
-    //Different defense
-    blackMage4 = new BlackMage(turns, NAME , HEALTH, DEFENSE2,MANA2);
-    //Different name and health
-    blackMage5 = new BlackMage(turns, NAME2, HEALTH2, DEFENSE,MANA2);
-    //Different name and defense
-    blackMage6 = new BlackMage(turns, NAME2, HEALTH, DEFENSE2,MANA2);
-    //Different health and defense
-    blackMage7 = new BlackMage(turns, NAME , HEALTH2, DEFENSE2,MANA2);
-    //All different 
-    blackMage8 = new BlackMage(turns, NAME2, HEALTH2, DEFENSE2,MANA2);
-
-    checkConstruction(blackMage,blackMage1,blackMage2,blackMage3,blackMage4,blackMage5,blackMage6, blackMage7, blackMage8);
-
+      super.checkConstruction();
   }
 
   /**
@@ -83,53 +68,29 @@ class BlackMageTest extends AbstractMagicPlayerCharacterTest{
    */
   @Test
     void equipWeaponTest() {
-        IPlayerCharacter blackMage1 = new BlackMage(turns, "hola",10,10,10);
-
-        IWeapon axeTest = new Axe(10,10);
-        IWeapon bowTest = new Bow(10,10);
-        IWeapon knifeTest = new Knife(10,10);
-        IWeapon swordTest = new Sword(10,10);
-        IWeapon staffTest = new Staff(10,10,10);
 
 
-        assertNull(blackMage1.getEquippedWeapon());
+        assertNull(characterEquipWeaponTest.getEquippedWeapon());
 
-        blackMage1.equipWeapon(axeTest);
-        assertNull(blackMage1.getEquippedWeapon());
+        characterEquipWeaponTest.equipWeapon(axeTest);
+        assertNull(characterEquipWeaponTest.getEquippedWeapon());
 
-        blackMage1.equipWeapon(swordTest);
-        assertNull(blackMage1.getEquippedWeapon());
+        characterEquipWeaponTest.equipWeapon(swordTest);
+        assertNull(characterEquipWeaponTest.getEquippedWeapon());
 
-        blackMage1.equipWeapon(bowTest);
-      assertNull(blackMage1.getEquippedWeapon());
+        characterEquipWeaponTest.equipWeapon(bowTest);
+        assertNull(characterEquipWeaponTest.getEquippedWeapon());
 
-      blackMage1.equipWeapon(knifeTest);
-        assertEquals(blackMage1.getEquippedWeapon(), knifeTest);
+        characterEquipWeaponTest.equipWeapon(knifeTest);
+        assertEquals(characterEquipWeaponTest.getEquippedWeapon(), knifeTest);
 
-        blackMage1.equipWeapon(staffTest);
-        assertEquals(blackMage1.getEquippedWeapon(), staffTest);
+        characterEquipWeaponTest.equipWeapon(staffTest);
+        assertEquals(characterEquipWeaponTest.getEquippedWeapon(), staffTest);
 
-        IPlayerCharacter blackMage2 = new BlackMage(turns, "hola",0,0,0);
-        blackMage2.equipWeapon(staffTest);
-        assertNull(blackMage2.getEquippedWeapon());
-
+        characterEquipWeaponTest0.equipWeapon(staffTest);
+        assertNull(characterEquipWeaponTest0.getEquippedWeapon());
     }
 
- 
- 
-    @Test
-    void attackTest(){
-        IMagicPlayerCharacter blackMage1 = new BlackMage(turns, "hola", 20,10,10);
-        //weapon Damage = 15
-        blackMage1.equipWeapon(testWeapon);
-        ICharacter enemy = new Enemy(turns,"hola",15,5,10,10);
-        blackMage1.attack(enemy);
-        assertEquals(enemy.getHealth(),5);
-        blackMage1.attack(enemy);
-        assertEquals(enemy.getHealth(),0);
-        enemy.attack(blackMage1);
-
-    }
 }
 
 

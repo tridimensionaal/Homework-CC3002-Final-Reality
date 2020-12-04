@@ -13,6 +13,7 @@ import com.github.tridimensionaal.finalreality.model.weapon.IWeapon;
  * @author Matías Salim Seda Auil 
  */
 public interface IPlayerCharacter extends ICharacter{
+
   /**
    * @return the actual equipped weapon.
    */
@@ -27,6 +28,5 @@ public interface IPlayerCharacter extends ICharacter{
   /**
    * @return the player character's class.
    */
- 
   String getCharacterClass();
 }

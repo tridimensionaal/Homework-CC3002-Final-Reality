@@ -20,22 +20,28 @@ public class Sword extends AbstractWeapon{
     public Sword( final int damage, final int weight) {
         super("Sword", damage, weight);
   }
+
+  @Override
   public boolean equippedByEngineer(){
       return false;
   }
 
+  @Override
   public boolean equippedByKnight(){
       return true;
   }
 
+  @Override
   public boolean equippedByThief(){
       return true;
   }
 
+  @Override
   public boolean equippedByBlackMage(){
       return false;
   }
 
+  @Override
   public boolean equippedByWhiteMage(){
       return false;
   }

@@ -22,6 +22,8 @@ public class Thief extends AbstractPlayerCharacter {
     public Thief(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense) {
         super(turnsQueue, name, health, defense, "Thief");
     }
+
+    @Override
     public void equipWeapon(IWeapon weapon){
         if (weapon.equippedByThief()){
             super.equipWeapon(weapon);

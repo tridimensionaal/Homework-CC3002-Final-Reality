@@ -1,12 +1,15 @@
 package com.github.tridimensionaal.finalreality.model.character;
 
-import com.github.tridimensionaal.finalreality.model.character.player.IPlayerCharacter;
 import com.github.tridimensionaal.finalreality.model.character.enemy.Enemy;
+import com.github.tridimensionaal.finalreality.model.character.player.IPlayerCharacter;
+import com.github.tridimensionaal.finalreality.controller.handlers.IEventHandler;
+import org.jetbrains.annotations.NotNull;
+
+import java.beans.PropertyChangeSupport;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * An abstract class that holds the common behaviour of all the characters in the game.
@@ -21,6 +24,8 @@ public abstract class AbstractCharacter implements ICharacter {
   private int health;
   private final int defense;
   private ScheduledExecutorService scheduledExecutor;
+
+  private final PropertyChangeSupport hasDiedEvent = new PropertyChangeSupport(this);
 
   /**
    * Creates a new abstract character.
@@ -74,14 +79,30 @@ public abstract class AbstractCharacter implements ICharacter {
     return defense;
   }
 
+  @Override
+  public boolean isDead() { return this.health == 0; }
+
+  @Override
+  public void hasDied() {
+    this.health = 0;
+    hasDiedEvent.firePropertyChange("Character has died " + name, null, this);
+  }
+
+  @Override
   public void receiveDamage(int damage) {
-    if (health == 0) {
+
+    if (this.isDead()) {
       return;
     }
-    health -= (damage - this.defense);
-    if (health < 1) {
-      health = 0;
+
+    this.health -= (damage - this.defense);
+    if (this.health < 1) {
+      this.hasDied();
     }
+  }
+
+  public void addListener(IEventHandler handler) {
+      hasDiedEvent.addPropertyChangeListener(handler);
   }
 
   @Override

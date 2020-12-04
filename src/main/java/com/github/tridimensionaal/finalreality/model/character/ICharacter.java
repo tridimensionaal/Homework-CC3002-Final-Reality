@@ -1,5 +1,8 @@
 package com.github.tridimensionaal.finalreality.model.character;
 
+import com.github.tridimensionaal.finalreality.controller.handlers.IEventHandler;
+
+
 
 /**
  * This represents a character from the game.
@@ -48,13 +51,31 @@ public interface ICharacter {
   int hashCode();
 
   /**
+   * Attacks the ICharacter character 
    * @param character 
    */
   void attack(ICharacter character);
 
   /**
+   * Receives damage
    * @param damage
    */
   void receiveDamage(int damage);
+
+  /**
+   * @return True is this character is dead or false otherwise. A character is dead if they health is 0. 
+   */
+  boolean isDead();
+
+  /**
+   * Sets to zero the health of this character
+   */
+  void hasDied();
+
+  /**
+   * Sets the 
+   * @param handler
+   */
+  void addListener(IEventHandler handler);
 }
 

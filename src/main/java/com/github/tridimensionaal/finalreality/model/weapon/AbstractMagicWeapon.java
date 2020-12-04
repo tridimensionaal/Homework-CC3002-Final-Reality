@@ -13,9 +13,10 @@ public abstract class AbstractMagicWeapon extends AbstractWeapon implements IMag
   private final int magicDamage;
 
   /**
-   * Creates a new magic weapon.
+   * Creates a new abstract magic weapon.
    * 
    *
+   * 
    * {@inheritDoc} 
    *
    * @param magicDamage
@@ -27,9 +28,7 @@ public abstract class AbstractMagicWeapon extends AbstractWeapon implements IMag
     this.magicDamage= magicDamage;
   }
 
-  /**
-   * @return the weapon's magic damage
-   */
+  @Override
   public int getMagicDamage() {
     return magicDamage;
   }

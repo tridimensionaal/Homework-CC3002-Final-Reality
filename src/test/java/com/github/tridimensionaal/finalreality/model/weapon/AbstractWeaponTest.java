@@ -18,63 +18,62 @@ public abstract class AbstractWeaponTest{
   protected final int DAMAGE2 = 10;
   protected final int WEIGHT2 = 12;
 
-  protected static final String STR  = "HOLA";
+  protected static final String STR  = "Hi";
 
-  protected void checkConstruction(
-      //Original weapon
-      final IWeapon weapon,
-      //Same weapon
-      final IWeapon weapon1,
-      //Different name
-      final IWeapon weapon2,
-      //Different damage
-      final IWeapon weapon3,
-      //Different weight 
-      final IWeapon weapon4,
-      //Different name and damage
-      final IWeapon weapon5,
-      //Different name and weight
-      final IWeapon weapon6,
-      //Different damage and weight 
-      final IWeapon weapon7,
-      //All different
-      final IWeapon weapon8) {
+  //Original weapon
+  protected IWeapon weaponTest;
+  //Same weapon
+  protected IWeapon weaponTest1;
+  //Different name
+  protected IWeapon weaponTest2;
+  //Different damage
+  protected IWeapon weaponTest3;
+  //Different weight
+  protected IWeapon weaponTest4;
+  //Different name and damage
+  protected IWeapon weaponTest5;
+  //Different name and weight
+  protected IWeapon weaponTest6;
+  //Different damage and weight
+  protected IWeapon weaponTest7;
+  //All different
+  protected IWeapon weaponTest8;
 
-    assertEquals(weapon, weapon);
-    assertEquals(weapon.hashCode(), weapon.hashCode());
+  protected void checkConstruction(){
+    assertEquals(weaponTest, weaponTest);
+    assertEquals(weaponTest.hashCode(), weaponTest.hashCode());
 
-    assertEquals(weapon, weapon1);
-    assertEquals(weapon.hashCode(), weapon1.hashCode());
+    assertEquals(weaponTest, weaponTest1);
+    assertEquals(weaponTest.hashCode(), weaponTest1.hashCode());
 
-    assertNotEquals(weapon, weapon2);
-    assertNotEquals(weapon.hashCode(), weapon2.hashCode());
+    assertNotEquals(weaponTest, weaponTest2);
+    assertNotEquals(weaponTest.hashCode(), weaponTest2.hashCode());
 
-    assertNotEquals(weapon, weapon3);
-    assertNotEquals(weapon.hashCode(), weapon3.hashCode());
+    assertNotEquals(weaponTest, weaponTest3);
+    assertNotEquals(weaponTest.hashCode(), weaponTest3.hashCode());
 
-    assertNotEquals(weapon, weapon4);
-    assertNotEquals(weapon.hashCode(), weapon4.hashCode());
+    assertNotEquals(weaponTest, weaponTest4);
+    assertNotEquals(weaponTest.hashCode(), weaponTest4.hashCode());
 
-    assertNotEquals(weapon, weapon5);
-    assertNotEquals(weapon.hashCode(), weapon5.hashCode());
+    assertNotEquals(weaponTest, weaponTest5);
+    assertNotEquals(weaponTest.hashCode(), weaponTest5.hashCode());
 
-    assertNotEquals(weapon, weapon6);
-    assertNotEquals(weapon.hashCode(), weapon6.hashCode());
+    assertNotEquals(weaponTest, weaponTest6);
+    assertNotEquals(weaponTest.hashCode(), weaponTest6.hashCode());
 
-    assertNotEquals(weapon, weapon7);
-    assertNotEquals(weapon.hashCode(), weapon7.hashCode());
+    assertNotEquals(weaponTest, weaponTest7);
+    assertNotEquals(weaponTest.hashCode(), weaponTest7.hashCode());
 
-    assertNotEquals(weapon, weapon8);
-    assertNotEquals(weapon.hashCode(), weapon8.hashCode());
+    assertNotEquals(weaponTest, weaponTest8);
+    assertNotEquals(weaponTest.hashCode(), weaponTest8.hashCode());
 
-    assertNotEquals(weapon, weapon8);
-    assertNotEquals(weapon.hashCode(), weapon8.hashCode());
+    assertNotEquals(weaponTest, weaponTest8);
+    assertNotEquals(weaponTest.hashCode(), weaponTest8.hashCode());
 
-    assertNotEquals(weapon, STR);
-    assertNotEquals(weapon.hashCode(), STR.hashCode());
+    assertNotEquals(weaponTest, STR);
+    assertNotEquals(weaponTest.hashCode(), STR.hashCode());
 
-    assertNotEquals(STR, weapon);
-    assertNotEquals(STR.hashCode(), weapon.hashCode());
- 
-      }
+    assertNotEquals(STR, weaponTest);
+    assertNotEquals(STR.hashCode(), weaponTest.hashCode());
+  }
 }

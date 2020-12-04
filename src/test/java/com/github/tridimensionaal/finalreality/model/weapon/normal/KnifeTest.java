@@ -15,30 +15,20 @@ import org.junit.jupiter.api.Test;
  */
 class KnifeTest extends AbstractWeaponTest{
 
-  private IWeapon testKnife;
-  private IWeapon testKnife1;
-  private IWeapon testKnife2;
-  private IWeapon testKnife3;
-  private IWeapon testKnife4;
-  private IWeapon testKnife5;
-  private IWeapon testKnife6;
-  private IWeapon testKnife7;
-  private IWeapon testKnife8;
-
   /**
    * Setup method.
    */
   @BeforeEach
   void setUp() {
-    testKnife = new Knife(DAMAGE, WEIGHT);
-    testKnife1 = new Knife(DAMAGE, WEIGHT);
-    testKnife2 = new Bow(DAMAGE, WEIGHT);
-    testKnife3= new Knife(DAMAGE2, WEIGHT);
-    testKnife4 = new Knife(DAMAGE, WEIGHT2);
-    testKnife5 = new Bow(DAMAGE2, WEIGHT);
-    testKnife6 = new Bow(DAMAGE, WEIGHT2);
-    testKnife7 = new Knife(DAMAGE2, WEIGHT2);
-    testKnife8 = new Bow(DAMAGE2, WEIGHT2);
+    weaponTest = new Knife(DAMAGE, WEIGHT);
+    weaponTest1 = new Knife(DAMAGE, WEIGHT);
+    weaponTest2 = new Bow(DAMAGE, WEIGHT);
+    weaponTest3= new Knife(DAMAGE2, WEIGHT);
+    weaponTest4 = new Knife(DAMAGE, WEIGHT2);
+    weaponTest5 = new Bow(DAMAGE2, WEIGHT);
+    weaponTest6 = new Bow(DAMAGE, WEIGHT2);
+    weaponTest7 = new Knife(DAMAGE2, WEIGHT2);
+    weaponTest8 = new Bow(DAMAGE2, WEIGHT2);
   }
 
   /**
@@ -46,6 +36,6 @@ class KnifeTest extends AbstractWeaponTest{
    */
   @Test
   void constructorTest() {
-    checkConstruction(testKnife, testKnife1,testKnife2,testKnife3,testKnife4,testKnife5,testKnife6,testKnife7,testKnife8);
+    super.checkConstruction();
   }
 }

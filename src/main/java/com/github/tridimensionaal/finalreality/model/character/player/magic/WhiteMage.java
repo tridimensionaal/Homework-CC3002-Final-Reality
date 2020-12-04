@@ -17,14 +17,15 @@ public class WhiteMage extends AbstractMagicPlayerCharacter {
 
     /**
      * Creates a new white mage.
-     * <p>
+     * 
      * {@inheritDoc}
      */
 
     public WhiteMage(@NotNull BlockingQueue<ICharacter> turnsQueue, final String name, final int health, final int defense, final int mana) {
         super(turnsQueue, name, health, defense, "WhiteMage", mana);
     }
-
+    
+    @Override
     public void equipWeapon(IWeapon weapon) {
         if (weapon.equippedByWhiteMage()) {
             super.equipWeapon(weapon);
