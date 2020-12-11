@@ -32,37 +32,143 @@ public class GameController {
   public GameController() {
   }
 
-  /**
-   * @return this player's character list.
-   */
-  public LinkedList<IPlayerCharacter> getPlayerCharacter(){
-      return playerCharacter;
-  }
-
-  /**
-   * @return this enemy's character list.
-   */
-  public LinkedList<ICharacter> getEnemyCharacter(){
-        return enemyCharacter;
-
-    }
-
-  /**
-   * @return this player's inventory.
-   */
-    public LinkedList<IWeapon> getPlayerInventory(){
-      return playerInventory;
-    }
-
-  /**
-   * @return this player's queue.
-   */
+    /**
+     * @return this game's queue.
+     */
     public BlockingQueue<ICharacter> getQueue(){
         return queue;
     }
 
+    /**
+     * @return this player's inventory size.
+     */
+    public int getPlayerInventorySize(){
+        return playerInventory.size();
+    }
+
+    /**
+     * @return this player's character list size.
+     * */
+    public int getPlayerCharacterSize(){
+      return playerCharacter.size();
+  }
 
   /**
+   * @return this enemy's character list size.
+   */
+  public int getEnemyCharacterSize(){
+        return enemyCharacter.size();
+    }
+
+    /**
+     * @param i index of the list
+     * @return the element in the index i of this player's inventory list.
+     *
+     */
+    public IWeapon getPlayerInventoryElement(int i){
+        return playerInventory.get(i);
+    }
+
+    /**
+    * @param i index of the list
+    * @return the element in the index i of this player's character list.
+     */
+    public IPlayerCharacter getPlayerCharacterElement(int i){
+        return playerCharacter.get(i);
+    }
+
+    /**
+     * @param i index of the list
+     * @return the element in the index i of this enemy's character list.
+     */
+    public ICharacter getEnemyCharacterElement(int i){
+        return enemyCharacter.get(i);
+    }
+
+
+    /**
+     * @param i index of the list
+     * @return the damage of the element in the index i of this player's inventory list.
+     */
+    public int getInventoryElementDamage(int i){
+        return playerInventory.get(i).getDamage();
+    }
+
+    /**
+     * @param i index of the list
+     * @return the weight of the element in the index i of this player's inventory list.
+     */
+    public int getInventoryElementWeight(int i){
+        return playerInventory.get(i).getWeight();
+    }
+
+    /**
+     * @param i index of the list
+     * @return the name of the element in the index i of this player's character list.
+     */
+    public String getPlayerCharacterElementName(int i){
+        return playerCharacter.get(i).getName();
+    }
+
+    /**
+     * @param i index of the list
+     * @return the health of the element in the index i of this player's character list.
+     */
+    public int getPlayerCharacterElementHealth(int i){
+        return playerCharacter.get(i).getHealth();
+    }
+
+    /**
+     * @param i index of the list
+     * @return the defense of the element in the index i of this enemy's character list.
+     */
+    public int getPlayerCharacterElementDefense(int i){
+        return playerCharacter.get(i).getDefense();
+    }
+
+    /**
+     * @param i index of the list
+     * @return the name of the element in the index i of this enemy's character list.
+     */
+    public String getEnemyCharacterElementName(int i){
+        return enemyCharacter.get(i).getName();
+    }
+
+    /**
+     * @param i index of the list
+     * @return the health of the element in the index i of this enemy's character list.
+     */
+    public int getEnemyCharacterElementHealth(int i){
+        return enemyCharacter.get(i).getHealth();
+    }
+
+    /**
+     * @param i index of the list
+     * @return the defense of the element in the index i of this enemy's character list.
+     */
+    public int getEnemyCharacterElementDefense(int i){
+        return enemyCharacter.get(i).getDefense();
+    }
+
+    /**
+     * @param i index of the list
+     * @return the weight of the element in the index i of this enemy's character list.
+     */
+    public int getEnemyCharacterElementWeight(int i){
+        Enemy enemy = (Enemy) enemyCharacter.get(i);
+        return enemy.getWeight();
+    }
+
+    /**
+     * @param i index of the list
+     * @return the damage of the element in the index i of this enemy's character list.
+     */
+    public int getEnemyCharacterElementDamage(int i){
+        Enemy enemy = (Enemy) enemyCharacter.get(i);
+        return enemy.getDamage();
+    }
+
+    /**
    * Creates a new axe
    * @param damage of the axe
    * @param weight of the axe
@@ -259,8 +365,10 @@ public class GameController {
           }
       }
   }
-
-  public void turns(){
+    /**
+     * Method that handles the logic of one round of turns.
+     */
+    public void turns(){
 
       for (ICharacter enemy: enemyCharacter) {
           enemy.waitTurn();
@@ -296,17 +404,23 @@ public class GameController {
 
   public void enemyHasWin(){
   }
-
-  public void onPlayerCharacterHasDied(IPlayerCharacter character) {
+    /**
+     * Removes a player's character from the player's characters list when it dies.
+     * @param character the character to remove from the player's character list
+     */
+    public void onPlayerCharacterHasDied(IPlayerCharacter character) {
       playerCharacter.remove(character);
-      if (playerCharacter.size() == 0){
+      if (getPlayerCharacterSize() == 0){
           enemyHasWin();
       }
   }
-
-  public void onEnemyHasDied(ICharacter character) {
+    /**
+     * Removes a enemy's character from the enemy's characters list when it dies.
+     * @param character the character to remove from the enemy's characters list
+     */
+    public void onEnemyHasDied(ICharacter character) {
       enemyCharacter.remove(character);
-      if (enemyCharacter.size() == 0){
+      if (getEnemyCharacterSize() == 0){
           playerHasWin();
       }
   }
