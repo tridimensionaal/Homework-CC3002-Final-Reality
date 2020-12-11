@@ -70,22 +70,6 @@ public class GameController {
     }
 
     /**
-     * @param i index of the list
-     * @return the damage of the element in the index i of this player's inventory list.
-     */
-    public int getInventoryElementDamage(int i){
-        return playerInventory.get(i).getDamage();
-    }
-
-    /**
-     * @param i index of the list
-     * @return the weight of the element in the index i of this player's inventory list.
-     */
-    public int getInventoryElementWeight(int i){
-        return playerInventory.get(i).getWeight();
-    }
-
-    /**
     * @param i index of the list
     * @return the element in the index i of this player's character list.
      */
@@ -99,6 +83,23 @@ public class GameController {
      */
     public ICharacter getEnemyCharacterElement(int i){
         return enemyCharacter.get(i);
+    }
+
+
+    /**
+     * @param i index of the list
+     * @return the damage of the element in the index i of this player's inventory list.
+     */
+    public int getInventoryElementDamage(int i){
+        return playerInventory.get(i).getDamage();
+    }
+
+    /**
+     * @param i index of the list
+     * @return the weight of the element in the index i of this player's inventory list.
+     */
+    public int getInventoryElementWeight(int i){
+        return playerInventory.get(i).getWeight();
     }
 
     /**
