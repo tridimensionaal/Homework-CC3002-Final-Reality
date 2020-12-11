@@ -23,10 +23,10 @@ A player's characters can attack a enemies and enemies can attack player's chara
 
 ## Versions
 - **Version 0.1**: Models of player's characters, enemies and weapons.
- * Implements the models of the all the player's characters, enemies and weapons.
+    - Implements the models of the all the player's characters, enemies and weapons.
 - **Version 0.2**: Interaction between player's characters, enemies and weapons.
- * Complements the models of the all the player's characters, enemies and weapons.
- * Implements the game controller to implements the interaction between the player's characters, enemies and weapons.
+    - Complements the models of the all the player's characters, enemies and weapons.
+    - Implements the game controller to implements the interaction between the player's characters, enemies and weapons.
 
     
 
