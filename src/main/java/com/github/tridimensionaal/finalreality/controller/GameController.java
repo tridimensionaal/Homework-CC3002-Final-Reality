@@ -45,6 +45,14 @@ public class GameController {
     }
 
     /**
+     * @return this game's queue size.
+     */
+    public int getQueueSize(){
+        return this.getQueue().size();
+    }
+
+
+    /**
      * @return this player's inventory size.
      */
     public int getPlayerInventorySize(){
@@ -356,9 +364,16 @@ public class GameController {
       for (IPlayerCharacter character: playerCharacter){
           character.waitTurn();
       }
-
   }
-  /**
+    /**
+     * Method that add all the characters of the game to the queue.
+     */
+    public void pollQueue(){
+        ICharacter character = getQueue().poll();
+        setActualCharacter(character);
+    }
+
+    /**
    * The actual character attacks a character 
    * @param character the character to be attacked by the actual character
    */
@@ -367,9 +382,11 @@ public class GameController {
   }
 
   public void playerHasWin(){
+      this.setPhase(new FinalPhase(true));
   }
 
   public void enemyHasWin(){
+      this.setPhase(new FinalPhase(false));
   }
     /**
      * Removes a player's character from the player's characters list when it dies.

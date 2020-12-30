@@ -67,6 +67,8 @@ public interface ICharacter {
    */
   boolean isDead();
 
+  boolean isPlayerCharacter();
+
   /**
    * Sets to zero the health of this character
    */
@@ -77,5 +79,6 @@ public interface ICharacter {
    * @param handler
    */
   void addListener(IEventHandler handler);
+
 }
 

@@ -340,7 +340,27 @@ class GameControllerTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        assertEquals(gameControllerTest.getQueue().size(), 5);
+        assertEquals(gameControllerTest.getQueueSize(), 5);
+
+        gameControllerTest.pollQueue();
+        assertNotNull(gameControllerTest.getActualCharacter());
+        assertEquals(gameControllerTest.getQueueSize(), 4);
+
+        gameControllerTest.pollQueue();
+        assertNotNull(gameControllerTest.getActualCharacter());
+        assertEquals(gameControllerTest.getQueueSize(), 3);
+
+        gameControllerTest.pollQueue();
+        assertNotNull(gameControllerTest.getActualCharacter());
+        assertEquals(gameControllerTest.getQueueSize(), 2);
+
+        gameControllerTest.pollQueue();
+        assertNotNull(gameControllerTest.getActualCharacter());
+        assertEquals(gameControllerTest.getQueueSize(), 1);
+
+        gameControllerTest.pollQueue();
+        assertNotNull(gameControllerTest.getActualCharacter());
+        assertEquals(gameControllerTest.getQueueSize(), 0);
 
     }
 }

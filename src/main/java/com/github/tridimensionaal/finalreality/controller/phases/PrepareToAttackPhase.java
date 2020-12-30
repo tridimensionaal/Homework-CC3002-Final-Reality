@@ -6,14 +6,14 @@ public class PrepareToAttackPhase extends Phase{
     }
 
     @Override
-    public void toAttackPhase(){
-        changePhase(new AttackPhase());
+    public void toGetCharacterPhase(){
+        changePhase(new GetCharacterPhase());
     }
 
     @Override
     public void prepareToAttack () throws InvalidMovementException {
         super.prepareToAttack();
-        this.toAttackPhase();
+        this.toGetCharacterPhase();
     }
 
 }

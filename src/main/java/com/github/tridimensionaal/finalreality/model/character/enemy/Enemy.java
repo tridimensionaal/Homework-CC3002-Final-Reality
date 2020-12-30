@@ -52,6 +52,10 @@ public class Enemy extends AbstractCharacter {
       }
       character.receiveDamage(this.getDamage());
   }
+  @Override
+  public boolean isPlayerCharacter(){
+      return false;
+  }
 
   @Override
   public boolean equals(final Object o) {

@@ -51,6 +51,11 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   }
 
   @Override
+  public boolean isPlayerCharacter(){
+      return true;
+  }
+
+  @Override
   public void attack(ICharacter character){
       if(this.equippedWeapon== null){
           return;
