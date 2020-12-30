@@ -1,9 +1,8 @@
-package com.github.tridimensionaal.finalreality.model.character.player.magic;
+package com.github.tridimensionaal.finalreality.model.character.player.normal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import com.github.tridimensionaal.finalreality.model.character.player.*;
-import com.github.tridimensionaal.finalreality.model.weapon.magic.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +14,7 @@ import org.junit.jupiter.api.Test;
  * @author Matías Salim Seda Auil
  * @see WhiteMage
  */
-class WhiteMageTest extends AbstractMagicPlayerCharacterTest{
+class WhiteMageTest extends AbstractPlayerCharacterTest{
 
   /**
    * Setup method.
@@ -24,32 +23,22 @@ class WhiteMageTest extends AbstractMagicPlayerCharacterTest{
   void setUp() {
     super.basicSetUp();
 
-    testWeapon = new Staff(15,10,10);
+    testWeapon = staffTest;
 
-    character = new WhiteMage(turns, NAME, HEALTH, DEFENSE, MANA);
-    character1 = new WhiteMage(turns, NAME, HEALTH, DEFENSE, MANA);
-    character2 = new WhiteMage(turns, NAME2, HEALTH, DEFENSE, MANA);
-    character3 = new WhiteMage(turns, NAME, HEALTH2, DEFENSE, MANA);
-    character4 = new WhiteMage(turns, NAME, HEALTH, DEFENSE2, MANA);
-    character5 = new WhiteMage(turns, NAME2, HEALTH2, DEFENSE, MANA);
-    character6 = new WhiteMage(turns, NAME2, HEALTH, DEFENSE2, MANA);
-    character7  = new WhiteMage(turns, NAME, HEALTH2, DEFENSE2, MANA);
-    character8 = new WhiteMage(turns, NAME2, HEALTH2, DEFENSE2, MANA);
+    character = new WhiteMage(turns, NAME, HEALTH, DEFENSE);
+    character1 = new WhiteMage(turns, NAME, HEALTH, DEFENSE);
+    character2 = new WhiteMage(turns, NAME2, HEALTH, DEFENSE);
+    character3 = new WhiteMage(turns, NAME, HEALTH2, DEFENSE);
+    character4 = new WhiteMage(turns, NAME, HEALTH, DEFENSE2);
+    character5 = new WhiteMage(turns, NAME2, HEALTH2, DEFENSE);
+    character6 = new WhiteMage(turns, NAME2, HEALTH, DEFENSE2);
+    character7  = new WhiteMage(turns, NAME, HEALTH2, DEFENSE2);
+    character8 = new WhiteMage(turns, NAME2, HEALTH2, DEFENSE2);
 
     testCharacters.add(character);
 
-    magicPlayerCharacter = new WhiteMage(turns, NAME, HEALTH, DEFENSE, MANA);
-    magicPlayerCharacter1 = new WhiteMage(turns, NAME, HEALTH, DEFENSE, MANA);
-    magicPlayerCharacter2 = new WhiteMage(turns, NAME, HEALTH2, DEFENSE, MANA);
-    magicPlayerCharacter3 = new WhiteMage(turns, NAME, HEALTH, DEFENSE2, MANA);
-    magicPlayerCharacter4 = new WhiteMage(turns, NAME, HEALTH, DEFENSE2, MANA2);
-    magicPlayerCharacter5 = new WhiteMage(turns, NAME, HEALTH2, DEFENSE2, MANA);
-    magicPlayerCharacter6 = new WhiteMage(turns, NAME, HEALTH2, DEFENSE2, MANA);
-    magicPlayerCharacter7  = new WhiteMage(turns, NAME, HEALTH, DEFENSE2, MANA2);
-    magicPlayerCharacter8 = new WhiteMage(turns, NAME, HEALTH2, DEFENSE2, MANA2);
-
     characterEquipWeaponTest = (IPlayerCharacter) character;
-    characterEquipWeaponTest0 = new WhiteMage(turns, NAME, 0, DEFENSE, MANA);
+    characterEquipWeaponTest0 = new WhiteMage(turns, NAME, 0, DEFENSE);
     characterAttackTest = (IPlayerCharacter) character;
   }
 
