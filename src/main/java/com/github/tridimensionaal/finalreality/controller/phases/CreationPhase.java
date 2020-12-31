@@ -1,5 +1,10 @@
 package com.github.tridimensionaal.finalreality.controller.phases;
 
+/**
+ * A class that holds all the information of a creation phase of the game.
+ *
+ * @author Matías Salim Seda Auil
+ */
 public class CreationPhase extends Phase{
     public CreationPhase(){
         this.canCreateCharacters = true;
@@ -7,8 +12,8 @@ public class CreationPhase extends Phase{
     }
 
     @Override
-    public void CreateElements() throws InvalidMovementException {
-        super.CreateElements();
+    public void createElements() throws InvalidMovementException {
+        super.createElements();
         this.toPrepareToAttackPhase();
     }
 

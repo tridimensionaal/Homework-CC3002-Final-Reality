@@ -15,6 +15,11 @@ import java.util.LinkedList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * A class that holds all the information of a controller of the game.
+ *
+ * @author Matías Salim Seda Auil
+ */
 public class GameController {
   private final LinkedList<IPlayerCharacter> playerCharacter = new LinkedList<>();
   private final LinkedList<ICharacter> enemyCharacter = new LinkedList<>();
@@ -26,16 +31,33 @@ public class GameController {
   private final IEventHandler playerCharacterIsDeadHandler = new PlayerCharacterIsDeadHandler(this);
   private final IEventHandler enemyIsDeadHandler = new EnemyIsDeadHandler(this);
 
-  private ICharacter actualCharacter;
+  /**
+   * Creates a new controller    
+   *
+   */
+  private ICharacter currentCharacter;
 
   public GameController() {
       this.setPhase(new InitialPhase());
   }
 
+   /**
+    * Sets a new phase
+     * @param phase the new phase to be set
+     *
+     */
   public void setPhase(Phase phase){
       this.phase = phase;
       phase.setController(this);
   }
+
+    /**
+     * @return this game's phase.
+     */
+  public Phase getPhase(){
+      return this.phase;
+  }
+
 
     /**
      * @return this game's queue.
@@ -314,27 +336,27 @@ public class GameController {
   }
 
   /**
-   * Sets a character as the actual character.
-   * @param character (the new actual character)
+   * Sets a character as the current character.
+   * @param character (the new current character)
    */
-  public void setActualCharacter(ICharacter character){
-      actualCharacter = character;
+  public void setCurrentCharacter(ICharacter character){
+      currentCharacter = character;
   }
 
   /**
-   * Gets the actual the actual character.
-   * @return actual character
+   * Gets the current the current character.
+   * @return current character
    */
-  public ICharacter getActualCharacter(){
-      return actualCharacter;
+  public ICharacter getCurrentCharacter(){
+      return currentCharacter;
   }
 
   /**
-   * Equips a new weapon to the actual character. 
-   * @param weapon to be equipped by the actual character
+   * Equips a new weapon to the current character. 
+   * @param weapon to be equipped by the current character
    */
   public void equipWeapon(IWeapon weapon){
-      IPlayerCharacter character = (IPlayerCharacter) actualCharacter;
+      IPlayerCharacter character = (IPlayerCharacter) currentCharacter;
       IWeapon characterWeapon = character.getEquippedWeapon();
 
       character.equipWeapon(weapon);
@@ -353,7 +375,7 @@ public class GameController {
       }
   }
     /**
-     * Method that add all the characters of the game to the queue.
+     * Adds all the characters of the game to the queue.
      */
     public void addToQueue(){
 
@@ -364,27 +386,33 @@ public class GameController {
       for (IPlayerCharacter character: playerCharacter){
           character.waitTurn();
       }
-  }
-    /**
-     * Method that add all the characters of the game to the queue.
-     */
-    public void pollQueue(){
-        ICharacter character = getQueue().poll();
-        setActualCharacter(character);
     }
 
     /**
-   * The actual character attacks a character 
-   * @param character the character to be attacked by the actual character
+     * Sets the current character as the first character on the queue
+     */
+    public void pollQueue(){
+        ICharacter character = getQueue().poll();
+        setCurrentCharacter(character);
+    }
+
+    /**
+   * The current character attacks a character 
+   * @param character the character to be attacked by the current character
    */
   public void attack(ICharacter character){
-      actualCharacter.attack(character);
+      currentCharacter.attack(character);
   }
-
+    /**
+     * Changes the phase when the player wins.
+     * */
   public void playerHasWin(){
       this.setPhase(new FinalPhase(true));
   }
 
+    /**
+     * Changes the phase when the enemy wins.
+     * */
   public void enemyHasWin(){
       this.setPhase(new FinalPhase(false));
   }

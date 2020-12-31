@@ -1,13 +1,17 @@
 package com.github.tridimensionaal.finalreality.controller.phases;
 
 import com.github.tridimensionaal.finalreality.controller.GameController;
-import com.github.tridimensionaal.finalreality.model.character.ICharacter;
 import com.github.tridimensionaal.finalreality.model.character.player.IPlayerCharacter;
 import com.github.tridimensionaal.finalreality.model.weapon.IWeapon;
-import com.github.tridimensionaal.finalreality.model.weapon.normal.Sword;
 
+import java.util.Objects;
 import java.util.Random;
 
+/**
+ * A class that holds all the information of a phase of the game.
+ *
+ * @author Matías Salim Seda Auil
+ */
 public class Phase{
     protected GameController controller;
     protected boolean canCreateCharacters = false;
@@ -17,44 +21,60 @@ public class Phase{
 
     protected String namePhase;
 
+   /**
+    * Sets a new controller 
+     * @param controller the new controller to be set
+     *
+     */
     public void setController(GameController controller){
         this.controller = controller;
     }
 
+   /**
+    * Changes the actual phase to a new phase 
+     * @param phase the new 
+     *
+     */
     protected void changePhase(Phase phase){
         controller.setPhase(phase);
     }
 
-      public void CreateElements() throws InvalidMovementException {
+   /**
+    * Creates player characters, enemies and weapons. 
+     *
+     */
+      public void createElements() throws InvalidMovementException {
           if(!canCreateCharacters){
-              throw new InvalidMovementException("Can't create characters on " + this.toString() + ".");
+              throw new InvalidMovementException("Can't create characters on " + this.toString());
           }
+
           for (int i = 1; i < 10; i++){
               controller.addEnemy(controller.createEnemy("Enemy " + i ));
           }
+
           IPlayerCharacter character1 = controller.createKnight("Knight");
           IWeapon sword = controller.createSword();
           character1.equipWeapon(sword);
           controller.addPlayerCharacter(character1);
 
           IPlayerCharacter character2 = controller.createEngineer("Engineer");
-          IWeapon bow = controller.createBow();
-          character2.equipWeapon(bow);
+          IWeapon axe= controller.createAxe();
+          character2.equipWeapon(axe);
           controller.addPlayerCharacter(character2);
 
           IPlayerCharacter character3 = controller.createThief("Thief");
-          IWeapon axe = controller.createAxe();
-          character3.equipWeapon(axe);
+          IWeapon bow= controller.createBow();
+          character3.equipWeapon(bow);
           controller.addPlayerCharacter(character3);
 
           IPlayerCharacter character4 = controller.createBlackMage("Black mage");
           IWeapon knife = controller.createKnife();
-          character3.equipWeapon(knife);
+          character4.equipWeapon(knife);
           controller.addPlayerCharacter(character4);
 
           IPlayerCharacter character5 = controller.createWhiteMage("White mage");
           IWeapon staff = controller.createStaff();
-          character3.equipWeapon(staff);
+          character5.equipWeapon(staff);
           controller.addPlayerCharacter(character5);
 
           //Extra weapons
@@ -64,21 +84,39 @@ public class Phase{
 
       }
 
+    /**
+     * Adds all player characters and enemies to the queue
+     */
       public void prepareToAttack() throws InvalidMovementException {
           if(!canPrepareToAttack){
-              throw new InvalidMovementException("Can't prepare to attack on " + this.toString() + ".");
+              throw new InvalidMovementException("Can't prepare to attack on " + this.toString());
           }
           controller.addToQueue();
       }
 
+
+    /**
+     * Gets the first character of the queue
+     */
+      public void getCharacter() throws InvalidMovementException {
+          if(!canGetCharacter){
+              throw new InvalidMovementException("Can't get character on " + this.toString());
+        }
+        controller.pollQueue();
+  }
+
+
+    /**
+     *The current character attacks
+     */
       public void attack() throws InvalidMovementException {
           if(!canAttack){
-              throw new InvalidMovementException("Can't attack on " + this.toString() + ".");
+              throw new InvalidMovementException("Can't attack on " + this.toString());
         }
 
          int large;
           Random rng = new Random();
-          if(controller.getActualCharacter().isPlayerCharacter()){
+          if(controller.getCurrentCharacter().isPlayerCharacter()){
             large = controller.getEnemyCharacterSize();
             controller.attack(controller.getEnemyCharacterElement(rng.nextInt(large)));
 
@@ -89,38 +127,49 @@ public class Phase{
         }
   }
 
-      public void getCharacter() throws InvalidMovementException {
-          if(!canGetCharacter){
-              throw new InvalidMovementException("Can't attack on " + this.toString() + ".");
-        }
-        controller.pollQueue();
-  }
-
+    /**
+     * Changes the actual phase to the initial phase
+     */
       public void toInitialPhase() throws InvalidTransitionException {
         throw new InvalidTransitionException(
             "Can't change from " + this.toString() + " to initial phase");
       }
 
+    /**
+     * Changes the actual phase to the creation phase
+     */
       public void toCreationPhase() throws InvalidTransitionException {
         throw new InvalidTransitionException(
-            "Can't change from " + this.toString() + " to creation phase ");
+            "Can't change from " + this.toString() + " to creation phase");
       }
 
+    /**
+     * Changes the actual phase to the creation phase
+     */
       public void toPrepareToAttackPhase() throws InvalidTransitionException {
         throw new InvalidTransitionException(
             "Can't change from " + this.toString() + " to prepare to attack phase");
       }
 
+    /**
+     * Changes the actual phase to the get character phase
+     */
       public void toGetCharacterPhase() throws InvalidTransitionException {
         throw new InvalidTransitionException(
             "Can't change from " + this.toString() + " to get character phase");
       }
 
+    /**
+     * Changes the actual phase to the attack phase
+     */
       public void toAttackPhase() throws InvalidTransitionException {
         throw new InvalidTransitionException(
             "Can't change from " + this.toString() + " to attack phase");
       }
 
+    /**
+     * Changes the actual phase to the final phase
+     */
       public void toFinalPhase() throws InvalidTransitionException {
         throw new InvalidTransitionException(
             "Can't change from " + this.toString() + " to final phase");
@@ -129,4 +178,21 @@ public class Phase{
       public String toString(){
           return namePhase;
       }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.toString());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this==obj) {
+            return true;
+        }
+        if(!(obj instanceof  Phase)) {
+            return false;
+        }
+        Phase that = (Phase) obj;
+        return that.toString() == this.toString();
+    }
 }

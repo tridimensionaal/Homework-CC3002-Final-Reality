@@ -239,24 +239,24 @@ class GameControllerTest {
      */
     @Test
     void equipWeapon() {
-        gameControllerTest.setActualCharacter(engineerTest);
-        IPlayerCharacter actual = (IPlayerCharacter) gameControllerTest.getActualCharacter();
-        assertEquals(engineerTest, actual);
+        gameControllerTest.setCurrentCharacter(engineerTest);
+        IPlayerCharacter current = (IPlayerCharacter) gameControllerTest.getCurrentCharacter();
+        assertEquals(engineerTest, current);
 
         gameControllerTest.addWeaponToInventory(staffTest);
         gameControllerTest.equipWeapon(gameControllerTest.getPlayerInventoryElement(0));
-        actual = (IPlayerCharacter) gameControllerTest.getActualCharacter();
-        assertNull(actual.getEquippedWeapon());
+        current = (IPlayerCharacter) gameControllerTest.getCurrentCharacter();
+        assertNull(current.getEquippedWeapon());
 
         gameControllerTest.addWeaponToInventory(bowTest);
         gameControllerTest.equipWeapon(gameControllerTest.getPlayerInventoryElement(1));
-        actual = (IPlayerCharacter) gameControllerTest.getActualCharacter();
-        assertEquals(actual.getEquippedWeapon(), bowTest);
+        current = (IPlayerCharacter) gameControllerTest.getCurrentCharacter();
+        assertEquals(current.getEquippedWeapon(), bowTest);
 
         gameControllerTest.addWeaponToInventory(axeTest);
         gameControllerTest.equipWeapon(gameControllerTest.getPlayerInventoryElement(1));
-        actual = (IPlayerCharacter) gameControllerTest.getActualCharacter();
-        assertEquals(actual.getEquippedWeapon(), axeTest);
+        current = (IPlayerCharacter) gameControllerTest.getCurrentCharacter();
+        assertEquals(current.getEquippedWeapon(), axeTest);
 
     }
 
@@ -272,8 +272,8 @@ class GameControllerTest {
         gameControllerTest.addEnemy(enemy1);
         gameControllerTest.addEnemy(enemy2);
 
-        ICharacter actual = gameControllerTest.getPlayerCharacterElement(0);
-        gameControllerTest.setActualCharacter(actual);
+        ICharacter current = gameControllerTest.getPlayerCharacterElement(0);
+        gameControllerTest.setCurrentCharacter(current);
         gameControllerTest.equipWeapon(new Bow(15, 10));
 
         //Player's character attacks enemy1
@@ -298,8 +298,8 @@ class GameControllerTest {
         IPlayerCharacter knight = new Knight(gameControllerTest.getQueue(), "a", 10, 10);
         gameControllerTest.addPlayerCharacter(knight);
 
-        actual = gameControllerTest.getEnemyCharacterElement(0);
-        gameControllerTest.setActualCharacter(actual);
+        current = gameControllerTest.getEnemyCharacterElement(0);
+        gameControllerTest.setCurrentCharacter(current);
 
 
         //Enemy attacks player's character1
@@ -343,23 +343,23 @@ class GameControllerTest {
         assertEquals(gameControllerTest.getQueueSize(), 5);
 
         gameControllerTest.pollQueue();
-        assertNotNull(gameControllerTest.getActualCharacter());
+        assertNotNull(gameControllerTest.getCurrentCharacter());
         assertEquals(gameControllerTest.getQueueSize(), 4);
 
         gameControllerTest.pollQueue();
-        assertNotNull(gameControllerTest.getActualCharacter());
+        assertNotNull(gameControllerTest.getCurrentCharacter());
         assertEquals(gameControllerTest.getQueueSize(), 3);
 
         gameControllerTest.pollQueue();
-        assertNotNull(gameControllerTest.getActualCharacter());
+        assertNotNull(gameControllerTest.getCurrentCharacter());
         assertEquals(gameControllerTest.getQueueSize(), 2);
 
         gameControllerTest.pollQueue();
-        assertNotNull(gameControllerTest.getActualCharacter());
+        assertNotNull(gameControllerTest.getCurrentCharacter());
         assertEquals(gameControllerTest.getQueueSize(), 1);
 
         gameControllerTest.pollQueue();
-        assertNotNull(gameControllerTest.getActualCharacter());
+        assertNotNull(gameControllerTest.getCurrentCharacter());
         assertEquals(gameControllerTest.getQueueSize(), 0);
 
     }

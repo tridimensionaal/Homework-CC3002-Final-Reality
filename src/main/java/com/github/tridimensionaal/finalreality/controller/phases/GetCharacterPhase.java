@@ -1,5 +1,10 @@
 package com.github.tridimensionaal.finalreality.controller.phases;
 
+/**
+ * A class that holds all the information of a get character phase of the game.
+ *
+ * @author Matías Salim Seda Auil
+ */
 public class GetCharacterPhase extends Phase{
     public GetCharacterPhase(){
         this.namePhase = "Get character phase";
