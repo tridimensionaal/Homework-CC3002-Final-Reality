@@ -18,6 +18,7 @@ public class Phase{
     protected boolean canAttack = false;
     protected boolean canPrepareToAttack= false;
     protected boolean canGetCharacter= false;
+    protected String text;
 
     protected String namePhase;
 
@@ -48,7 +49,7 @@ public class Phase{
               throw new InvalidMovementException("Can't create characters on " + this.toString());
           }
 
-          for (int i = 1; i < 10; i++){
+          for (int i = 1; i < 7; i++){
               controller.addEnemy(controller.createEnemy("Enemy " + i ));
           }
 
@@ -109,21 +110,16 @@ public class Phase{
     /**
      *The current character attacks
      */
-      public void attack() throws InvalidMovementException {
+      public void attack(int i) throws InvalidMovementException {
           if(!canAttack){
               throw new InvalidMovementException("Can't attack on " + this.toString());
         }
-
-         int large;
-          Random rng = new Random();
           if(controller.getCurrentCharacter().isPlayerCharacter()){
-            large = controller.getEnemyCharacterSize();
-            controller.attack(controller.getEnemyCharacterElement(rng.nextInt(large)));
+            controller.attack(controller.getEnemyCharacterElement(i));
 
         }
         else{
-            large = controller.getPlayerCharacterSize();
-            controller.attack(controller.getPlayerCharacterElement(rng.nextInt(large)));
+            controller.attack(controller.getPlayerCharacterElement(i));
         }
   }
 
@@ -178,6 +174,11 @@ public class Phase{
       public String toString(){
           return namePhase;
       }
+
+      public String getText(){
+          return text;
+      }
+
 
     @Override
     public int hashCode() {

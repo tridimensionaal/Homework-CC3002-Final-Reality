@@ -163,6 +163,42 @@ public class GameController {
 
     /**
      * @param i index of the list
+     * @return the defense of the element in the index i of this enemy's character list.
+     */
+    public String getPlayerCharacterElementWeaponName(int i){
+        IWeapon weapon = playerCharacter.get(i).getEquippedWeapon();
+        if(weapon!=null){
+            return weapon.getName();
+        }
+        return "";
+    }
+
+    /**
+     * @param i index of the list
+     * @return the defense of the element in the index i of this enemy's character list.
+     */
+    public int getPlayerCharacterElementWeaponDamage(int i){
+        IWeapon weapon = playerCharacter.get(i).getEquippedWeapon();
+        if(weapon!=null){
+            return weapon.getDamage();
+        }
+        return 0;
+    }
+
+    /**
+     * @param i index of the list
+     * @return the defense of the element in the index i of this enemy's character list.
+     */
+    public int getPlayerCharacterElementWeaponWeight(int i){
+        IWeapon weapon = playerCharacter.get(i).getEquippedWeapon();
+        if(weapon!=null){
+            return weapon.getWeight();
+        }
+        return 0;
+    }
+
+    /**
+     * @param i index of the list
      * @return the name of the element in the index i of this enemy's character list.
      */
     public String getEnemyCharacterElementName(int i){
@@ -344,7 +380,7 @@ public class GameController {
   }
 
   /**
-   * Gets the current the current character.
+   * Gets the current character.
    * @return current character
    */
   public ICharacter getCurrentCharacter(){
@@ -422,6 +458,7 @@ public class GameController {
      */
     public void onPlayerCharacterHasDied(IPlayerCharacter character) {
       playerCharacter.remove(character);
+      queue.remove(character);
       if (getPlayerCharacterSize() == 0){
           enemyHasWin();
       }
@@ -432,6 +469,7 @@ public class GameController {
      */
     public void onEnemyHasDied(ICharacter character) {
       enemyCharacter.remove(character);
+      queue.remove(character);
       if (getEnemyCharacterSize() == 0){
           playerHasWin();
       }

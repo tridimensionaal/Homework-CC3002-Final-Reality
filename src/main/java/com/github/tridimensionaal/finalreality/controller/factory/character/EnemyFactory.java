@@ -13,7 +13,7 @@ public class EnemyFactory extends AbstractCharacterFactory{
     public EnemyFactory(String name, BlockingQueue<ICharacter> queue){
         Random rng = new Random();
         int extra_value = rng.nextInt(5);
-        int damage = 15 + extra_value;
+        int damage = 30 + extra_value;
         int weight = 10 + extra_value*2;
         character = new Enemy(queue,name,health,defense,weight,damage);
     }

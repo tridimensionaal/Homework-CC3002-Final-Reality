@@ -8,7 +8,8 @@ package com.github.tridimensionaal.finalreality.controller.phases;
 public class PrepareToAttackPhase extends Phase{
     public PrepareToAttackPhase(){
         this.namePhase = "Prepare to attack phase";
-        canPrepareToAttack = true;
+        this.canPrepareToAttack = true;
+        this.text = "Preparing to fight";
     }
 
     @Override

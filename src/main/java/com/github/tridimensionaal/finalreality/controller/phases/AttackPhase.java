@@ -18,8 +18,8 @@ public class AttackPhase extends Phase{
 
 
     @Override
-    public void attack() throws InvalidMovementException {
-        super.attack();
+    public void attack(int i) throws InvalidMovementException {
+        super.attack(i);
         this.toGetCharacterPhase();
     }
 }
