@@ -16,10 +16,23 @@ public class AttackPhase extends Phase{
         changePhase(new GetCharacterPhase());
     }
 
+    @Override
+    public void toFinalPhase(){
+        changePhase(new FinalPhase());
+    }
+
+
 
     @Override
     public void attack(int i) throws InvalidMovementException {
         super.attack(i);
-        this.toGetCharacterPhase();
+        if(!this.gameOver){
+            this.toGetCharacterPhase();
+        }
+        else{
+            this.toFinalPhase();
+
+        }
+
     }
 }

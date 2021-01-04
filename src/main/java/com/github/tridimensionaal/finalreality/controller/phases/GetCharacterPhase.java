@@ -17,6 +17,12 @@ public class GetCharacterPhase extends Phase{
     }
 
     @Override
+    public void toEquipWeaponPhase(){
+        changePhase(new AttackPhase());
+    }
+
+
+    @Override
     public void toPrepareToAttackPhase(){
         changePhase(new PrepareToAttackPhase());
     }
@@ -26,7 +32,13 @@ public class GetCharacterPhase extends Phase{
     public void getCharacter() throws InvalidMovementException {
         if(controller.getQueueSize()>0){
             super.getCharacter();
-            this.toAttackPhase();
+            if(controller.getCurrentCharacter().isPlayerCharacter()) {
+                this.toEquipWeaponPhase();
+            }
+            else{
+                this.toAttackPhase();
+
+            }
         }
         else{
             this.toPrepareToAttackPhase();

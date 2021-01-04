@@ -6,10 +6,18 @@ package com.github.tridimensionaal.finalreality.controller.phases;
  * @author Matías Salim Seda Auil
  */
 public class FinalPhase extends Phase{
-    private final boolean winner;
-    public FinalPhase(boolean winner){
+    public FinalPhase(){
         this.namePhase = "Final phase";
-        this.winner = winner;
+    }
+
+    @Override
+    public String getText() {
+        if(winner){
+            return "Congratulations!, you have won.";
+        }
+        else{
+            return "Nice try but you have lost.";
+        }
     }
 }
 

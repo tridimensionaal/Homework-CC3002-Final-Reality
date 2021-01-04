@@ -21,7 +21,7 @@ class FinalPhaseTest extends PhaseTest {
     @BeforeEach
     void setUp() {
         super.setUp();
-        controller.setPhase(new FinalPhase(true));
+        controller.setPhase(new FinalPhase());
         phase = controller.getPhase();
 
     }

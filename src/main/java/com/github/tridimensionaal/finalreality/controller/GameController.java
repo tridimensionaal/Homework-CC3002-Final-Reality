@@ -125,6 +125,14 @@ public class GameController {
      * @param i index of the list
      * @return the damage of the element in the index i of this player's inventory list.
      */
+    public String getInventoryElementName(int i){
+        return playerInventory.get(i).getName();
+    }
+
+    /**
+     * @param i index of the list
+     * @return the damage of the element in the index i of this player's inventory list.
+     */
     public int getInventoryElementDamage(int i){
         return playerInventory.get(i).getDamage();
     }
@@ -443,14 +451,16 @@ public class GameController {
      * Changes the phase when the player wins.
      * */
   public void playerHasWin(){
-      this.setPhase(new FinalPhase(true));
+      this.getPhase().gameOver();
+      this.getPhase().playerWin();
+
   }
 
     /**
      * Changes the phase when the enemy wins.
      * */
   public void enemyHasWin(){
-      this.setPhase(new FinalPhase(false));
+      this.getPhase().gameOver();
   }
     /**
      * Removes a player's character from the player's characters list when it dies.
