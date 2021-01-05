@@ -1,43 +1,83 @@
-
 package com.github.tridimensionaal.finalreality.controller;
 
 import com.github.tridimensionaal.finalreality.model.character.ICharacter;
 import com.github.tridimensionaal.finalreality.model.character.player.*;
 import com.github.tridimensionaal.finalreality.model.character.enemy.*;
-import com.github.tridimensionaal.finalreality.model.character.player.magic.*;
-import com.github.tridimensionaal.finalreality.model.character.player.normal.*;
 
 import com.github.tridimensionaal.finalreality.controller.handlers.*;
+import com.github.tridimensionaal.finalreality.controller.phases.*;
+import com.github.tridimensionaal.finalreality.controller.factory.weapon.*;
+import com.github.tridimensionaal.finalreality.controller.factory.character.*;
 
 import com.github.tridimensionaal.finalreality.model.weapon.IWeapon;
-import com.github.tridimensionaal.finalreality.model.weapon.normal.*;
-import com.github.tridimensionaal.finalreality.model.weapon.magic.*;
 
 import java.util.LinkedList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * A class that holds all the information of a controller of the game.
+ *
+ * @author Matías Salim Seda Auil
+ */
 public class GameController {
   private final LinkedList<IPlayerCharacter> playerCharacter = new LinkedList<>();
   private final LinkedList<ICharacter> enemyCharacter = new LinkedList<>();
   private final LinkedList<IWeapon> playerInventory = new LinkedList<>();
+  private Phase phase;
 
   BlockingQueue<ICharacter> queue = new LinkedBlockingQueue<>();
 
   private final IEventHandler playerCharacterIsDeadHandler = new PlayerCharacterIsDeadHandler(this);
   private final IEventHandler enemyIsDeadHandler = new EnemyIsDeadHandler(this);
 
-  private ICharacter actualCharacter;
+  private boolean winner = false;
+
+  /**
+   * Creates a new controller    
+   *
+   */
+  private ICharacter currentCharacter;
 
   public GameController() {
+      this.setPhase(new InitialPhase());
   }
 
+   /**
+    * Sets a new phase
+     * @param phase the new phase to be set
+     *
+     */
+  public void setPhase(Phase phase){
+      this.phase = phase;
+      phase.setController(this);
+  }
+
+    /**
+     * @return this game's phase.
+     */
+  public Phase getPhase(){
+      return this.phase;
+  }
+
+  public String getPhaseText(){
+      return this.getPhase().getText();
+
+  }
     /**
      * @return this game's queue.
      */
     public BlockingQueue<ICharacter> getQueue(){
         return queue;
     }
+
+    /**
+     * @return this game's queue size.
+     */
+    public int getQueueSize(){
+        return this.getQueue().size();
+    }
+
 
     /**
      * @return this player's inventory size.
@@ -65,7 +105,7 @@ public class GameController {
      * @return the element in the index i of this player's inventory list.
      *
      */
-    public IWeapon getPlayerInventoryElement(int i){
+    public IWeapon getInventoryElement(int i){
         return playerInventory.get(i);
     }
 
@@ -88,18 +128,27 @@ public class GameController {
 
     /**
      * @param i index of the list
+     * @return the name of the element in the index i of this player's inventory list.
+     */
+    public String getInventoryElementName(int i){
+        return this.getInventoryElement(i).getName();
+    }
+
+    /**
+     * @param i index of the list
      * @return the damage of the element in the index i of this player's inventory list.
      */
     public int getInventoryElementDamage(int i){
-        return playerInventory.get(i).getDamage();
+        return this.getInventoryElement(i).getDamage();
     }
+
 
     /**
      * @param i index of the list
      * @return the weight of the element in the index i of this player's inventory list.
      */
     public int getInventoryElementWeight(int i){
-        return playerInventory.get(i).getWeight();
+        return this.getInventoryElement(i).getWeight();
     }
 
     /**
@@ -107,7 +156,7 @@ public class GameController {
      * @return the name of the element in the index i of this player's character list.
      */
     public String getPlayerCharacterElementName(int i){
-        return playerCharacter.get(i).getName();
+        return getPlayerCharacterElement(i).getName();
     }
 
     /**
@@ -115,7 +164,7 @@ public class GameController {
      * @return the health of the element in the index i of this player's character list.
      */
     public int getPlayerCharacterElementHealth(int i){
-        return playerCharacter.get(i).getHealth();
+        return getPlayerCharacterElement(i).getHealth();
     }
 
     /**
@@ -123,15 +172,50 @@ public class GameController {
      * @return the defense of the element in the index i of this enemy's character list.
      */
     public int getPlayerCharacterElementDefense(int i){
-        return playerCharacter.get(i).getDefense();
+        return getPlayerCharacterElement(i).getDefense();
     }
 
+    /**
+     * @param i index of the list
+     * @return the defense of the element in the index i of this enemy's character list.
+     */
+    public String getPlayerCharacterElementWeaponName(int i){
+        IWeapon weapon = getPlayerCharacterElement(i).getEquippedWeapon();
+        if(weapon!=null){
+            return weapon.getName();
+        }
+        return "";
+    }
+
+    /**
+     * @param i index of the list
+     * @return the defense of the element in the index i of this enemy's character list.
+     */
+    public int getPlayerCharacterElementWeaponDamage(int i){
+        IWeapon weapon = getPlayerCharacterElement(i).getEquippedWeapon();
+        if(weapon!=null){
+            return weapon.getDamage();
+        }
+        return 0;
+    }
+
+    /**
+     * @param i index of the list
+     * @return the defense of the element in the index i of this enemy's character list.
+     */
+    public int getPlayerCharacterElementWeaponWeight(int i){
+        IWeapon weapon = getPlayerCharacterElement(i).getEquippedWeapon();
+        if(weapon!=null){
+            return weapon.getWeight();
+        }
+        return 0;
+    }
     /**
      * @param i index of the list
      * @return the name of the element in the index i of this enemy's character list.
      */
     public String getEnemyCharacterElementName(int i){
-        return enemyCharacter.get(i).getName();
+        return getEnemyCharacterElement(i).getName();
     }
 
     /**
@@ -139,7 +223,7 @@ public class GameController {
      * @return the health of the element in the index i of this enemy's character list.
      */
     public int getEnemyCharacterElementHealth(int i){
-        return enemyCharacter.get(i).getHealth();
+        return getEnemyCharacterElement(i).getHealth();
     }
 
     /**
@@ -147,7 +231,7 @@ public class GameController {
      * @return the defense of the element in the index i of this enemy's character list.
      */
     public int getEnemyCharacterElementDefense(int i){
-        return enemyCharacter.get(i).getDefense();
+        return getEnemyCharacterElement(i).getDefense();
     }
 
     /**
@@ -155,7 +239,7 @@ public class GameController {
      * @return the weight of the element in the index i of this enemy's character list.
      */
     public int getEnemyCharacterElementWeight(int i){
-        Enemy enemy = (Enemy) enemyCharacter.get(i);
+        Enemy enemy = (Enemy) getEnemyCharacterElement(i);
         return enemy.getWeight();
     }
 
@@ -164,64 +248,53 @@ public class GameController {
      * @return the damage of the element in the index i of this enemy's character list.
      */
     public int getEnemyCharacterElementDamage(int i){
-        Enemy enemy = (Enemy) enemyCharacter.get(i);
+        Enemy enemy = (Enemy) getEnemyCharacterElement(i);
         return enemy.getDamage();
     }
 
-    /**
+  /**
    * Creates a new axe
-   * @param damage of the axe
-   * @param weight of the axe
    *
-   * @return  the axe
+   * @return the new created axe
    */
-  public IWeapon createAxe(int damage, int weight){
-      return new Axe(damage, weight);
+  public IWeapon createAxe(){
+      return new AxeFactory().createWeapon();
   }
 
-  /**
+ /**
    * Creates a new bow
-   * @param damage of the bow
-   * @param weight of the bow
    *
-   * @return  the bow
+   * @return the new created bow
    */
-  public IWeapon createBow(int damage, int weight){
-      return new Bow(damage, weight);
+  public IWeapon createBow(){
+      return new BowFactory().createWeapon();
   }
 
-  /**
+ /**
    * Creates a new knife
-   * @param damage of the knife
-   * @param weight of the knife
    *
-   * @return  the knife
+   * @return the new created knife
    */
-  public IWeapon createKnife(int damage, int weight){
-      return new Knife(damage, weight);
+  public IWeapon createKnife(){
+      return new KnifeFactory().createWeapon();
   }
 
-  /**
+ /**
    * Creates a new sword
-   * @param damage of the sword
-   * @param weight of the sword
    *
-   * @return  the sword
+   * @return the new created sword
    */
-  public IWeapon createSword(int damage, int weight){
-      return new Sword(damage, weight);
+  public IWeapon createSword(){
+      return new SwordFactory().createWeapon();
   }
 
   /**
    * Creates a new staff
-   * @param damage of the staff
-   * @param weight of the staff
-   * @param magicDamage of the staff
    *
-   * @return  the staff
+   * @return the new created staff
    */
-  public IWeapon createStaff(int damage, int weight, int magicDamage){
-      return new Staff(damage, weight,magicDamage);
+  public IWeapon createStaff(){
+      return new StaffFactory().createWeapon();
   }
 
   /**
@@ -234,16 +307,12 @@ public class GameController {
 
   /**
    * Creates a new enemy
-   * @param name of the enemy
-   * @param health of the enemy
-   * @param defense of the enemy
-   * @param weight of the enemy
-   * @param damage of the enemy
+   * @param name of new the enemy
    *
    * @return the enemy
    */
-  public ICharacter createEnemy(String name, int health, int defense, int weight, int damage ){
-      return new Enemy(queue,name,health,defense,weight,damage);
+  public ICharacter createEnemy(String name){
+      return new EnemyFactory(name, this.getQueue()).createCharacter();
   }
 
   /**
@@ -257,64 +326,53 @@ public class GameController {
 
   /**
    * Creates a new engineer
-   * @param name of the engineer
-   * @param health of the engineer
-   * @param defense of the engineer
+   * @param name of the new engineer
    *
-   * @return the engineer
+   * @return the new engineer
    */
-  public IPlayerCharacter createEngineer(String name, int health, int defense){
-      return new Engineer(queue,name,health, defense );
+  public IPlayerCharacter createEngineer(String name){
+      return (IPlayerCharacter) new EngineerFactory(name, this.getQueue()).createCharacter();
   }
 
   /**
    * Creates a new knight
-   * @param name of the knight
-   * @param health of the knight
-   * @param defense of the knight
+   * @param name of the new knight
    *
-   * @return the knight
+   * @return the new knight
    */
-  public IPlayerCharacter createKnight(String name, int health, int defense){
-      return new Knight(queue,name,health, defense );
+  public IPlayerCharacter createKnight(String name){
+      return (IPlayerCharacter) new KnightFactory(name, this.getQueue()).createCharacter();
   }
 
   /**
    * Creates a new thief
-   * @param name of the thief
-   * @param health of the thief
-   * @param defense of the thief
+   * @param name of the new thief
    *
-   * @return the thief
+   * @return the new thief
    */
-  public IPlayerCharacter createThief(String name, int health, int defense){
-      return new Thief(queue,name,health, defense );
+  public IPlayerCharacter createThief(String name){
+      return (IPlayerCharacter) new ThiefFactory(name, this.getQueue()).createCharacter();
   }
 
   /**
    * Creates a new black mage
-   * @param name of the black mage
-   * @param health of the black mage
-   * @param defense of the black mage
-   * @param mana of the black mage
+   * @param name of the new black mage
    *
-   * @return the black mage
+   * @return the new black mage
    */
-  public IPlayerCharacter createBlackMage(String name, int health, int defense, int mana){
-      return new BlackMage(queue,name,health, defense, mana);
+  public IPlayerCharacter createBlackMage(String name){
+      return (IPlayerCharacter) new BlackMageFactory(name, this.getQueue()).createCharacter();
   }
 
   /**
    * Creates a new white mage
-   * @param name of the white mage
-   * @param health of the white mage
-   * @param defense of the white mage
-   * @param mana of the white mage
+   * @param name of the new white mage
    *
-   * @return the white mage
+   * @return the new white mage
    */
-  public IPlayerCharacter createWhiteMage(String name, int health, int defense, int mana){
-      return new WhiteMage(queue,name,health, defense,mana);
+
+  public IPlayerCharacter createWhiteMage(String name){
+      return (IPlayerCharacter) new WhiteMageFactory(name, this.getQueue()).createCharacter();
   }
 
   /**
@@ -327,35 +385,48 @@ public class GameController {
   }
 
   /**
-   * Sets a character as the actual character.
-   * @param character (the new actual character)
+   * Sets a character as the current character.
+   * @param character (the new current character)
    */
-  public void setActualCharacter(ICharacter character){
-      actualCharacter = character;
+  public void setCurrentCharacter(ICharacter character){
+      currentCharacter = character;
   }
 
   /**
-   * Gets the actual the actual character.
-   * @return actual character
+   * Gets the current character.
+   * @return current character
    */
-  public ICharacter getActualCharacter(){
-      return actualCharacter;
+  public ICharacter getCurrentCharacter(){
+      return currentCharacter;
   }
 
-  /**
-   * Equips a new weapon to the actual character. 
-   * @param weapon to be equipped by the actual character
+    /**
+     * Gets the current character.
+     * @return current character
+     */
+    public String getCurrentCharacterName(){
+        return this.getCurrentCharacter().getName();
+    }
+    public boolean isTheCurrentCharacterAPlayerCharacter(){
+        return this.getCurrentCharacter().isPlayerCharacter();
+    }
+
+
+    /**
+   * Equips a new weapon to the current character. 
+   * @param weapon to be equipped by the current character
    */
-  public void equipWeapon(IWeapon weapon){
-      IPlayerCharacter character = (IPlayerCharacter) actualCharacter;
+  public boolean equipWeapon(IWeapon weapon){
+      IPlayerCharacter character = (IPlayerCharacter) currentCharacter;
       IWeapon characterWeapon = character.getEquippedWeapon();
 
       character.equipWeapon(weapon);
       if(character.getEquippedWeapon()==null){
-          return;
+          return false;
+
       }
       if (character.getEquippedWeapon().equals(characterWeapon)){
-          return;
+          return false;
       }
 
       else{
@@ -363,12 +434,13 @@ public class GameController {
           if (characterWeapon != null){
               addWeaponToInventory(characterWeapon);
           }
+          return true;
       }
   }
     /**
-     * Method that handles the logic of one round of turns.
+     * Adds all the characters of the game to the queue.
      */
-    public void turns(){
+    public void addToQueue(){
 
       for (ICharacter enemy: enemyCharacter) {
           enemy.waitTurn();
@@ -377,32 +449,42 @@ public class GameController {
       for (IPlayerCharacter character: playerCharacter){
           character.waitTurn();
       }
+    }
 
-      try {
-          Thread.sleep(6000);
-      } catch (InterruptedException e) {
-          e.printStackTrace();
-      }
+    /**
+     * Sets the current character as the first character on the queue
+     */
+    public void pollQueue(){
+        ICharacter character = getQueue().poll();
+        setCurrentCharacter(character);
+    }
 
-      while(!queue.isEmpty()){
-          var character = queue.poll();
-          setActualCharacter(character);
-          //Do something
-      }
-  }
-
-  /**
-   * The actual character attacks a character 
-   * @param character the character to be attacked by the actual character
+    /**
+   * The current character attacks a character 
+   * @param character the character to be attacked by the current character
    */
   public void attack(ICharacter character){
-      actualCharacter.attack(character);
+      currentCharacter.attack(character);
   }
 
+    /**
+     * Changes the condition to change the phase when the player wins.
+     * */
   public void playerHasWin(){
+      this.getPhase().gameOver();
+      this.winner = true;
   }
-
+    /**
+     * @return True if the player have won otherwise returns false.
+     * */
+    public boolean getWinner(){
+      return this.winner;
+  }
+    /**
+     * Changes the condition to change the phase when the enemy wins.
+     * */
   public void enemyHasWin(){
+      this.getPhase().gameOver();
   }
     /**
      * Removes a player's character from the player's characters list when it dies.
@@ -410,6 +492,7 @@ public class GameController {
      */
     public void onPlayerCharacterHasDied(IPlayerCharacter character) {
       playerCharacter.remove(character);
+      queue.remove(character);
       if (getPlayerCharacterSize() == 0){
           enemyHasWin();
       }
@@ -420,6 +503,7 @@ public class GameController {
      */
     public void onEnemyHasDied(ICharacter character) {
       enemyCharacter.remove(character);
+      queue.remove(character);
       if (getEnemyCharacterSize() == 0){
           playerHasWin();
       }

@@ -1,6 +1,6 @@
-package com.github.tridimensionaal.finalreality.model.weapon.magic;
+package com.github.tridimensionaal.finalreality.model.weapon.normal;
 
-import com.github.tridimensionaal.finalreality.model.weapon.AbstractMagicWeapon;
+import com.github.tridimensionaal.finalreality.model.weapon.AbstractWeapon;
 
 /**
  * A class that holds all the information of a single staff.
@@ -8,7 +8,7 @@ import com.github.tridimensionaal.finalreality.model.weapon.AbstractMagicWeapon;
  * @author Matías Salim Seda Auil
  */
  
-public class Staff extends AbstractMagicWeapon{
+public class Staff extends AbstractWeapon{
 
   /**
    * Creates a new staff.
@@ -16,8 +16,8 @@ public class Staff extends AbstractMagicWeapon{
    * {@inheritDoc}
    */
 
-    public Staff(final int damage, final int weight, final int magicDamage) {
-        super("Staff", damage, weight, magicDamage);
+    public Staff(final int damage, final int weight) {
+        super("Staff", damage, weight);
   }
 
   @Override

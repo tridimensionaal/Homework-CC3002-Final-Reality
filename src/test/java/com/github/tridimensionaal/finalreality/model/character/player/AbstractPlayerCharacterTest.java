@@ -4,7 +4,6 @@ import com.github.tridimensionaal.finalreality.model.character.*;
 import com.github.tridimensionaal.finalreality.model.character.enemy.Enemy;
 import com.github.tridimensionaal.finalreality.model.weapon.IWeapon;
 import com.github.tridimensionaal.finalreality.model.weapon.normal.*;
-import com.github.tridimensionaal.finalreality.model.weapon.magic.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -64,7 +63,7 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
     bowTest = new Bow(15,10);
     knifeTest = new Knife(15,10);
     swordTest = new Sword(15,10);
-    staffTest = new Staff(15,10,10);
+    staffTest = new Staff(15,10);
     enemyAttackTest = new Enemy(turns, "hi",10,10,10,10);
 
   }
