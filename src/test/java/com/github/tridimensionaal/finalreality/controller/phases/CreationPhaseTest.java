@@ -38,7 +38,7 @@ class CreationPhaseTest extends PhaseTest {
             assertNotEquals(controller.getPhase(), "asda");
 
             assertEquals(controller.getPlayerCharacterSize(), 5);
-            assertEquals(controller.getEnemyCharacterSize(), 9);
+            assertEquals(controller.getEnemyCharacterSize(), 6);
             assertEquals(controller.getPlayerInventorySize(), 3);
 
         } catch (InvalidMovementException e) {

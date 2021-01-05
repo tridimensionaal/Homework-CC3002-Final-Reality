@@ -22,7 +22,6 @@ public class AttackPhase extends Phase{
     }
 
 
-
     @Override
     public void attack(int i) throws InvalidMovementException {
         super.attack(i);

@@ -8,7 +8,9 @@ import com.github.tridimensionaal.finalreality.model.weapon.normal.Knife;
 public class KnifeFactory extends AbstractWeaponFactory{
 
     public KnifeFactory(){
-        int damage = 10;
+        //10
+        int damage = 12;
+        //6
         int weight = 6;
         int extra_value = rng.nextInt(4);
         damage += extra_value;

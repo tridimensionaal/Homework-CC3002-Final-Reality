@@ -1,5 +1,7 @@
 package com.github.tridimensionaal.finalreality.controller.phases;
 
+import com.github.tridimensionaal.finalreality.model.character.ICharacter;
+import com.github.tridimensionaal.finalreality.model.character.player.IPlayerCharacter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,38 +23,8 @@ class AttackPhaseTest extends PhaseTest {
     @BeforeEach
     void setUp() {
         super.setUp();
-        controller.setPhase(new CreationPhase());
+        controller.setPhase(new AttackPhase());
         phase = controller.getPhase();
-
-        try {
-            phase.createElements();
-        } catch (InvalidMovementException e) {
-            e.printStackTrace();
-        }
-
-        phase = controller.getPhase();
-
-        try {
-            phase.prepareToAttack();
-        } catch (InvalidMovementException e) {
-            e.printStackTrace();
-        }
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        phase = controller.getPhase();
-        try {
-            phase.getCharacter();
-        } catch (InvalidMovementException e) {
-            e.printStackTrace();
-        }
- 
-        phase = controller.getPhase();
-
-
     }
 
     /**
@@ -61,7 +33,7 @@ class AttackPhaseTest extends PhaseTest {
     @Test
     void toGetCharacterPhaseTest() {
         try {
-            phase.toPrepareToAttackPhase();
+            phase.toGetCharacterPhase();
             assertEquals(controller.getPhase(), new GetCharacterPhase());
             assertEquals(controller.getPhase().hashCode() , new GetCharacterPhase().hashCode());
             assertEquals(controller.getPhase(), controller.getPhase());
@@ -72,21 +44,58 @@ class AttackPhaseTest extends PhaseTest {
             e.printStackTrace();
         }
     }
+    /**
+     * Checks that the attack phase's method "toGetCharacterPhase" works properly.
+     */
+    @Test
+    void toFinalPhaseTest() {
+        try {
+            phase.toFinalPhase();
+            assertEquals(controller.getPhase(), new FinalPhase());
+            assertEquals(controller.getPhase().hashCode() , new FinalPhase().hashCode());
+            assertEquals(controller.getPhase(), controller.getPhase());
+            assertEquals(controller.getPhase().hashCode(), controller.getPhase().hashCode());
+            assertNotEquals(controller.getPhase(), "asda");
+
+        } catch (InvalidTransitionException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * Checks that the attack phase's method "attack" works properly.
      */
     @Test
     void attackTest() {
+        ICharacter enemy = controller.createEnemy("Enemy");
+        controller.addEnemy(enemy);
+
+        IPlayerCharacter knight = controller.createKnight("Knight");
+        knight.equipWeapon(controller.createSword());
+        controller.addPlayerCharacter(knight);
+        controller.setCurrentCharacter(knight);
         try {
-            phase.attack();
-            assertEquals(controller.getPhase(), new GetCharacterPhase());
+            phase.attack(0);
             assertEquals(controller.getPhase(), controller.getPhase());
             assertNotEquals(controller.getPhase(), "asda");
-
+            assertEquals(controller.getPhase(), new GetCharacterPhase());
         } catch (InvalidMovementException e) {
             e.printStackTrace();
         }
+        controller.setPhase(new AttackPhase());
+        controller.setCurrentCharacter(enemy);
+        try {
+            phase.attack(0);
+            assertEquals(controller.getPhase(), controller.getPhase());
+            assertNotEquals(controller.getPhase(), "asda");
+            assertEquals(controller.getPhase(), new GetCharacterPhase());
+        } catch (InvalidMovementException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 
 }

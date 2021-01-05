@@ -31,6 +31,8 @@ public class GameController {
   private final IEventHandler playerCharacterIsDeadHandler = new PlayerCharacterIsDeadHandler(this);
   private final IEventHandler enemyIsDeadHandler = new EnemyIsDeadHandler(this);
 
+  private boolean winner = false;
+
   /**
    * Creates a new controller    
    *
@@ -58,7 +60,10 @@ public class GameController {
       return this.phase;
   }
 
+  public String getPhaseText(){
+      return this.getPhase().getText();
 
+  }
     /**
      * @return this game's queue.
      */
@@ -100,7 +105,7 @@ public class GameController {
      * @return the element in the index i of this player's inventory list.
      *
      */
-    public IWeapon getPlayerInventoryElement(int i){
+    public IWeapon getInventoryElement(int i){
         return playerInventory.get(i);
     }
 
@@ -123,10 +128,10 @@ public class GameController {
 
     /**
      * @param i index of the list
-     * @return the damage of the element in the index i of this player's inventory list.
+     * @return the name of the element in the index i of this player's inventory list.
      */
     public String getInventoryElementName(int i){
-        return playerInventory.get(i).getName();
+        return this.getInventoryElement(i).getName();
     }
 
     /**
@@ -134,15 +139,16 @@ public class GameController {
      * @return the damage of the element in the index i of this player's inventory list.
      */
     public int getInventoryElementDamage(int i){
-        return playerInventory.get(i).getDamage();
+        return this.getInventoryElement(i).getDamage();
     }
+
 
     /**
      * @param i index of the list
      * @return the weight of the element in the index i of this player's inventory list.
      */
     public int getInventoryElementWeight(int i){
-        return playerInventory.get(i).getWeight();
+        return this.getInventoryElement(i).getWeight();
     }
 
     /**
@@ -150,7 +156,7 @@ public class GameController {
      * @return the name of the element in the index i of this player's character list.
      */
     public String getPlayerCharacterElementName(int i){
-        return playerCharacter.get(i).getName();
+        return getPlayerCharacterElement(i).getName();
     }
 
     /**
@@ -158,7 +164,7 @@ public class GameController {
      * @return the health of the element in the index i of this player's character list.
      */
     public int getPlayerCharacterElementHealth(int i){
-        return playerCharacter.get(i).getHealth();
+        return getPlayerCharacterElement(i).getHealth();
     }
 
     /**
@@ -166,7 +172,7 @@ public class GameController {
      * @return the defense of the element in the index i of this enemy's character list.
      */
     public int getPlayerCharacterElementDefense(int i){
-        return playerCharacter.get(i).getDefense();
+        return getPlayerCharacterElement(i).getDefense();
     }
 
     /**
@@ -174,7 +180,7 @@ public class GameController {
      * @return the defense of the element in the index i of this enemy's character list.
      */
     public String getPlayerCharacterElementWeaponName(int i){
-        IWeapon weapon = playerCharacter.get(i).getEquippedWeapon();
+        IWeapon weapon = getPlayerCharacterElement(i).getEquippedWeapon();
         if(weapon!=null){
             return weapon.getName();
         }
@@ -186,7 +192,7 @@ public class GameController {
      * @return the defense of the element in the index i of this enemy's character list.
      */
     public int getPlayerCharacterElementWeaponDamage(int i){
-        IWeapon weapon = playerCharacter.get(i).getEquippedWeapon();
+        IWeapon weapon = getPlayerCharacterElement(i).getEquippedWeapon();
         if(weapon!=null){
             return weapon.getDamage();
         }
@@ -198,19 +204,18 @@ public class GameController {
      * @return the defense of the element in the index i of this enemy's character list.
      */
     public int getPlayerCharacterElementWeaponWeight(int i){
-        IWeapon weapon = playerCharacter.get(i).getEquippedWeapon();
+        IWeapon weapon = getPlayerCharacterElement(i).getEquippedWeapon();
         if(weapon!=null){
             return weapon.getWeight();
         }
         return 0;
     }
-
     /**
      * @param i index of the list
      * @return the name of the element in the index i of this enemy's character list.
      */
     public String getEnemyCharacterElementName(int i){
-        return enemyCharacter.get(i).getName();
+        return getEnemyCharacterElement(i).getName();
     }
 
     /**
@@ -218,7 +223,7 @@ public class GameController {
      * @return the health of the element in the index i of this enemy's character list.
      */
     public int getEnemyCharacterElementHealth(int i){
-        return enemyCharacter.get(i).getHealth();
+        return getEnemyCharacterElement(i).getHealth();
     }
 
     /**
@@ -226,7 +231,7 @@ public class GameController {
      * @return the defense of the element in the index i of this enemy's character list.
      */
     public int getEnemyCharacterElementDefense(int i){
-        return enemyCharacter.get(i).getDefense();
+        return getEnemyCharacterElement(i).getDefense();
     }
 
     /**
@@ -234,7 +239,7 @@ public class GameController {
      * @return the weight of the element in the index i of this enemy's character list.
      */
     public int getEnemyCharacterElementWeight(int i){
-        Enemy enemy = (Enemy) enemyCharacter.get(i);
+        Enemy enemy = (Enemy) getEnemyCharacterElement(i);
         return enemy.getWeight();
     }
 
@@ -243,7 +248,7 @@ public class GameController {
      * @return the damage of the element in the index i of this enemy's character list.
      */
     public int getEnemyCharacterElementDamage(int i){
-        Enemy enemy = (Enemy) enemyCharacter.get(i);
+        Enemy enemy = (Enemy) getEnemyCharacterElement(i);
         return enemy.getDamage();
     }
 
@@ -395,20 +400,33 @@ public class GameController {
       return currentCharacter;
   }
 
-  /**
+    /**
+     * Gets the current character.
+     * @return current character
+     */
+    public String getCurrentCharacterName(){
+        return this.getCurrentCharacter().getName();
+    }
+    public boolean isTheCurrentCharacterAPlayerCharacter(){
+        return this.getCurrentCharacter().isPlayerCharacter();
+    }
+
+
+    /**
    * Equips a new weapon to the current character. 
    * @param weapon to be equipped by the current character
    */
-  public void equipWeapon(IWeapon weapon){
+  public boolean equipWeapon(IWeapon weapon){
       IPlayerCharacter character = (IPlayerCharacter) currentCharacter;
       IWeapon characterWeapon = character.getEquippedWeapon();
 
       character.equipWeapon(weapon);
       if(character.getEquippedWeapon()==null){
-          return;
+          return false;
+
       }
       if (character.getEquippedWeapon().equals(characterWeapon)){
-          return;
+          return false;
       }
 
       else{
@@ -416,6 +434,7 @@ public class GameController {
           if (characterWeapon != null){
               addWeaponToInventory(characterWeapon);
           }
+          return true;
       }
   }
     /**
@@ -447,17 +466,22 @@ public class GameController {
   public void attack(ICharacter character){
       currentCharacter.attack(character);
   }
+
     /**
-     * Changes the phase when the player wins.
+     * Changes the condition to change the phase when the player wins.
      * */
   public void playerHasWin(){
       this.getPhase().gameOver();
-      this.getPhase().playerWin();
-
+      this.winner = true;
   }
-
     /**
-     * Changes the phase when the enemy wins.
+     * @return True if the player have won otherwise returns false.
+     * */
+    public boolean getWinner(){
+      return this.winner;
+  }
+    /**
+     * Changes the condition to change the phase when the enemy wins.
      * */
   public void enemyHasWin(){
       this.getPhase().gameOver();

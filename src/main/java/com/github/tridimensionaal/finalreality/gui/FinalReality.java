@@ -17,7 +17,6 @@ import java.util.Random;
  * @author Ignacio Slater Muñoz.
  * @author Matías Salim Seda Auil.
  */
-
 public class FinalReality extends Application {
   private final GameController controller = new GameController();
   private final int WIDTH = 640;
@@ -46,11 +45,10 @@ public class FinalReality extends Application {
   private Scene InitialScene() {
     Group root = new Group();
     Scene scene = new Scene(root, WIDTH, HEIGHT);
-    Label label = createLabel(10, 30, controller.getPhase().getText());
+    createLabel(10, 30, controller.getPhaseText(), root);
     Button button = createButton(centerX - 100, centerY - 20, "Press to start the game");
     button.setOnAction(event -> this.creationScene());
     root.getChildren().add(button);
-    root.getChildren().add(label);
     return scene;
   }
 
@@ -65,10 +63,9 @@ public class FinalReality extends Application {
     }
 
     Group root = new Group();
-    Label label = createLabel(10, 30, controller.getPhase().getText());
+    createLabel(10, 30, controller.getPhaseText(), root);
     Button button = createButton(centerX - 100, centerY - 20, "Press to start the fight");
     button.setOnAction(event -> this.prepareToAttackScene());
-    root.getChildren().add(label);
     root.getChildren().add(button);
 
     try {
@@ -84,8 +81,7 @@ public class FinalReality extends Application {
    */
   private void prepareToAttackScene() {
     Group root = new Group();
-    Label initialPhaseLabel = createLabel(10, 30, controller.getPhase().getText());
-    root.getChildren().add(initialPhaseLabel);
+    createLabel(10, 30, controller.getPhaseText(),root);
     actualScene.setRoot(root);
 
     try {
@@ -109,6 +105,9 @@ public class FinalReality extends Application {
     new Thread(sleeper).start();
   }
 
+  /**
+   * Creates the get character scene of the game.
+   */
   private void getCharacterScene() {
     try {
       controller.getPhase().getCharacter();
@@ -120,50 +119,78 @@ public class FinalReality extends Application {
       prepareToAttackScene();
       return;
     }
+
     Group root = new Group();
     createEnemiesInfo(root, false);
     createPlayerCharactersInfo(root);
 
-    if (controller.getCurrentCharacter().isPlayerCharacter()) {
-      Label label= createLabel(centerX - 200, centerY - 20, "It is " + controller.getCurrentCharacter().getName() + "'s turn\n" +
-              "Choose attack or equip a new weapon and then attack");
-      root.getChildren().add(label);
+    if (controller.isTheCurrentCharacterAPlayerCharacter()) {
+      createLabel(centerX - 200, centerY - 20, "It is " + controller.getCurrentCharacterName()+ "'s turn\n" +
+              "Choose attack or equip a new weapon and then attack", root);
 
       Button button = createButton(centerX - 200, centerY+20, "Equip a new weapon");
-      button.setOnAction(event -> this.equipWeaponScene());
+      button.setOnAction(event -> this.equipWeaponScene1(controller.getCurrentCharacterName(),true));
       root.getChildren().add(button);
 
       Button button1 = createButton(centerX +50, centerY+20, "Attack");
-      button1.setOnAction(event -> this.attackScene1(controller.getCurrentCharacter().getName()));
+      button1.setOnAction(event -> this.attackScene1(controller.getCurrentCharacterName()));
       root.getChildren().add(button1);
 
     } else {
-      Label label = createLabel(centerX - 100, centerY - 20, "It is " + controller.getCurrentCharacter().getName() + "'s turn");
-      root.getChildren().add(label);
+      createLabel(centerX - 100, centerY - 20, "It is " + controller.getCurrentCharacterName() + "'s turn", root);
 
       Button button = createButton(centerX - 100, centerY, "Press to continue");
-      button.setOnAction(event -> this.attackScene1(controller.getCurrentCharacter().getName()));
+      button.setOnAction(event -> this.attackScene1(controller.getCurrentCharacterName()));
       root.getChildren().add(button);
     }
-
     actualScene.setRoot(root);
   }
 
-  private void equipWeaponScene() {
+  /**
+   * Creates the equip weapon scene of the game.
+   * @param name the name of the current character
+   * @param bol true if the player haven't tried to equip a new weapon otherwise false
+   */
+  private void equipWeaponScene1(String name,boolean bol) {
     Group root = new Group();
     createPlayerCharactersInfo(root);
+    String text;
+    if(bol) {
+      text = "Choose a weapon to equip to " + name;
+    }
+    else{
+        text = name + " can't equip these weapon. Choose another weapon";
+
+    }
+    createLabel(centerX - 150, centerY - 20, text, root);
+
+    Button button = createButton(centerX - 150, centerY, "Press if you dont want to change the weapon");
+    button.setOnAction(event -> this.attackScene1(controller.getCurrentCharacterName()));
+    root.getChildren().add(button);
+
+    createInventoryInfo(root);
     actualScene.setRoot(root);
   }
 
-
+  /**
+   * Creates the first part of the attack scene of the game.
+   * @param name the name of the current character
+   */
   private void attackScene1(String name) {
-    if(controller.getCurrentCharacter().isPlayerCharacter()) {
+    if(controller.getPhase().equals(new EquipWeaponPhase())){
+      try {
+        controller.getPhase().toAttackPhase();
+      } catch (InvalidTransitionException e) {
+        e.printStackTrace();
+      }
+
+    }
+    if(controller.isTheCurrentCharacterAPlayerCharacter()) {
 
       Group root = new Group();
       createEnemiesInfo(root, true);
       createPlayerCharactersInfo(root);
-      Label label = createLabel(centerX - 100, centerY - 20, "Choose a enemy to attack \n"+ name + " is going to attack");
-      root.getChildren().add(label);
+      createLabel(centerX - 100, centerY - 20, "Choose a enemy to attack \n"+ name + " is going to attack",root);
       actualScene.setRoot(root);
     }
     else {
@@ -173,7 +200,12 @@ public class FinalReality extends Application {
         attackScene2(i, controller.getPlayerCharacterElementName(i));
     }
   }
-
+  /**
+   * Creates the second part of the attack scene of the game.
+   * @param i the index of the character to be attacked.
+   * @param name the name of the attacked character.
+   *
+   */
   private void attackScene2(int i, String name) {
     Group root = new Group();
     try {
@@ -182,9 +214,8 @@ public class FinalReality extends Application {
       e.printStackTrace();
     }
 
-    String text = controller.getCurrentCharacter().getName() + " has attacked " +  name;
-    Label label = createLabel(10, 30, text);
-    root.getChildren().add(label);
+    String text = controller.getCurrentCharacterName() + " has attacked " +  name;
+    createLabel(10, 30, text, root);
     actualScene.setRoot(root);
 
     Task<Void> sleeper = new Task<>() {
@@ -209,26 +240,50 @@ public class FinalReality extends Application {
     new Thread(sleeper).start();
   }
 
+  /**
+   * Creates the second part of the attack scene of the game.
+   */
   private void finalScene() {
     Group root = new Group();
-    Label label = createLabel(10, 30, controller.getPhase().getText());
-    root.getChildren().add(label);
+    createLabel(10, 30, controller.getPhaseText(),root);
     actualScene.setRoot(root);
   }
 
-  private Label createLabel(int x, int y, String text) {
+  /**
+   * Creates a new label
+   * @param x position in the x-axis of the label
+   * @param y position in the y-axis of the label
+   * @param text text of the label
+   * @param root where the label if going to be added
+   */
+  private void createLabel(int x, int y, String text, Group root) {
     Label label = new Label();
     label.setLayoutX(x);
     label.setLayoutY(y);
     label.setText(text);
-    return label;
+    root.getChildren().addAll(label);
   }
+  /**
+   * Creates a new button
+   * @param x position in the x-axis of the button
+   * @param y position in the y-axis of the button
+   * @param text button of the label
+   * @return the new created button
+   *
+   */
   private Button createButton(int x, int y, String text) {
     Button button = new Button(text);
     button.setLayoutX(x);
     button.setLayoutY(y);
     return button;
   }
+
+  /**
+   * Creates the "information" of a enemy
+   * @param i index of the enemy
+   * @return a string with all the enemy's information
+   *
+   */
   private String createEnemyInfo(int i) {
     return  controller.getEnemyCharacterElementName(i) + '\n'
             + "Health: " + controller.getEnemyCharacterElementHealth(i) + '\n'
@@ -236,6 +291,13 @@ public class FinalReality extends Application {
             + "Damage: " + controller.getEnemyCharacterElementDamage(i) + '\n'
             + "Weight: " + controller.getEnemyCharacterElementWeight(i) + '\n';
   }
+
+  /**
+   * Creates the "information" of a player character
+   * @param i index of the player character
+   * @return a string with all the player character's information
+   *
+   */
   private String createPlayerCharacterInfo(int i) {
     return controller.getPlayerCharacterElementName(i) + '\n'
             + "Health: " + controller.getPlayerCharacterElementHealth(i) + '\n'
@@ -244,28 +306,40 @@ public class FinalReality extends Application {
             + "Damage: " + controller.getPlayerCharacterElementWeaponDamage(i) + '\n'
             + "Weight: " + controller.getPlayerCharacterElementWeaponWeight(i) + '\n';
   }
+
+  /**
+   * Creates the "information" of a weapon
+   * @param i index of the weapon
+   * @return a string with all the weapon's information
+   *
+   */
   private String createWeaponInfo(int i) {
     return controller.getInventoryElementName(i) + '\n'
             + "Damage: " + controller.getInventoryElementDamage(i) + '\n'
             + "Weight: " + controller.getInventoryElementWeight(i) + '\n';
   }
 
+  /**
+   * Creates the "information" of all player characters in the game.
+   * @param root where all the information is going to be added
+   */
   private void createPlayerCharactersInfo(Group root){
     int large = controller.getPlayerCharacterSize();
     int step = WIDTH/large;
     for(int i = 0; i < large; i++) {
-      Label label = createLabel(10 + step*i, HEIGHT-100, createPlayerCharacterInfo(i));
-      root.getChildren().add(label);
+      createLabel(10 + step*i, HEIGHT-100, createPlayerCharacterInfo(i),root);
     }
 
   }
-
+  /**
+   * Creates the "information" of all enemies in the game.
+   * @param root where all the information is going to be added
+   */
   private void createEnemiesInfo(Group root, boolean attack){
     int large = controller.getEnemyCharacterSize();
     int step = WIDTH / large;
     for (int i = 0; i < large; i++) {
-      Label label = createLabel(10 + step * i, 10, createEnemyInfo(i));
-      root.getChildren().add(label);
+      createLabel(10 + step * i, 10, createEnemyInfo(i),root);
       if(attack){
         Button button = createButton(10 + step * i, 100, "Attack");
         final int n = i;
@@ -274,15 +348,42 @@ public class FinalReality extends Application {
       }
     }
   }
+
+  /**
+   * Creates the "information" of all weapons in the game.
+   * @param root where all the information is going to be added
+   */
   private void createInventoryInfo(Group root){
     int large = controller.getPlayerInventorySize();
     int step = WIDTH/large;
     for(int i = 0; i < large; i++) {
-      Label label = createLabel(10 + step*i, 100, createWeaponInfo(i));
-      root.getChildren().add(label);
+      createLabel(10 + step*i, 10, createWeaponInfo(i),root);
+      Button button = createButton(10 + step * i, 70, "Equip");
+      final int n = i;
+      button.setOnAction(event -> this.equipWeapon(n));
+      root.getChildren().add(button);
+
     }
   }
 
+  /**
+   * Handles the logic of the scenes when the current character tries to equip a new weapon.
+   * @param i the index of the weapon to be equipped
+   */
+  private void equipWeapon(int i) {
+    try {
+      controller.getPhase().equipWeapon(i);
+    } catch (InvalidMovementException e) {
+      e.printStackTrace();
+    }
+
+    if(controller.getPhase().equals(new AttackPhase())) {
+      attackScene1(controller.getCurrentCharacter().getName());
+    }
+    else{
+      equipWeaponScene1(controller.getCurrentCharacter().getName(), false);
+    }
+  }
 }
 
 

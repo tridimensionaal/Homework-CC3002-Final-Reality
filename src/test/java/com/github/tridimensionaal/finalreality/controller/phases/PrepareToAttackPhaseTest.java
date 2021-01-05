@@ -66,7 +66,7 @@ class PrepareToAttackPhaseTest extends PhaseTest {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            assertEquals(controller.getQueueSize(), 14);
+            assertEquals(controller.getQueueSize(), 11);
 
         } catch (InvalidMovementException e) {
             e.printStackTrace();

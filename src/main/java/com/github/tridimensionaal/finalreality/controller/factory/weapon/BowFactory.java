@@ -8,7 +8,9 @@ import com.github.tridimensionaal.finalreality.model.weapon.normal.Bow;
 public class BowFactory extends AbstractWeaponFactory{
 
     public BowFactory(){
-        int damage = 8;
+        //8
+        int damage = 10;
+        //4
         int weight = 4;
         int extra_value = rng.nextInt(6);
         damage += extra_value;

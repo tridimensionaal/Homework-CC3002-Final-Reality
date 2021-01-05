@@ -1,6 +1,9 @@
 package com.github.tridimensionaal.finalreality.controller.phases;
 
 import com.github.tridimensionaal.finalreality.controller.GameController;
+import com.github.tridimensionaal.finalreality.model.character.ICharacter;
+import com.github.tridimensionaal.finalreality.model.character.player.IPlayerCharacter;
+import com.github.tridimensionaal.finalreality.model.weapon.IWeapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,31 +21,11 @@ class GetCharacterPhaseTest extends PhaseTest {
     /**
      * Setup method.
      */
+
     @BeforeEach
     void setUp() {
         super.setUp();
-        controller.setPhase(new CreationPhase());
-        phase = controller.getPhase();
-
-        try {
-            phase.createElements();
-        } catch (InvalidMovementException e) {
-            e.printStackTrace();
-        }
-
-        phase = controller.getPhase();
-
-        try {
-            phase.prepareToAttack();
-        } catch (InvalidMovementException e) {
-            e.printStackTrace();
-        }
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        controller.setPhase(new GetCharacterPhase());
         phase = controller.getPhase();
 
     }
@@ -62,21 +45,37 @@ class GetCharacterPhaseTest extends PhaseTest {
             e.printStackTrace();
         }
     }
-
     /**
-     * Checks that the get character phase's method "toAttackPhase" works properly.
+     * Checks that the get character phase's method "toEquipWeaponPhase" works properly.
      */
     @Test
-    void toAttackPhase() {
+    void toEquipWeaponPhaseTest() {
         try {
-            phase.toAttackPhase();
-            assertEquals(controller.getPhase(), new AttackPhase());
+            phase.toEquipWeaponPhase();
+            assertEquals(controller.getPhase(), new EquipWeaponPhase());
             assertEquals(controller.getPhase(), controller.getPhase());
             assertNotEquals(controller.getPhase(), "asda");
 
         } catch (InvalidTransitionException e) {
             e.printStackTrace();
         }
+    }
+
+
+    /**
+     * Checks that the get character phase's method "toAttackPhase" works properly.
+     */
+    @Test
+    void toAttackPhaseTest() {
+        try {
+            phase.toAttackPhase();
+            assertEquals(controller.getPhase(), new AttackPhase());
+            assertEquals(controller.getPhase(), controller.getPhase());
+            assertNotEquals(controller.getPhase(), "asda");
+        } catch (InvalidTransitionException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -86,24 +85,55 @@ class GetCharacterPhaseTest extends PhaseTest {
     void getCharacterTest(){
         try {
             phase.getCharacter();
-            assertEquals(controller.getPhase(), new AttackPhase());
+            assertEquals(controller.getPhase(), new PrepareToAttackPhase());
             assertEquals(controller.getPhase(), controller.getPhase());
+            assertEquals(controller.getQueueSize(), 0);
             assertNotEquals(controller.getPhase(), "asda");
-            assertEquals(controller.getQueueSize(),13);
-            assertNotNull(controller.getCurrentCharacter());
+            assertNull(controller.getCurrentCharacter());
+
         } catch (InvalidMovementException e) {
             e.printStackTrace();
         }
-        controller = new GameController();
-        controller.setPhase( new GetCharacterPhase());
-        phase = controller.getPhase();
+        ICharacter enemy = controller.createEnemy("Enemy");
+        controller.setPhase(new GetCharacterPhase());
+        controller.addEnemy(enemy);
+        controller.addToQueue();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+        phase = controller.getPhase();
         try {
             phase.getCharacter();
-            assertEquals(controller.getPhase(), new PrepareToAttackPhase());
+            assertEquals(controller.getPhase(), new AttackPhase());
             assertEquals(controller.getPhase(), controller.getPhase());
             assertNotEquals(controller.getPhase(), "asda");
-            assertEquals(controller.getQueueSize(),0);
+            assertEquals(controller.getCurrentCharacter(), enemy);
+        } catch (InvalidMovementException e) {
+            e.printStackTrace();
+        }
+
+        controller = new GameController();
+        controller.setPhase(new GetCharacterPhase());
+        IPlayerCharacter knight = controller.createKnight("Knight");
+        knight.equipWeapon(controller.createSword());
+        controller.addPlayerCharacter(knight);
+        controller.addToQueue();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        phase = controller.getPhase();
+        try {
+            phase.getCharacter();
+            assertEquals(controller.getPhase(), controller.getPhase());
+            assertNotEquals(controller.getPhase(), "asda");
+            assertEquals(controller.getPhase(), new EquipWeaponPhase());
+            assertEquals(controller.getCurrentCharacter(), knight);
         } catch (InvalidMovementException e) {
             e.printStackTrace();
         }

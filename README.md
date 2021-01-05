@@ -18,7 +18,11 @@ The user (player) owns a set of different characters that they can control. The 
 
 The CPU owns a set enemies that they can control. Only exists one type of CPU's characters. The enemies can't equip weapons.
 
-player's characters can attack enemies and enemies can attack player's characters. Every player's character and enemy have a turn to do things like attack or equip a weapon and then attack (in the case of a player's character). In the game, player's characters and enemies have one turn or more. The game ends when all the player's characters have died or when all the enemys have died. If all the player's characters have died then the CPU win and if all the enemies have died then the user wins.
+Player's characters can attack enemies and enemies can attack player's characters. Every player's character and enemy have a turn to do things like attack or equip a weapon and then attack (in the case of a player's character). In the game, player's characters and enemies have one turn or more. The game ends when all the player's characters have died or when all the enemys have died. If all the player's characters have died then the CPU win and if all the enemies have died then the user wins.
+
+
+## How to play?
+Download the proyect and run the game. In the game are all the instructions to play!
 
 ## Versions
 - **Version 0.1**: Models of player's characters, enemies and weapons.
@@ -26,6 +30,11 @@ player's characters can attack enemies and enemies can attack player's character
 - **Version 0.2**: Interaction between player's characters, enemies and weapons.
     - Complements the models of the all the player's characters, enemies and weapons.
     - Implements the game controller to implements the interaction between the player's characters, enemies and weapons.
+- **Version 0.3**: Phases of the game between the phases and the controller.
+    - Implements the phases of the game and the interaction between the controller and the phases of the game.
+- **Version 1.0**: GUI of the game.
+    - Implementes the gui and its interaction with the controller and phases of the game.
+    - First playable vesion of the game.
 
 ![http://creativecommons.org/licenses/by/4.0/](https://i.creativecommons.org/l/by/4.0/88x31.png)
 

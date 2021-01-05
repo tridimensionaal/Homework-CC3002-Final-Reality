@@ -244,17 +244,17 @@ class GameControllerTest {
         assertEquals(engineerTest, current);
 
         gameControllerTest.addWeaponToInventory(staffTest);
-        gameControllerTest.equipWeapon(gameControllerTest.getPlayerInventoryElement(0));
+        gameControllerTest.equipWeapon(gameControllerTest.getInventoryElement(0));
         current = (IPlayerCharacter) gameControllerTest.getCurrentCharacter();
         assertNull(current.getEquippedWeapon());
 
         gameControllerTest.addWeaponToInventory(bowTest);
-        gameControllerTest.equipWeapon(gameControllerTest.getPlayerInventoryElement(1));
+        gameControllerTest.equipWeapon(gameControllerTest.getInventoryElement(1));
         current = (IPlayerCharacter) gameControllerTest.getCurrentCharacter();
         assertEquals(current.getEquippedWeapon(), bowTest);
 
         gameControllerTest.addWeaponToInventory(axeTest);
-        gameControllerTest.equipWeapon(gameControllerTest.getPlayerInventoryElement(1));
+        gameControllerTest.equipWeapon(gameControllerTest.getInventoryElement(1));
         current = (IPlayerCharacter) gameControllerTest.getCurrentCharacter();
         assertEquals(current.getEquippedWeapon(), axeTest);
 

@@ -12,7 +12,7 @@ public class FinalPhase extends Phase{
 
     @Override
     public String getText() {
-        if(winner){
+        if(controller.getWinner()){
             return "Congratulations!, you have won.";
         }
         else{

@@ -9,7 +9,7 @@ public class CreationPhase extends Phase{
     public CreationPhase(){
         this.canCreateCharacters = true;
         this.namePhase = "Creation phase";
-        this.text = "You have Knight, an Engineer, a Thief, a Black Mage and a White Mage to fight. \nThe CPU has 9 enemies to fight. \nEvery one of your characters has a initial weapon. \nYou have a inventory with 3 extra weapon.";
+        this.text = "You have Knight, an Engineer, a Thief, a Black Mage and a White Mage to fight. \nThe CPU has 6 enemies to fight. \nEvery one of your characters has a initial weapon. \nYou have a inventory with 3 extra weapon.";
 
 
     }

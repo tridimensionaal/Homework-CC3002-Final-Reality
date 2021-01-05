@@ -18,7 +18,7 @@ public class GetCharacterPhase extends Phase{
 
     @Override
     public void toEquipWeaponPhase(){
-        changePhase(new AttackPhase());
+        changePhase(new EquipWeaponPhase());
     }
 
 
@@ -37,7 +37,6 @@ public class GetCharacterPhase extends Phase{
             }
             else{
                 this.toAttackPhase();
-
             }
         }
         else{

@@ -14,28 +14,30 @@ import java.util.Objects;
 public class Phase {
     protected GameController controller;
     protected boolean canCreateCharacters = false;
+    protected boolean changeWeapon = false;
+    protected boolean canChangeWeapon = false;
     protected boolean canAttack = false;
     protected boolean canPrepareToAttack = false;
     protected boolean canGetCharacter = false;
     protected boolean gameOver = false;
-    protected boolean winner = false;
     protected String text = "";
 
     protected String namePhase;
 
     /**
-     * Sets a new controller
+     * Sets a new controller.
      *
-     * @param controller the new controller to be set
+     * @param controller the new controller to be set.
      */
     public void setController(GameController controller) {
         this.controller = controller;
     }
 
     /**
-     * Changes the actual phase to a new phase
+     * Changes the actual phase to a new phase.
      *
-     * @param phase the new
+     * @param phase the new phase.
+     *
      */
     protected void changePhase(Phase phase) {
         controller.setPhase(phase);
@@ -95,9 +97,8 @@ public class Phase {
         controller.addToQueue();
     }
 
-
     /**
-     * Gets the first character of the queue
+     * Gets the first character of the queue.
      */
     public void getCharacter() throws InvalidMovementException {
         if (!canGetCharacter) {
@@ -108,7 +109,8 @@ public class Phase {
 
 
     /**
-     * The current character attacks
+     * The current character attacks.
+     * @param i the index of the character to be attacked.
      */
     public void attack(int i) throws InvalidMovementException {
         if (!canAttack) {
@@ -124,7 +126,18 @@ public class Phase {
     }
 
     /**
-     * Changes the actual phase to the initial phase
+     * The current character equip a weapon
+     * @param i the index of the weapon to be equipped.
+     */
+    public void equipWeapon(int i) throws InvalidMovementException {
+        if (!canChangeWeapon) {
+            throw new InvalidMovementException("Can't equip weapon on " + this.toString());
+        }
+        this.changeWeapon = controller.equipWeapon(controller.getInventoryElement(i));
+    }
+
+    /**
+     * Changes the actual phase to the initial phase.
      */
     public void toInitialPhase() throws InvalidTransitionException {
         throw new InvalidTransitionException(
@@ -132,7 +145,7 @@ public class Phase {
     }
 
     /**
-     * Changes the actual phase to the creation phase
+     * Changes the actual phase to the creation phase.
      */
     public void toCreationPhase() throws InvalidTransitionException {
         throw new InvalidTransitionException(
@@ -140,7 +153,7 @@ public class Phase {
     }
 
     /**
-     * Changes the actual phase to the creation phase
+     * Changes the actual phase to the creation phase.
      */
     public void toPrepareToAttackPhase() throws InvalidTransitionException {
         throw new InvalidTransitionException(
@@ -190,11 +203,6 @@ public class Phase {
     public void gameOver() {
         this.gameOver = true;
     }
-
-    public void playerWin() {
-        this.winner = true;
-    }
-
 
     @Override
     public int hashCode() {
