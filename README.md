@@ -1,3 +1,9 @@
+# Homework-CC3002
+Homework for the course "Metodologías de Diseño y Programación"
+
+The following repository contains the proyect developed in the spring term of the 2020 in the course "Metodologías de Diseño y Progrmación" of the degree in Computer Science at Universidad de Chile.
+
+-------------------------------------------------
 # Final Reality
 
 ## What's this project about?
